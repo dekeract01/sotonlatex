@@ -1,0 +1,225 @@
+
+\begin{frame}{Introduction}
+\normalsize
+
+
+\begin{highlightbox}[sotonmintblue!30!white]
+    \textbf{Purpose of this Template:} \\
+    Provide a clean, consistent, and visually aligned format for academic presentations using the University of Southampton Beamer theme.
+\end{highlightbox}
+
+\insertpause
+\vspace{2mm}
+\rule{\linewidth}{0.5pt}
+\vspace{2mm}
+\insertpause
+
+\begin{highlightbox}[sotonneongreen!20!white]
+    \textbf{Template Features:}
+    \begin{smartitemize}
+        \item University-approved colour scheme and branding.
+        \item Highlight boxes for emphasis and clarity.
+        \item Flexible layout for technical content, figures, and equations.
+        \item Accommodate various imaging formats (.svg, .pdf)
+        \item Simple switch to convert from print and animation
+    \end{smartitemize}
+\end{highlightbox}
+
+\end{frame}
+
+
+
+\begin{frame}{Southampton Colour Palette}
+\centering
+
+\begin{columns}[T]
+
+    \begin{column}{0.24\textwidth}
+    \begin{tikzpicture}[x=0.25cm, y=0.35cm]
+    \foreach \x [count=\i] in {
+        sotonuniblue,
+        sotondeepblue,
+        sotontealblue,
+        sotonskyblue,
+        sotonmintblue,
+        sotongreenblue,
+        sotonlimegreen,
+        sotonamber,
+        sotonorange,
+        sotonred,
+        sotonmagenta,
+        sotonplum,
+        sotonblue,
+        sotonblueDark,
+        sotonblack,
+        sotongreen%
+    } {
+      \fill[\x] (0,-\i) rectangle +(4,0.8);
+      \node[anchor=west, inner sep=2pt] at (4.1,-\i+0.45) {\texttt{\x}};
+    }
+    \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.24\textwidth}
+    \begin{tikzpicture}[x=0.25cm, y=0.35cm]
+    \foreach \x [count=\i] in {
+        sotongreen,
+        sotonlightgray,
+        sotonanthrazit,
+        sotonlink,
+        sotonaqua,
+        sotonlightpurple,
+        sotondarkpurple,
+        sotonpurple,
+        sotonlilac,
+        sotonblueceleste,
+        sotondarkblue,
+        sotonlightblue,
+        sotonbrightblue,
+        sotonnavyblue,
+        sotonneongreen,
+        sotondarkgreen%
+    } {
+      \fill[\x] (0,-\i) rectangle +(4,0.8);
+      \node[anchor=west, inner sep=2pt] at (4.1,-\i+0.45) {\texttt{\x}};
+    }
+    \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.24\textwidth}
+    \begin{tikzpicture}[x=0.25cm, y=0.35cm]
+    \foreach \x [count=\i] in {
+        sotonmidgreen,
+        sotonbrightgreen,
+        sotonlightgreen,
+        sotontruegreen,
+        sotonstone,
+        sotondarkgrey,
+        sotondarkbrown,
+        sotondarkred,
+        sotonburgundy,
+        sotonpink,
+        sotonrichred,
+        sotonmidred,
+        sotonyellow,
+        sotonferrarired,
+        sotonneonyellow,
+        sotontruered%
+    } {
+      \fill[\x] (0,-\i) rectangle +(4,0.8);
+      \node[anchor=west, inner sep=2pt] at (4.1,-\i+0.45) {\texttt{\x}};
+    }
+    \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.24\textwidth}
+    \begin{tikzpicture}[x=0.25cm, y=0.35cm]
+    \foreach \x [count=\i] in {
+        sotontrueblue,
+        sotontrueyellow,
+        sotonplainblack,
+        sotoninkblack,
+        sotonslategrey,
+        sotonsteelgrey,
+        sotoncloudgrey,
+        sotonmistgrey,
+        sotonneonpink,
+        sotonneonorange,
+        sotonneonblue,
+        sotonneonpurple,
+        sotonneonred%
+    } {
+      \fill[\x] (0,-\i) rectangle +(4,0.8);
+      \node[anchor=west, inner sep=2pt] at (4.1,-\i+0.45) {\texttt{\x}};
+    }
+    \end{tikzpicture}
+    \end{column}
+
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}{Example with Two Columns}
+\small 
+
+Demonstration of using two columns to present related content side-by-side.
+
+\vspace{2mm}
+\begin{columns}[T] % [T] aligns the top of the columns
+
+    \begin{column}{0.48\textwidth}
+    \begin{highlightbox}[sotonneongreen!30!white]
+        \textbf{Text + Image Example}
+
+        You can place a description, bullet points, or equations here to complement the visual on the right.
+    \end{highlightbox}
+
+    \vspace{2mm}
+    \centering
+    \includegraphics[width=0.6\linewidth]{example-image-a} % Replace with actual image
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+    \begin{highlightbox}[sotonuniblue!30!white]
+        \textbf{Visual Emphasis}
+
+        Use visuals to present results, schematics, or concepts clearly.
+    \end{highlightbox}
+
+    \vspace{2mm}
+    \centering
+    \includegraphics[width=0.6\linewidth]{example-image-b} % Replace with actual image
+    \end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Example Slide}
+\footnotesize
+
+This slide demonstrates how to present example numerical data using tables and highlight boxes in a consistent layout.
+
+\insertpause
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.4}
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+Label & A & B (units) & C (units) & D (units) & E (units) & Category \\
+\hline
+\multirow{2}{*}{X1} & \multirow{2}{*}{10} & \multirow{2}{*}{123.4} & \multirow{2}{*}{5.67} & \multirow{2}{*}{0.0089} & 2500.00 & Type A \\
+                    &                     &                        &                       &                          & 2480.50 & Type B \\
+\hline
+\multirow{2}{*}{X2} & \multirow{2}{*}{12} & \multirow{2}{*}{456.7} & \multirow{2}{*}{3.21} & \multirow{2}{*}{0.0065} & 3100.00 & Type A \\
+                    &                     &                        &                       &                          & 3088.00 & Type B \\
+\hline
+\end{tabular}
+\end{table}
+
+\insertpause
+\begin{highlightbox}[sotonmintblue!30!white]
+\centering
+\textbf{Example Highlight:} Value E changes across categories
+\end{highlightbox}
+
+\insertpause
+\begin{highlightbox}[sotonneongreen!30!white]
+\centering
+\textbf{Example Highlight:} Label X2 corresponds to higher A and lower D
+\end{highlightbox}
+
+\insertpause
+\begin{highlightbox}[sotonamber!30!white]
+\centering
+\textbf{Example Highlight:} Category B generally yields lower E values \citep{Lovell:2011:updated}
+\end{highlightbox}
+
+\tiny
+\vfill
+\vspace{-2mm}
+\textsuperscript{1} Lovell, C. J. (2011). Updated templates
+
+\end{frame}

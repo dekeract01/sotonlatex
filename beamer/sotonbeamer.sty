@@ -1,0 +1,287 @@
+% --------------------------------------------------------------------------------------
+% File: sotonbeamer.sty
+%
+% University of Southampton Beamer Theme
+% Author: Teja Ala (2025) — t.ala@soton.ac.uk | github.com/dekeract01
+%
+% Description:
+%   Custom Beamer style file for presentations affiliated with the University of 
+%   Southampton. Includes institutional colours, title and section formatting, 
+%   block styles, and other layout customisations suitable for academic use.
+%
+% Adapted from a template by:
+%   Chris Carmona — carmona@stats.ox.ac.uk | chriscarmona.me
+%
+% License:
+%   This file is part of the Southampton Beamer Theme and is licensed under the
+%   Creative Commons Attribution 4.0 International (CC BY 4.0)
+%
+% Usage:
+%   \usepackage{sotonbeamer}  % in preamble.tex or main .tex document
+% --------------------------------------------------------------------------------------
+
+% University of Southampton un-official colours
+
+% --------------------------------------------
+% University of Southampton Brand Neutrals
+% --------------------------------------------
+\definecolor{sotonplainblack}    {HTML}{231F20}  % Plain Black
+\definecolor{sotoninkblack}      {HTML}{00131D}  % Rich Black
+\definecolor{sotonslategrey}     {HTML}{495961}  % Neutral 1
+\definecolor{sotonsteelgrey}     {HTML}{758D9A}  % Neutral 2
+\definecolor{sotoncloudgrey}     {HTML}{9EB1BD}  % Neutral 3
+\definecolor{sotonmistgrey}      {HTML}{E1E8EC}  % Neutral 4
+
+% --------------------------------------------
+% University of Southampton Brand Colours — Renamed for readability
+% --------------------------------------------
+\definecolor{sotonuniblue}       {HTML}{005C84}  % University Blue
+\definecolor{sotondeepblue}      {HTML}{002F4C}  % Marine 1
+\definecolor{sotontealblue}      {HTML}{0C838C}  % Marine 2
+\definecolor{sotonskyblue}       {HTML}{74C9E5}  % Marine 3
+\definecolor{sotonmintblue}      {HTML}{83DBD2}  % Marine 4
+\definecolor{sotongreenblue}     {HTML}{4BB694}  % Marine 5
+\definecolor{sotonlimegreen}     {HTML}{C0D100}  % Marine 6
+
+\definecolor{sotonamber}         {HTML}{FCBC00}  % Horizon 1
+\definecolor{sotonorange}        {HTML}{EF7D00}  % Horizon 2
+\definecolor{sotonred}           {HTML}{E63037}  % Horizon 3
+\definecolor{sotonmagenta}       {HTML}{D5007F}  % Horizon 4
+\definecolor{sotonplum}          {HTML}{8D3970}  % Horizon 5
+
+% --------------------------------------------
+% Core Branding Colours
+% --------------------------------------------
+\definecolor{sotonblue}          {HTML}{005C84}        % Primary blue
+\definecolor{sotonblueDark}      {HTML}{005c85}        % Darker blue
+\definecolor{sotonblack}         {cmyk}{0.00,0.00,0.00,1.00}  % Black
+% \definecolor{sotongreen}         {HTML}{101010}        % Dark green
+\definecolor{sotongreen}         {HTML}{005f4e}        % Secondary green
+\definecolor{sotonlightgray}     {HTML}{c1c6c8}        % Light gray
+\definecolor{sotonanthrazit}     {HTML}{5b6770}        % Anthracite grey
+\definecolor{sotonlink}          {HTML}{61993b}        % Link green
+\definecolor{sotonaqua}          {HTML}{00FFFF}        % Aqua
+
+% --------------------------------------------
+% Purples and Blues
+% --------------------------------------------
+\definecolor{sotonlightpurple}   {cmyk}{0.08,0.25,0.04,0.14}  % Light purple
+\definecolor{sotondarkpurple}    {cmyk}{0.67,0.79,0.24,0.59}  % Dark purple
+\definecolor{sotonpurple}        {cmyk}{0.83,0.99,0.00,0.02}  % Purple
+\definecolor{sotonlilac}         {HTML}{F1EDFF}              % Lilac
+\definecolor{sotonblueceleste}   {cmyk}{0.30,0.00,0.07,0.00}  % Blue celeste
+\definecolor{sotondarkblue}      {HTML}{18399a}              % Dark blue
+\definecolor{sotonlightblue}     {cmyk}{0.42,0.07,0.08,0.08}  % Light blue
+\definecolor{sotonskyblue}       {cmyk}{0.42,0.10,0.02,0.06}  % Sky blue
+\definecolor{sotonbrightblue}    {cmyk}{0.98,0.00,0.28,0.04}  % Bright blue
+\definecolor{sotonnavyblue}      {cmyk}{1.00,0.69,0.08,0.54}  % Navy blue
+
+% --------------------------------------------
+% Greens
+% --------------------------------------------
+\definecolor{sotonneongreen}     {HTML}{0FFF50}              % Neon green
+\definecolor{sotondarkgreen}     {cmyk}{0.35,0.30,1.00,0.75}  % Dark green
+\definecolor{sotonmidgreen}      {cmyk}{0.42,0.05,0.98,0.29}  % Mid green
+\definecolor{sotonbrightgreen}   {cmyk}{0.27,0.00,1.00,0.03}  % Bright green
+\definecolor{sotonlightgreen}    {cmyk}{0.25,0.04,0.44,0.03}  % Light green
+\definecolor{sotontruegreen}     {HTML}{3CB371}              % True green
+
+% --------------------------------------------
+% Reds, Oranges, Yellows
+% --------------------------------------------
+\definecolor{sotonstone}         {cmyk}{0.03,0.04,0.14,0.08}  % Stone
+\definecolor{sotondarkgrey}      {cmyk}{0.17,0.24,0.25,0.49}  % Dark grey
+\definecolor{sotondarkbrown}     {cmyk}{0.30,0.71,0.75,0.81}  % Dark brown
+\definecolor{sotondarkred}       {cmyk}{0.18,1.00,0.45,0.67}  % Dark red
+\definecolor{sotonburgundy}      {cmyk}{0.00,0.97,0.89,0.45}  % Burgundy
+\definecolor{sotonpink}          {cmyk}{0.06,1.00,0.26,0.24}  % Pink
+\definecolor{sotonrichred}       {cmyk}{0.00,1.00,0.72,0.00}  % Rich red
+\definecolor{sotonmidred}        {cmyk}{0.00,0.87,0.85,0.00}  % Mid red
+\definecolor{sotonorange}        {cmyk}{0.00,0.61,0.99,0.00}  % Orange
+\definecolor{sotonyellow}        {cmyk}{0.00,0.29,1.00,0.00}  % Yellow
+\definecolor{sotonferrarired}    {cmyk}{0.00,0.84,1.00,0.00}  % Ferrari red
+\definecolor{sotonneonyellow}    {HTML}{FFFF33}              % Neon yellow
+\definecolor{sotontruered}       {HTML}{FF0000}              % True red
+\definecolor{sotontrueblue}      {HTML}{0000FF}              % True blue
+\definecolor{sotontrueyellow}    {HTML}{FFEE00}              % True yellow
+
+
+
+% --------------------------------------------
+% Neon Colours
+% --------------------------------------------
+\definecolor{sotonneongreen}     {HTML}{0FFF50}  % Neon green
+\definecolor{sotonneonyellow}    {HTML}{FFFF33}  % Neon yellow
+\definecolor{sotonneonpink}      {HTML}{FF6EC7}  % Neon pink
+\definecolor{sotonneonorange}    {HTML}{FF9933}  % Neon orange
+\definecolor{sotonneonblue}      {HTML}{1B03A3}  % Neon blue
+\definecolor{sotonneonpurple}    {HTML}{C724B1}  % Neon purple
+\definecolor{sotonneonred}       {HTML}{FF073A}  % Neon red
+
+
+% --------------------------------------------------------------------------------------
+% Beamer custom layout and block definitions — University of Southampton
+% --------------------------------------------------------------------------------------
+
+% Core packages
+\RequirePackage{tikz}
+\RequirePackage{environ}                     % Defines NewEnviron
+\usepackage{tcolorbox}
+\usepackage{multirow}
+
+% --------------------------------
+% Title slide formatting
+% --------------------------------
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor*{subtitle}{fg=white}
+\setbeamercolor*{date}{fg=white}
+\setbeamerfont*{date}{size=\footnotesize}
+
+\setbeamertemplate{title page}{
+  \vspace{0.9cm}
+  \begin{centering}
+    \vspace{4mm}
+    {\huge \usebeamercolor[fg]{title}\inserttitle\\[1.5cm]}
+    \vspace{-8mm}
+    {\large \usebeamercolor[fg]{subtitle}\insertauthor\\[0.5cm]}
+    {\normalsize \usebeamercolor[fg]{subtitle}\insertinstitute\\[0cm]}
+    \vspace{6mm}
+    \usebeamerfont{date}
+    \usebeamercolor[fg]{date}
+    \normalsize \insertdate\\[1cm]
+  \end{centering}
+  \vspace{15mm}
+  \begin{picture}(0,0)
+    \put(0,25){\includegraphics[width=4.6cm]{images/logos/logo-soton-white.eps}}
+    % \put(285,27){\includegraphics[width=3.8cm]{images/logos/logo-company-white.eps}}
+  \end{picture}
+}
+
+% --------------------------------
+% General slide formatting
+% --------------------------------
+\setbeamertemplate{frametitle}{
+  \begin{picture}(0,0)
+    \put(-8,-10){\centering\normalsize\bf\color{sotonblack}\insertframetitle}
+    \put(-7,-20){\normalsize\color{sotonblack}\insertframesubtitle}
+  \end{picture}
+}
+
+\setlength{\abovedisplayskip}{3pt}           % Compact equation spacing
+\setlength{\belowdisplayskip}{3pt}
+\raggedbottom                                % Avoid vertical stretching
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=sotonblack}
+\setbeamertemplate{caption}[numbered]        % Numbered captions
+\newcommand\textbox[1]{\parbox{.333\textwidth}{#1}}
+
+% --------------------------------
+% Colors and structure
+% --------------------------------
+\colorlet{alert}{sotongreen}
+\setbeamercolor{structure}{fg=sotongreen}
+\setbeamercolor{block title}{fg=white, bg=sotonanthrazit}
+\setbeamercolor{block body}{bg=sotonlightgray}
+\setbeamercolor{block title example}{fg=white, bg=soton2green}
+\setbeamercolor{block body example}{bg=sotonlightgray}
+\setbeamercolor{block title alerted}{fg=white, bg=sotongreen}
+\setbeamercolor{block body alerted}{bg=sotonlightgray}
+\setbeamercolor{alerted text}{fg=sotongreen}
+
+% --------------------------------
+% Block templates
+% --------------------------------
+\setbeamertemplate{block begin}{
+  \setbeamercolor{itemize item}{fg=block title.bg}
+  \setbeamercolor{item projected}{fg=block title.fg, bg=block title.bg}
+  \setbeamercolor{caption name}{fg=alert}
+  \vskip1.3ex
+  \begin{beamercolorbox}[ht=2.4ex, dp=1ex, leftskip=0.75ex, rightskip=0.75ex]{block title}
+    \usebeamerfont*{block title}\footnotesize\insertblocktitle
+  \end{beamercolorbox}
+  \nointerlineskip
+  \usebeamerfont{block body}
+  \begin{beamercolorbox}[dp=1ex, leftskip=0.75ex, rightskip=0.75ex, vmode]{block body}
+    \vspace*{1ex}
+}
+
+\setbeamertemplate{block end}{
+  \vskip0pt
+  \end{beamercolorbox}
+  \vskip1.3ex
+}
+
+% --------------------------------
+% Example block (with fixed title)
+% --------------------------------
+\setbeamertemplate{block example begin}{
+  \setbeamercolor{itemize item}{fg=block title example.bg}
+  \setbeamercolor{item projected}{fg=block title example.fg, bg=block title example.bg}
+  \vskip1.3ex
+  \begin{beamercolorbox}[ht=2.4ex, dp=1ex, leftskip=0.75ex, rightskip=0.75ex]{block title example}
+    \usebeamerfont*{block title example}\footnotesize Transition studies
+  \end{beamercolorbox}
+  \nointerlineskip
+  \usebeamerfont{block body example}
+  \begin{beamercolorbox}[dp=1ex, leftskip=0.75ex, rightskip=0.75ex, vmode]{block body example}
+    \vspace*{1ex}
+}
+
+\setbeamertemplate{block example end}{
+  \vskip0pt
+  \end{beamercolorbox}
+  \vskip1.3ex
+}
+
+% --------------------------------
+% Section title slide
+% --------------------------------
+\setbeamertemplate{section page}{
+  \begin{center}
+    \vskip\baselineskip
+    \insertsection
+  \end{center}
+}
+
+\newcommand{\SectionPage}{
+  \setbeamercolor{background canvas}{bg=\beamercolor, parent=section page}
+  \begin{frame}[c, plain, noframenumbering]
+    \LARGE \textcolor{white}{\sectionpage}
+  \end{frame}
+  \setbeamercolor{background canvas}{bg=white, parent=section page}
+}
+
+% --------------------------------
+% Highlight box
+% --------------------------------
+\newtcolorbox{highlightbox}[1][Theorem:]{
+  colback={#1}, colbacktitle=white, colframe={#1},
+  boxrule=0pt, titlerule=0pt, arc=0pt
+}
+
+% --------------------------------
+% Cancel-to commands
+% --------------------------------
+\let\cancelorigcolor\CancelColor
+
+\newcommand{\CancelTo}[3][]{%
+  \ifblank{#1}{}{\renewcommand{\CancelColor}{#1}}%
+  \cancelto{#2}{#3}%
+}
+
+\newcommand{\canceltocolor}[3]{%
+  {\renewcommand{\CancelColor}{#1}%
+  \cancelto{#2}{#3}}%
+}
+
+\newcommand{\coloredcancelto}[3]{%
+  \tikz[baseline=(math.base)]{
+    \node[inner sep=0pt] (math) {$#3$};
+    \draw[white] (math.south west) -- (math.north east);
+    \draw[white, -stealth] (math.south west) -- ++(-0.5em, -0.5em)
+      node[below] {$\textcolor{white}{#2}$};
+  }
+}
+

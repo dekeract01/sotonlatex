@@ -1,0 +1,80 @@
+% --------------------------------------------------------------------------------------
+% Beamer presentation template — University of Southampton
+% File: preamble.tex
+%
+% Author: Teja Ala (2025) — t.ala@soton.ac.uk | github.com/dekeract01
+%
+% Description:
+%   This file configures the presentation preamble for Beamer slides using the
+%   sotonbeamer.sty style. It sets up fonts, colors, packages, citation macros, 
+%   layout adjustments, and plotting environments for academic use.
+%
+% Adapted from a template by:
+%   Chris Carmona — carmona@stats.ox.ac.uk | chriscarmona.me
+%
+% License:
+%   This file is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)
+% Usage:
+%   \input{preamble.tex} % Include this in your main .tex document
+% --------------------------------------------------------------------------------------
+
+% Language, fonts, layout
+\usepackage[UKenglish]{babel}          % UK English
+\usepackage[utf8]{inputenc}            % UTF-8 encoding
+\usepackage{sotonbeamer}               % Southampton beamer theme
+\usepackage{graphicx}                  % Graphics inclusion
+\graphicspath{{images/}}               % Image path
+\usefonttheme{serif}                   % Use serif font
+\usepackage{charter}                   % Charter serif font
+
+% Math and citations
+\usepackage{amsmath, amsthm, amssymb}  % Math packages
+\usepackage{natbib}                    % Citation management
+\usepackage{bibentry}                  % Inline bib entries
+\bibliographystyle{apalike}            % APA-like style
+\usepackage{breakcites}                % Allow citation breaks
+
+% Custom citation macros
+\usepackage{chngcntr}
+\counterwithin*{footnote}{page}
+\newcommand\footcite[1]{\footnote{\bibentry{#1}}\label{\thepage:#1}}
+\newcommand\secondcite[1]{\textsuperscript{\ref{\thepage:#1}}}
+
+% Scientific notation
+\usepackage{physics}                   % Physics notation
+\usepackage[version=4]{mhchem}         % Chemical formulas
+
+% TikZ and plots
+\usepackage{tikz}                      % Drawing
+\usetikzlibrary{shapes.geometric, arrows.meta, plotmarks}
+\usepackage{pgf, pgfplots}             % Plotting
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{patchplots}        % Patch plots
+\usepackage{grffile}                   % Handle dotted filenames
+
+% Captions and listings
+\usepackage[font=scriptsize, labelfont=bf]{caption}  % Small bold captions
+\usepackage{listings}                                % Code listings
+
+% Subfigures
+\usepackage{subfig}                    % Subfigures
+\makeatletter
+\renewcommand{\p@subfigure}{}         % No subfigure prefix
+\makeatother
+
+% Hyperlinks
+\hypersetup{
+    colorlinks,
+    linkcolor={white},
+    citecolor={blue},
+    urlcolor={red}
+}
+
+% Special symbols and markup for some serious maths
+\usepackage{pifont}                   % Special symbols
+\usepackage{cancel}                   % Strikeout in equations
+\renewcommand{\CancelColor}{\color{red}} % Red cancel lines
+
+% 
+\usepackage{svg}        % For including SVG images
+\usepackage{booktabs}   % Better table formatting

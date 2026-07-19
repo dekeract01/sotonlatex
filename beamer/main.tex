@@ -1,0 +1,169 @@
+% --------------------------------------------------------------------------------------
+% University of Southampton Beamer Presentation Template
+% File: main.tex
+%
+% Author: Teja Ala (2025) — t.ala@soton.ac.uk | github.com/dekeract01
+% Adapted from a template by Chris Carmona — carmona@stats.ox.ac.uk | chriscarmona.me
+%
+% Description:
+%   Main LaTeX file for Southampton-branded presentations using the Beamer class.
+%   Uses a 16:9 aspect ratio and custom sotonbeamer.sty style for consistent formatting.
+%
+% License:
+%   This document is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0). 
+% --------------------------------------------------------------------------------------
+
+\documentclass[aspectratio=169,8pt,pdftex]{beamer}
+
+% Optional: packages for font patching and UTF-8 font encoding
+% \usepackage{lmodern}
+% \usepackage[T1]{fontenc}
+% \usepackage{etoolbox}  % Required if using \patchcmd below
+
+% Optional: globally reduce font size in all frames
+% \AtBeginEnvironment{frame}{\fontsize{3pt}{3.6pt}\selectfont}
+
+% Optional: reduce frame title font size
+% \makeatletter
+% \patchcmd{\beamer@@frametitle}{\insertframetitle}{\fontsize{3pt}{3.6pt}\selectfont\insertframetitle}{}{}
+% \makeatother
+
+\input{preamble}
+
+\hypersetup{citecolor=blue}  % Set citation link color
+
+% Set Beamer primary colour
+% \newcommand{\beamercolor}{sotonnavyblue}
+\newcommand{\beamercolor}{sotonblue}
+
+% Custom footline format
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{%
+    \vspace*{-20pt}%
+    \textbox{A. Name (Soton), \textit{Conference} \hfill}%
+    \hfill%
+    \textbox{\hfill \arabic{framenumber} / \inserttotalframenumber \hfill}%
+  }
+}
+
+
+% --------------------------------------------------------------------------------------
+% Navigation symbols and logo setup
+% --------------------------------------------------------------------------------------
+
+% Remove default Beamer navigation symbols (e.g. arrows, menu)
+\setbeamertemplate{navigation symbols}{}
+
+% Optional: logo for Company or other versions
+% \textbox{Company Presentation \hfill}
+% \parbox{\linewidth}{\vspace*{-20pt}%
+%   \textbox{Ala.T (Soton) \hfill}%
+%   \textbox{\hfill Company Presentation \hfill}%
+%   \textbox{\hfill \insertpagenumber / \pageref{LastPage} \hfill}}
+
+% Optional logo for 4:3 aspect ratio
+% \logo{\pgfputat{\pgfxy(-0.2,8)}{\pgfbox[right,base]{\includegraphics[height=1cm]{images/logo-soton-new-rgb.eps}}}}
+
+% Default logo for 16:9 aspect ratio
+\logo{\pgfputat{\pgfxy(-0.2,7.5)}{\pgfbox[right,base]{%
+  \textcolor{\beamercolor}{\includegraphics[height=1cm]{images/logos/logo-soton-new-rgb.pdf}}}}}
+
+% Utility command to hide the logo (call \nologo to disable)
+\newcommand{\nologo}{\setbeamertemplate{logo}{}}
+
+
+
+
+% --------------------------------------------------------------------------------------
+% Title and author information
+% --------------------------------------------------------------------------------------
+
+\title[Short Title]{%
+  Beamer Template for University of Southampton
+}
+
+\author{Author Name\inst{1}}
+
+\institute{
+  \inst{1} \textit{Aerodynamics and Flight Mechanics Group}, University of Southampton \vspace{1mm}
+  
+  email: \small{username@soton.ac.uk}
+}
+
+\date[Venue and Date]{\today}
+
+
+% --------------------------------------------------------------------------------------
+% Global pause control - animations/appear control
+% --------------------------------------------------------------------------------------
+\newif\ifinsertpause
+\insertpausetrue        % Comment this to disable \pause and animations
+% \insertpausefalse
+
+\newcommand{\insertpause}{\ifinsertpause\pause\fi}
+
+\newenvironment{smartitemize}{%
+  \ifinsertpause
+    \begin{itemize}[<+->]
+  \else
+    \begin{itemize}
+  \fi
+}{%
+  \end{itemize}
+}
+
+
+
+% --------------------------------------------------------------------------------------
+% Document Start
+% --------------------------------------------------------------------------------------
+\begin{document}
+
+% --------------------------------------------------------------------------------------
+% Title Slide
+% --------------------------------------------------------------------------------------
+{
+  \setbeamertemplate{logo}{}                              % Hide logo on title slide
+  \setbeamertemplate{footline}{}                          % No footline
+  \setbeamertemplate{headline}{}                          % No headline
+  \setbeamercolor{background canvas}{bg=\beamercolor}     % Custom background colour
+  \maketitle
+}
+
+% --------------------------------------------------------------------------------------
+% Slides Content
+% --------------------------------------------------------------------------------------
+
+% Optional: Table of contents
+% \begin{frame}
+%   \frametitle{Outline}
+%   \tableofcontents
+% \end{frame}
+
+% Include main slide sections
+\include{slides/1.introduction}
+
+% --------------------------------------------------------------------------------------
+% References
+% --------------------------------------------------------------------------------------
+\begin{frame}
+  \frametitle{References}
+  \small
+  \bibliography{references}
+\end{frame}
+
+% --------------------------------------------------------------------------------------
+% Closing Slide
+% --------------------------------------------------------------------------------------
+\begin{frame}
+  \centering
+  \color{\beamercolor}
+  Thank you for your attention
+
+  \vspace{0.5cm}
+  \texttt{t.ala@soton.ac.uk}
+\end{frame}
+
+% --------------------------------------------------------------------------------------
+\end{document}
+
