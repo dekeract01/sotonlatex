@@ -1,0 +1,113 @@
+\documentclass[portrait,color=sotonbracinggreen,margin=3cm]{sotonposter}
+
+% \usepackage{svg} % uncomment if you include SVG figures
+
+\title{Poster title goes here, \\ \vspace{3mm} split across two lines}
+
+\author[1 *]{First Author}
+\author[1]{Second Author}
+\affil[1]{Research Group, Campus, University of Southampton. \protect\\}
+\affil[*]{first.author@soton.ac.uk}
+
+\begin{document}
+
+\maketitle
+\vspace{-42mm}
+
+\begin{multicols}{2}
+
+    \section*{Section title}
+
+    % Coloured highlight boxes are the main building block of this
+    % template. Pass any colour as the optional argument; mixing with
+    % white (e.g. sotonbryellow!30!white) softens it for backgrounds.
+    \begin{highlightbox}[sotonbryellow!30!white]
+        \textit{\textbf{Background}}:
+        Introduce the project here. Two to four sentences work best:
+        what the problem is, why it matters, and what this poster
+        shows. Keep it readable from a distance.
+    \end{highlightbox}
+
+    \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{example-image-a}
+        \captionof{figure}{A schematic or overview figure introducing
+        the problem. Replace \texttt{example-image-a} with your own
+        figure from the shared figures folder.}
+        \label{fig:schematic}
+    \end{minipage}
+
+    \columnbreak
+
+    \begin{highlightbox}[white!10!white]
+        \textit{\textbf{Methods}}: describe the approach here, citing
+        tools or prior work as needed\cite{ExampleReference}. Refer to
+        figures in the usual way, e.g. Figure~\ref{fig:schematic}.
+    \end{highlightbox}
+
+    \vspace{-3mm}
+
+    Plain text also works between boxes, for details that do not need
+    highlighting: parameter values, test conditions, assumptions and
+    similar supporting information.
+
+    \begin{highlightbox}[sotonneonblue!30!white]
+        \textit{\textbf{Equations}} sit naturally inside boxes:
+        \begin{equation}
+            f(x) = a_0 \, \exp\!\left( -\frac{(x - x_0)^2}{2\sigma^2}
+            \right) \sin( 2 \pi f t )
+        \end{equation}
+        with symbol definitions given directly below the equation.
+    \end{highlightbox}
+
+    \begin{highlightbox}[sotonbgreen!10!white]
+        \textit{\textbf{Key concept}}: use a box like this to explain
+        the central idea of the work, with a pointer to the main \cite{FayRiddell1958}
+        result, e.g. Figure~\ref{fig:mainresult}.
+    \end{highlightbox}
+
+    \vspace{-8mm}
+
+\end{multicols}
+
+% Full-width figure spanning both columns, for the main result.
+\vspace{-10mm}
+\begin{minipage}{\linewidth}
+    \centering
+    \captionsetup{justification=centering,margin=2cm}
+    \includegraphics[width=0.6\linewidth]{example-image}
+    \captionof{figure}{A wide, full-width figure for the main result
+    of the poster.}
+    \label{fig:mainresult}
+\end{minipage}
+
+\vspace{-1mm}
+
+\begin{multicols}{2}
+
+    \begin{highlightbox}[sotonlilac!80!white]
+        \textit{\textbf{Analysis}}: a second row of columns for
+        results and discussion, for example
+        \begin{equation}
+            N = \ln\!\left( \frac{A(x)}{A(x_0)} \right)
+        \end{equation}
+        with the terms defined in the surrounding text.
+    \end{highlightbox}
+
+
+
+    \columnbreak
+
+
+
+    \begin{highlightbox}[sotonbpurple!20!white]
+        \textit{\textbf{Conclusions}}: summarise the findings and any
+        acknowledgements of funding or support here.
+    \end{highlightbox}
+
+\end{multicols}
+
+\vspace{-23mm}
+\bibliography{references}
+
+\end{document}
