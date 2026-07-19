@@ -1,0 +1,651 @@
+\chapter{Governing equations}\label{chapter:governing_equations}
+The standard compressible Navier--Stokes equations must be extended to capture the complex interplay of high temperatures, vibrational excitation, and chemical reactions characteristic of hypersonic flows. This Chapter presents the complete set of governing equations for a five-species  ($n_s = 5$) gas mixture \ce{N2}, \ce{O2}, \ce{N}, \ce{O}, and \ce{NO} which are the typical constituents of Earth's atmosphere, excluding electronic excitation processes. The formulation accounts for thermal and chemical nonequilibrium, adopting Park's two-temperature model to represent the distinct translational--rotational and vibrational energy modes, while including active chemical reactions. The equations follow the framework described in \citet{Gnoffo1989} and \cite{Park1990}.
+
+The presence of multiple species requires separate conservation equations, since each species possesses its own distinct mass density. Accordingly, the continuity equation for species $s$, in terms of its density $\rho_s$, is expressed as
+\begin{equation}\label{equation:global_species_continuity}
+    \pdv{\rho_s}{t} + \pdv{\rho_s u_{j}}{x_{j}} = \pdv{}{x_{j}} \left( \rho D_s \pdv{X_s}{x_{j}} \right) + \dot{w}_s  
+\end{equation} here, $t$ and $u_j$ are time and the velocity in the $j$-th direction, respectively. The total density of the fluid, $\rho$, is the sum of all individual species densities:
+\begin{equation}
+    \rho = \sum^{n_s}_{s=1} \rho_s.
+\end{equation}
+It is convenient to represent each species in terms of its mole fraction $X_s$, defined as
+\begin{equation}
+    X_s = \cfrac{(\rho_s/\mathcal{M}_s)}{\sum_{z=1}^{n_s} (\rho_z/\mathcal{M}_z)},
+\end{equation}
+where $\mathcal{M}_s$ is the molecular weight of species $s$. The mass fraction $Y_s$ is defined as
+\begin{equation}
+    Y_s = \cfrac{\rho_s}{\rho}.
+\end{equation}
+
+The relative motion of each species with respect to the bulk mixture gives rise to a viscous diffusive flux term, as shown on the right-hand side of \Cref{equation:global_species_continuity}, where $D_s$ is the diffusion coefficient of species $s$. To account for the production and depletion of species due to chemical reactions, a source term $\dot{w}_s$ is included, representing the mass production rate of species $s$. Since the species continuity equations must be consistent with the global mass conservation law, the sum of the diffusive fluxes and chemical source terms across all species must vanish. This constraint ensures recovery of the global continuity equation:
+\begin{equation}\label{equation:global_continuity}
+    \pdv{\rho}{t} + \pdv{\rho u_j}{x_j} = 0.
+\end{equation}
+
+Extending the set of equations, one can obtain the momentum conservation equation, which is similar to the general momentum equation, omitting any terms emanating from the negligible body forces:
+\begin{equation}\label{equation:global_momentum}
+    \pdv{\rho u_j}{t} + \pdv{\rho u_{i} u_{j}}{x_{j}}  = - \delta_{ij} \pdv{p}{x_{j}} + \pdv{\tau_{ij}}{x_{j}} 
+\end{equation}
+where, $p$ is the total pressure of the mixture and $\tau_{ij}$ is the viscous stress tensor.
+
+The conservation of total energy for the high-enthalpy flow is defined as follows, where $E$ is the total energy per unit volume and $H$ is the total enthalpy of the system, defined as $H = E + p/\rho$:
+\begin{equation}\label{equation:global_total_energy}
+\begin{split}
+\pdv{\rho E}{t} + \pdv{\rho H u_j}{x_j}
+= - \pdv{q_{tr,j}}{x_j}
+  - \pdv{q_{v,j}}{x_j}
+  + \pdv{}{x_j} \left( \rho \sum_{s=1}^{n_s} h_s D_s \pdv{X_s}{x_j} \right)
+  + \pdv{u_i \tau_{ij}}{x_j},
+\end{split}
+\end{equation}
+with, $q_{tr,j}$ and $q_{v,j}$ are the translational--rotational and vibrational heat fluxes, respectively. Finally, $h_s$ denotes the enthalpy of species $s$.
+
+The vibrational energy equations to describe the conservation of molecular vibrational energy per unit volume are stated as
+\begin{equation}\label{equation:conservation_vibration}
+\begin{split}
+\pdv{\rho e_{v}}{t} + \pdv{\rho e_{v} u_j}{x_j} = \pdv{}{x_j} \left( \kappa_{v} \pdv{T_v}{x_j} \right) + \pdv{}{x_j} \left( \rho \sum^{n_s}_{s=1} h_{v,s} D_s \pdv{X_s}{x_j} \right) + \mathcal{Q}_{tv} + \dot{w}_{v}.
+\end{split}
+\end{equation}
+The equation is derived under the approximation that the number density of all vibrationally excited molecules has a Boltzmann distribution \citep{Gnoffo1989}. The vibrational energy per unit mass is defined in terms of $\rho e_v$:
+\begin{equation}
+    \rho e_v = \sum_{s=\mathrm{mol}} \rho_s e_{v,s}, 
+\end{equation} with $e_{v,s}$ denoting the vibrational energy per unit mass of species $s$, which is defined as a function of the vibrational temperature, $T_v$. It is important to distinguish between the translational--rotational temperature, $T_{tr}$ (hereafter referred to simply as $T$), and the vibrational temperature, $T_v$. The translational--rotational temperature represents the average kinetic energy associated with molecular translation and rotation, whereas the vibrational temperature characterizes the energy stored in the internal vibrational modes of molecular bonds \citep{Vincenti1965}.
+
+To capture the coupling between these energy modes, a model is required to represent the energy exchange between translational--rotational and vibrational modes. This coupling is denoted by $\mathcal{Q}_{tv}$, referred to as the vibrational--translational energy exchange term. Additionally, vibrational energy levels may vary due to dissociation and recombination processes. This effect is accounted for in the final term of the vibrational energy equation, $\dot{w}_v$, which represents the vibrational energy generated or consumed as species are produced or destroyed at a rate $\dot{w}_s$. Depending on the chosen model, this contribution may be treated using either a preferential or non-preferential approach, further explained in~\Cref{section:vibrationalrelaxation}.
+
+
+
+
+\section{Thermodynamic properties}
+\subsection{Equations of state}\label{section:equation_of_state}
+The equation of state can be derived by considering each species to be a thermally perfect gas and applying Dalton's law for the gas mixture:
+\begin{equation}
+    p = \sum_{s=1}^{n_s} \rho_{s} \mathcal{R}_s T 
+\end{equation}
+where $\mathcal{R} = 8.314~\mathrm{J/(mol\, K)}$ is the universal gas constant, $\mathcal{M}_s$ is the molecular weight of species $s$, and $\mathcal{R}_s = \mathcal{R}/\mathcal{M}_s$ is the species-specific gas constant. The pressure of the gas is computed using $T$, assuming a single-temperature model since the flows considered tend to equilibrium within a few molecular collisions~\citep{Wagnild2012}.
+
+
+The thermodynamic properties of high-temperature gases are computed using contributions from translational, rotational, and vibrational energy modes \citep{Gnoffo1989}, excluding electron energies. These contributions define the total energy per unit volume of the system:
+\begin{equation}
+    E = e + \frac{1}{2} u_i u_j,
+    \quad \mathrm{where} \quad 
+    e = \sum_{s=1}^{n_s} Y_s e_s,
+\end{equation}
+with $e$ being the internal energy of the system and $h_s$ previously defined as the enthalpy of species $s$. The specific internal energy of species $s$ is defined as
+\begin{equation}
+    e_s = c_{v,t,s} T + c_{v,r,s} T + e_{v,s} + h^{0}_{f,s},
+\end{equation}
+where $h^{0}_{f,s}$ is the enthalpy of formation of species $s$ at the reference temperature $T_{\mathrm{ref}} = 298.15~\mathrm{K}$. The translational and rotational contributions to the isochoric specific heat capacity, $c_{v,t,s}$ and $c_{v,r,s}$, are given by
+\begin{equation}
+    c_{v,t,s} = \left(\pdv{e_{s}}{T}\right) = \frac{3}{2} \frac{\mathcal{R}}{\mathcal{M}_s},
+    \quad
+    c_{v,r,s} = \delta_{sm} \cfrac{\mathcal{R}}{\mathcal{M}_s},
+\end{equation}
+where $\delta_{sm} = 1$ for molecules and $\delta_{sm} = 0$ for atoms.
+
+Finally, the vibrational energy contribution of the molecules, $e_{v,s}$, can be modeled using the harmonic oscillator approximation for molecular motion, assuming a Boltzmann distribution of vibrational states:
+\begin{equation}
+    e_{v,s} = \delta_{sm} \cfrac{\mathcal{R}}{\mathcal{M}_s} 
+    \cfrac{\theta_{vc,s}}{\exp(\theta_{vc,s}/T_{v}) - 1},
+\end{equation}
+where $\theta_{vc,s}$ is the characteristic vibrational temperature of species $s$. The vibrational specific heat at constant volume is then
+\begin{equation}
+    c_{v,v,s} = \delta_{sm} \cfrac{\mathcal{R}}{\mathcal{M}_s}
+    \cfrac{\big(\theta_{vc,s}/T_{v}\big)^2 \exp(\theta_{vc,s}/T_{v})}{\big[\exp(\theta_{vc,s}/T_{v}) - 1\big]^2}.
+\end{equation}
+This vibrational specific heat plays a critical role in determining the rate of vibrational--translational energy exchange, as well as in closing the vibrational energy conservation equation within the nonequilibrium flow formulation.
+
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\caption{Properties of species present in the mixture obtained from \citet{Gnoffo1989} and \citet{Scalabrin2005}.}\label{table:physicalconstants}
+\begin{tabular}{l|c|c|c|c}
+\toprule
+Species & $\mathcal{M}_s$ (g/mol) & $h^{0}_{f,s}$ (kJ/mol) & $\theta_{vc,s}$ (K) & $\tilde{D}_s$ (J/kg) \\ 
+\midrule
+\ce{N2} & 28 & 0 & 3393 & $3.36 \times 10^{7}$ \\ 
+\ce{O2} & 32 & 0 & 2270 & $1.54 \times 10^{7}$ \\ 
+\ce{NO} & 30 & 91.27 & 2739 & $2.09 \times 10^{7}$ \\ 
+\ce{N}  & 14 & 472.7 & --- & --- \\ 
+\ce{O}  & 16 & 249.2 & --- & --- \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% For nonequilibrium flows, after numerically integrating the conservation equations, the static temperature is computed from the specific internal energy directly using the energy balance including the vibrational energy contribution, whereas the vibrational temperature is determined using a Newton--Raphson iteration method. This iterative procedure ensures that the vibrational energy balance is satisfied while maintaining consistency with the vibrational--translational energy exchange model. Accurate determination of these temperatures is critical for capturing the thermochemical nonequilibrium effects that strongly influence heat transfer and chemical reaction rates in hypersonic flows. The physical constants required for this formulation are summarised in \Cref{table:physicalconstants}, ensuring the model remains fully defined and numerically consistent for the conditions encountered in high-enthalpy regimes.
+
+For flows in \gls{TNE}, after numerically integrating the conservation equations, the static temperature is computed from the specific internal energy directly using the energy balance including the vibrational energy contribution, whereas the vibrational temperature is determined using a Newton--Raphson iteration method since it appears implicitly in the vibrational energy \Cref{equation:conservation_vibration}. This iterative procedure ensures that the vibrational energy balance is satisfied whilst maintaining consistency with the vibrational--translational energy exchange model. For \gls{TEQ} flows, a similar Newton--Raphson iteration method is required to determine the static temperature $T$ since it appears implicitly in the energy \Cref{equation:global_total_energy} through the temperature-dependent thermodynamic properties. Accurate determination of these temperatures is critical for capturing the thermochemical nonequilibrium effects that strongly influence heat transfer and chemical reaction rates in hypersonic flows. The physical constants required for this formulation are summarised in \Cref{table:physicalconstants}, ensuring the model remains fully defined and numerically consistent for the conditions encountered in high-enthalpy regimes.
+
+
+
+\subsection{Speed of sound}
+The speed of sound in air is defined as the velocity of an infinitesimally small perturbation propagating through an initially uniform region, leaving behind a perturbed but still uniform region. This process is generally considered reversible, as particles crossing the perturbation front do not alter entropy levels. However, in a chemically reacting and thermally nonequilibrium medium, the flow behind the perturbation becomes non-uniform, and entropy is generated due to chemical and vibrational relaxation processes. Consequently, the speed of sound cannot be uniquely defined in nonequilibrium media. In the vibrationally frozen and thermochemical equilibrium limiting cases, no entropy is generated and the flow remains uniform behind the perturbation, thereby allowing well-defined frozen and equilibrium speeds of sound to exist.
+
+Consider a perturbation propagating through a quiescent, equilibrium medium. The front of the perturbation is characterised by infinitesimal jumps in pressure, $\mathrm{d}p$, and density, $\mathrm{d}\rho$. For a reversible process at constant entropy $S$, the propagation velocity of the perturbation front is given by
+\begin{equation}
+    a^2 = \left(\pdv{p}{\rho}\right)_{S=\text{const}},
+\end{equation}
+which is the general definition of the speed of sound in any medium.
+
+Reintroducing the assumption from \Cref{section:equation_of_state} that each species behaves as a thermally perfect gas, the chemically frozen condition implies that the total enthalpy $h$ of the mixture depends solely on the translational--rotational temperature $T$ and, by extension, on $p$ and $\rho$. In this case,
+\begin{equation}
+    h = c_p T,
+\end{equation}
+which leads to the frozen speed of sound
+\begin{equation}
+    a^{2}_{f} = \frac{c_{p,tr} p}{c_{v,tr} \rho} = \gamma_{f} \frac{p}{\rho},
+\end{equation}
+where $\gamma_{f}$ is the frozen ratio of specific heats for the mixture, given by
+\begin{equation}
+    \gamma_{f} = \sum_{s=1}^{n_s} Y_s \gamma_{f,s},
+\end{equation}
+and $\gamma_{f,s}$ is the frozen specific heat ratio for species $s$,
+\begin{equation}\label{equation:frozengamma}
+    \gamma_{f,s} = \frac{c_{p,tr,s}}{c_{v,tr,s}}.
+\end{equation}
+The frozen speed of sound therefore depends solely on the translational--rotational modes of the gas. The equilibrium speed of sound and the equilibrium ratio of specific heats are obtained in a similar fashion. Since the translational--rotational and vibrational energy modes are identical when $T = T_v$, the equilibrium specific heat ratio for species $s$ is given by
+\begin{equation}\label{equation:equilibriumgamma}
+    \gamma_{e,s} = \frac{c_{p,tr,s} + c_{p,v,s}}{c_{v,tr,s} + c_{v,v,s}},
+\end{equation}
+thereby accounting for all active energy modes in thermal equilibrium.
+
+\section{Thermophysical framework}
+The shear stress tensor, $\tau_{ij}$, is derived under the assumption of a Newtonian fluid and the application of Stokes' hypothesis, which relates the bulk viscosity $\lambda$ to the dynamic viscosity $\mu$ through the condition $2\mu + 3\lambda = 0$. This relation simplifies the stress tensor by eliminating the need to specify $\lambda$ independently. For a Newtonian fluid with isotropic properties, the shear stress tensor is given by
+\begin{equation}
+    \tau_{ij} = \mu \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)
+    - \frac{2}{3} \mu \delta_{ij} \frac{\partial u_k}{\partial x_k},
+\end{equation}
+where $\delta_{ij}$ is the Kronecker delta.
+
+The heat fluxes associated with the translational--rotational and vibrational energy modes are obtained using Fourier's law of heat conduction:
+\begin{align}
+    q_{tr,i} &= - \kappa_{tr} \ \pdv{T}{x_i}, \\[1em]
+    q_{v,i} &= - \kappa_{v} \ \pdv{T_v}{x_i}.
+\end{align}
+where $\kappa_{tr}$ is the translational--rotational thermal conductivity and $\kappa_{v}$ is the vibrational thermal conductivity.
+
+Accurate representation of transport properties is essential for reliably modelling high-enthalpy flows. At elevated temperatures, additional effects such as vibrational excitation, dissociation, and chemical reactions become significant, strongly influencing viscosity, thermal conductivity, and species diffusion~\citep{Vincenti1965}. These phenomena must be accounted for using physically accurate yet computationally tractable models, which is particularly important for high-fidelity \gls{DNS} where the cost of transport property evaluations can become significant \citep{Musawi2025}.
+
+\subsection{Viscosity models}
+Predicting momentum and energy transport in high-enthalpy flows depends strongly on the temperature dependence of viscosity and its sensitivity to nonequilibrium effects. For \textit{cold-flow} or \gls{CPG} conditions, Sutherland's law is widely used to approximate the temperature dependence of dynamic viscosity. Its dimensional form is given by
+\begin{equation}
+\mu = \mu_{\text{ref}} \left(\frac{T}{T_{\text{ref}}}\right)^{3/2} \frac{T_{\text{ref}} + S}{T + S},
+\end{equation}
+where $\mu_{\text{ref}}$ is the reference viscosity at the reference temperature $T_{\text{ref}}$, and $S$ is Sutherland's constant. For air, typical values are $\mu_{\text{ref}} = 1.716 \times 10^{-5}~\text{N}\!\cdot\!\text{s/m}^2$ at $T_{\text{ref}} = 273.15~\text{K}$, with $S = 110.4~\text{K}$, as reported in \citet{Hirschel2015}.
+
+For thermal conductivity, a constant Prandtl number, \gls{Pr}, is often assumed, defined as
+\begin{equation}
+\mathrm{Pr} = \frac{\mu c_p}{\kappa},
+\end{equation}
+where $c_p$ is the specific heat at constant pressure and $\kappa$ is the thermal conductivity. For air, $\mathrm{Pr}$ is typically taken to lie between 0.70 and 0.72.
+
+Sutherland's law applies only to near-equilibrium conditions and neglects vibrational excitation, dissociation, and chemical nonequilibrium effects, leading to significant inaccuracies in strongly nonequilibrium or high-enthalpy flows \citep{Vincenti1965, Park1990, miromiroThesis}. In such regimes, more advanced models are needed to capture additional energy modes and species interactions.
+
+\subsubsection{Blottner--Eucken--Wilke model}
+A practical combination of Blottner's empirical curve fits \citep{blottner1971}, Eucken's relations \citep{eucken1931}, and Wilke's mixing rules \citep{Wilke1950} is commonly used model to represent viscosity and thermal conductivity in high-enthalpy flows; this is referred to as the \gls{BEW} approach. 
+
+In this approach, the viscosity of each individual species, $\mu_s$, is first estimated using Blottner's empirical expression:
+\begin{equation}
+  \mu_s = 0.1 \exp\left[\left(a_{B,s} \ln T + b_{B,s}\right) \ln T + c_{B,s}\right],
+\end{equation}
+where the constants $a_{B,s}$, $b_{B,s}$, and $c_{B,s}$ are species-specific curve-fit coefficients provided by \citet[Table~5-111]{blottner1971} and summarised in \Cref{table:blottnerconstants}. For thermal nonequilibrium assumptions, one must decompose the thermal conductivity into the contributions of the various energy groups. For the two-temperature modelling considered in this work, the thermal conductivity of each species, $\kappa_s$, is estimated using Eucken's relations, which account for translational, rotational, and vibrational energy modes:
+\begin{align}
+  \kappa_{tr,s} &= \mu_s \ \left(\frac{5}{2} c_{v,t,s} + c_{v,r,s}\right), \\[6pt]
+  \kappa_{v,s}  &= \mu_s \ c_{v,v,s}.
+\end{align}
+
+Finally, the total mixture properties are computed using Wilke's mixing rule \citep{Wilke1950}, which accounts for molecular interactions between different species:
+\begin{equation}
+  \mathcal{Q} =
+  \sum_{s=1}^{n_s}
+  \frac{X_s \mathcal{Q}_s}{\sum_{w=1}^{n_s} X_w \phi_{sw}},
+\end{equation}
+where $\mathcal{Q} \in \{\mu, \kappa_{tr}, \kappa_v\}$ and $\phi_{sw}$ is the mixing parameter defined as
+\begin{equation}
+  \phi_{sw} = \frac{1}{\sqrt{8}}
+  \left(1 + \frac{\mathcal{M}_s}{\mathcal{M}_w}\right)^{-1/2}
+  \left[
+    1 +
+    \left(\frac{\mu_s}{\mu_w}\right)^{1/2}
+    \left(\frac{\mathcal{M}_s}{\mathcal{M}_w}\right)^{1/4}
+  \right]^2,
+\end{equation}
+where $\mathcal{M}_s$ and $\mathcal{M}_w$ denote the molar masses of species $s$ and $w$, respectively.
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.4}
+\centering
+\caption{Coefficients to compute pure species viscosity from \cite{blottner1971}}\label{table:blottnerconstants}
+
+\begin{tabular}{l|c|c|c}
+\toprule
+Species, $s$ & $a_{B}$ & $b_{B}$ & $c_{B}$   \\ 
+\midrule
+$\ce{N2}$ & 0.0268142 & 0.3177838 & -11.3155513   \\ 
+$\ce{O2}$ & 0.0449290 & -0.0826158 & -9.2019475   \\ 
+$\ce{NO}$ & 0.0436378 & -0.0335511 & -9.5767430   \\ 
+$\ce{N}$  & 0.0203144 & 0.4294404 & -11.6021403   \\ 
+$\ce{O}$  & 0.0115572 & 0.6031679 & -12.4327495   \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Musawi-Sandham model}
+
+In high-enthalpy hypersonic flows, the evaluation of accurate transport properties is computationally demanding. Classical models such as those of Yos \citep{Yos1963} can capture these effects with reasonable fidelity, but at the expense of significantly increased computational cost. Moreover, such models often lose accuracy at lower temperatures, which are also relevant in nonequilibrium boundary layer simulations. To achieve a compromise between efficiency and accuracy, simplified polynomial expressions for viscosity and thermal conductivity have been proposed, with coefficients calibrated for a broad temperature range (100--9000~K). These formulations retain the essential physics of detailed correlations whilst offering a tractable approach for direct numerical simulations. In this work, following the approach of Musawi \citep{Musawi2025}, corrected models are employed that blend Hirschfelder-type \citep{Hirschfelder1954}, Lennard--Jones \citep{Matyushov1996}, and Yos--Gupta \citep{Yos1963,Gupta1990} correlations to ensure validity across the entire temperature spectrum. The general expression for the present model is written as
+\begin{equation}
+\mathcal{Q} =
+\frac{\sum\limits_{i=\mathrm{atom}} 15X_i + \sum\limits_{i=\mathrm{mol}} 30X_i}
+     {P(a_{\mathrm{atom}}) \sum\limits_{i=\mathrm{atom}} X_i + P(a_{\mathrm{mol}}) \sum\limits_{i=\mathrm{mol}} X_i},
+\label{eq:present_model}
+\end{equation}
+where $\mathcal{Q} \in \{\mu, \kappa, \kappa_v\}$ and $X_i$ is the mole fraction of species $i$. The polynomial function is defined as
+\begin{equation}
+P(a) = \left|a_1 + a_2 T^2 + a_3 \ln(T) + \cfrac{a_4}{T}\right|,
+\label{eq:present_poly}
+\end{equation}
+with the coefficients $a = (a_1, a_2, a_3, a_4)$ tabulated separately for atoms and molecules in \Cref{tab:present_model_coeffs_atom,tab:present_model_coeffs_mol}. This split between atomic and molecular contributions, together with the omission of a separate mixing rule, provides a compact yet accurate formulation suitable for nonequilibrium DNS.
+
+For a more complete description of the thermal conductivity, it is decomposed into distinct contributions from the different energy modes of the gas,
+\begin{equation}
+\kappa = \kappa_{tr} + \kappa_v,
+\label{eq:thermal_modes}
+\end{equation}
+where $\kappa_{tr} = \kappa_t + \kappa_r$ represents the combined translational--rotational contribution and $\kappa_v$ is the vibrational contribution. This separation enables a consistent treatment of nonequilibrium effects, particularly in high-enthalpy hypersonic boundary layers. Both the total conductivity and the translational--rotational term are obtained using the polynomial form introduced in \Cref{eq:present_model}, whereas the vibrational component is modelled separately.
+
+\begin{table}[ht]
+    \centering
+    \caption{Polynomial coefficients for viscosity and thermal conductivity (atomic species).}
+    \label{tab:present_model_coeffs_atom}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{l c c c c}
+        \toprule
+        & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\
+        \midrule
+        $\mu$ & $-2.10 \times 10^{-5}$ & $-5.23 \times 10^{-6}$ & $1.99 \times 10^{-4}$ & $-2.72 \times 10^{-8}$ \\
+        $\kappa$ & $3.32 \times 10^{2}$ & $2.10 \times 10^{-7}$ & $-3.53 \times 10^{1}$ & $8.07 \times 10^{-4}$ \\
+        $\kappa_{tr}$ & $2.18 \times 10^{2}$ & $2.14 \times 10^{-7}$ & $-2.41 \times 10^{1}$ & $1.08 \times 10^{-3}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Polynomial coefficients for viscosity and thermal conductivity (molecular species).}
+    \label{tab:present_model_coeffs_mol}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{l c c c c}
+        \toprule
+        & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\
+        \midrule
+        $\mu$ & $1.27 \times 10^{3}$ & $3.39 \times 10^{-4}$ & $-1.30 \times 10^{5}$ & $3.52 \times 10^{8}$ \\
+        $\kappa$ & $-4.56 \times 10^{2}$ & $-1.84 \times 10^{-7}$ & $4.64 \times 10^{1}$ & $-3.03 \times 10^{5}$ \\
+        $\kappa_{tr}$ & $9.45 \times 10^{2}$ & $-1.60 \times 10^{-7}$ & $1.05 \times 10^{2}$ & $-2.34 \times 10^{5}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The vibrational contribution is governed by the vibrational temperature, and for each molecular species it is written as
+\begin{equation}
+\kappa_{v,i} = |X_i| \exp\left(\sum_{j=1}^{7} b_{i,j} T_d^{j-1}\right),
+\label{eq:kappa_vi}
+\end{equation}
+where $T_d = {T T_v} ^{0.5}$ and the coefficients $b_{i,j}$ are tabulated for each molecular species in \Cref{tab:vibrational_coeffs_1,tab:vibrational_coeffs_2}. The total vibrational conductivity is then obtained by summing the individual species contributions,
+\begin{equation}
+\kappa_v = \sum_{i \in \mathrm{mol}} \kappa_{v,i}.
+\label{eq:kappa_v}
+\end{equation}
+Following an Eucken-type correction, the translational--rotational contribution can be isolated by subtracting the vibrational part from the total conductivity,
+\begin{equation}
+\kappa_{tr} = \kappa - \sum_{i \in \mathrm{mol}} \kappa_{v,i}.
+\label{eq:kappa_tr}
+\end{equation}
+
+\begin{table}[ht]
+    \centering
+    \caption{Coefficients $b_1$--$b_4$ for species vibrational thermal conductivity $\kappa_{v,i}$.}
+    \label{tab:vibrational_coeffs_1}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{l c c c c}
+        \toprule
+        & $b_1$ & $b_2$ & $b_3$ & $b_4$ \\
+        \midrule
+        \ce{N2} & $1.92 \times 10^{-4}$ & $-3.93 \times 10^{-6}$ & $1.40 \times 10^{-8}$ & $-4.84 \times 10^{-12}$ \\
+        \ce{O2} & $-1.14 \times 10^{-3}$ & $7.21 \times 10^{-6}$ & $6.26 \times 10^{-9}$ & $-2.66 \times 10^{-12}$ \\
+        \ce{NO} & $-4.27 \times 10^{-4}$ & $9.86 \times 10^{-7}$ & $1.12 \times 10^{-8}$ & $-4.28 \times 10^{-12}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Coefficients $b_5$--$b_7$ for species vibrational thermal conductivity $\kappa_{v,i}$.}
+    \label{tab:vibrational_coeffs_2}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{l c c c}
+        \toprule
+        & $b_5$ & $b_6$ & $b_7$ \\
+        \midrule
+        \ce{N2} & $7.53 \times 10^{-16}$ & $-5.01 \times 10^{-20}$ & $1.09 \times 10^{-24}$ \\
+        \ce{O2} & $4.29 \times 10^{-16}$ & $-2.52 \times 10^{-20}$ & $3.04 \times 10^{-25}$ \\
+        \ce{NO} & $7.04 \times 10^{-16}$ & $-4.87 \times 10^{-20}$ & $1.10 \times 10^{-24}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+This approach ensures that atomic species contribute only to the translational--rotational part, whilst the vibrational component is restricted to molecules. The polynomial coefficients were optimised across equilibrium and nonequilibrium states for temperatures spanning 100--9,000~K. In particular, Hirschfelder--Lennard--Jones correlations were employed below 14,00~K, whilst Yos--Gupta fits were used above 14,00~K, thereby ensuring both accuracy and computational tractability in hypersonic nonequilibrium simulations.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[scale=1.2]{resources/figures/governingeqs/result_transport_properties.pdf}
+    \caption{Comparison of viscosity models for transport properties of air: viscosity $\mu$ (kg/m·s), thermal conductivity $\kappa$ (W/m·K), and vibrational thermal conductivity $\kappa_v$ (W/m·K) at various temperatures for frozen chemistry (left) and thermochemical equilibrium (right).}
+    \label{figure:transport_properties}
+\end{figure}
+
+A comparison of the different viscosity models is presented in \Cref{figure:transport_properties}, which shows that the present Musawi--Sandham model to both the Sutherland and \gls{BEW}, for both frozen chemistry and thermochemical equilibrium conditions. For viscosity $\mu$ and total thermal conductivity $\kappa$, all three models show reasonable agreement at moderate temperatures (1000--3000~K), with larger discrepancies emerging at higher temperatures where Sutherland's law becomes less reliable. The most significant differences appear in the vibrational thermal conductivity $\kappa_v$, where the Musawi--Sandham model predicts higher values than the \gls{BEW} approach, particularly in the equilibrium case. This enhanced representation of vibrational energy transport is critical for accurately capturing heat transfer in thermochemical nonequilibrium boundary layers.
+
+
+\subsection{Species diffusion}
+In multicomponent gases, mass diffusion must be considered alongside viscous and thermal transport. When a mixture contains multiple species with variable concentrations, mass redistributes to reduce concentration gradients. The diffusion flux can be driven by pressure gradients, temperature gradients, and chemical potential differences \citep{Sutton1998}. For hypersonic boundary layer flows, pressure gradient effects are negligible and thermal diffusion is small compared to chemical potential gradients, so diffusion is expressed primarily as a function of composition.
+
+The choice of diffusion model significantly affects heat transfer predictions in chemically reacting flows. As shown by \citet{ZhangZhang2022}, surface heat transfers predicted by binary diffusion SCEBD and Stefan--Maxwell models are lower than those from the constant Lewis number Fick model. However, the modified Fick, self-consistent effective binary diffusion, and Stefan--Maxwell models with blowing correction demonstrate good agreement, suggesting that corrected simplified models can approach the accuracy of complex formulations. For the present study, a constant diffusion coefficient approach is adopted, providing sufficient accuracy for spatially developing turbulent flows whilst maintaining computational efficiency.
+
+The effective diffusion coefficient $D_s$ connects directly to dimensionless transport numbers that characterise the relative importance of different transport mechanisms. These dimensionless parameters play a crucial role in determining the coupling between species transport, momentum transfer, and energy transport in thermally excited boundary layers. Specifically, the Lewis and Schmidt numbers for species $s$ are defined as
+\begin{equation}
+    \mathrm{Le}_s = \frac{\kappa}{\rho c_p D_s},
+    \qquad
+    \mathrm{Sc}_s = \frac{\mu}{\rho D_s},
+    \label{eq:le_sc}
+\end{equation}
+where $\kappa$ is the thermal conductivity, $\mu$ the viscosity, $\rho$ the density, and $c_p$ the specific heat at constant pressure. The Lewis number represents the ratio of thermal to mass diffusivity, whilst the Schmidt number represents the ratio of momentum to mass diffusivity. Their ratio recovers the Prandtl number,
+\begin{equation}
+    \mathrm{Pr} = \frac{\mathrm{Sc}_s}{\mathrm{Le}_s},
+    \label{eq:prandtl}
+\end{equation}
+which relates thermal diffusivity to momentum diffusivity. Unless otherwise stated, constant Schmidt number of 0.71 and Lewis number are adopted in the present work, consistent with the assumption of constant diffusion coefficients~\citep{ZhangZhang2022}. 
+
+\section{Vibrational framework}\label{section:vibrationalrelaxation}
+The vibrational-translational energy exchange term $\mathcal{Q}_{tv}$ can be expressed using the Landau-Teller formulation:
+\begin{equation}
+    \mathcal{Q}_{tv} = \sum_{s=1}^{n_s} \mathcal{Q}_{tv,s} = \sum_{s} \rho_s \frac{e_{v,\text{eq},s} - e_{v,s}}{\tau_s},
+\end{equation}
+in which $e_{v,\text{eq},s}$ is the equilibrium vibrational energy of species $s$, which represents the vibrational energy that the species would possess at thermal equilibrium. This quantity is evaluated at the translational-rotational temperature $T$, and $\tau_s$ is the vibrational relaxation time.
+
+The simplest implementation uses the Landau-Teller relaxation model:
+\begin{equation}
+    \tau_s = \frac{k_{1,s} T^{5/6} \exp\left(k_{2,s}/T\right)^{1/3}}{p \left[ 1 - \exp\left(-\theta_{v,s}/T\right) \right]},
+\end{equation} with $k_{1,s}$ and $k_{2,s}$ are species-dependent constants from \cite{Vincenti1965}, $p$ is pressure, and $\theta_{v,s}$ is the characteristic vibrational temperature; their numerical values are provided in~\Cref{table:physicalconstants}.
+
+A more accurate relaxation time for five-species air was proposed by \cite{Park1993}:
+\begin{equation}
+    \tau_s^{-1} = \sum_{j=1}^{n_s} \frac{X_j}{\tau_{MW,sj}} + \tau_{P,s}^{-1}, 
+\end{equation}
+where $X_j$ is the mole fraction of collision partner $j$, and $\tau_{MW,sj}$ is the Millikan-White vibrational relaxation time:
+\begin{equation}
+    \tau_{MW,sj} = \frac{1.01392 \times 10^{-5}}{p} \exp\left[a_{MW,sj} \left( T^{-1/3} - b_{MW,sj} \right)\right], 
+\end{equation}
+with empirical constants $a_{MW,sj}$ and $b_{MW,sj}$ from \cite{Park1993}.
+
+The high-temperature correction $\tau_{P,s}$ accounts for vibration-dissociation coupling \cite{Park1990}:
+\begin{equation}
+    \tau_{P,s} = \left[ n \sigma_{v} \sqrt{\frac{8 \mathcal{R} T}{\pi \mathcal{M}_s}} \right]^{-1}, 
+\end{equation}
+with $n$ being the total number density, and $\sigma_{v}$ is the effective cross-section from \cite{Park1993}:
+\begin{equation}
+    \sigma_{v} = 3 \times 10^{-21} \left(\frac{50{,}000}{T}\right)^2 \quad \text{[m}^2\text{]}
+\end{equation}
+
+Two models for the vibration-dissociation coupling source term $\dot{w}_v$ are commonly employed. The preferential dissociation model assumes molecules dissociate preferentially from higher vibrational levels:
+\begin{equation}
+    \dot{w}_{v} = 0.3 \sum_{s=1}^{n_s} \dot{\omega}_{s} D_{s}
+\end{equation}
+while the non-preferential dissociation model distributes the energy equally:
+\begin{equation}
+    \dot{w}_{v} = \sum_{s=1}^{n_s} \dot{\omega}_s e_{v,s}
+\end{equation}
+where $\dot{\omega}_s$ is the mass production rate of species $s$ and $D_s$ is the dissociation energy per unit mass, with $D_s = 0$ for monatomic species.
+
+\begin{table}[ht]
+    \centering
+    \caption{Millikan-White coefficients for relaxation time $\tau_{MW,sj}$ from \cite{Park1993}.}
+    \label{tab:millikan_white_coeffs}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{l c c c}
+        \toprule
+        Molecule & Collision Partner & $a_{MW}$ & $b_{MW}$ \\
+        \midrule
+        \multirow{5}{*}{$\text{N}_2$} & $\text{N}_2$ & 221 & 0.0290 \\
+                                       & $\text{O}_2$ & 229 & 0.0295 \\
+                                       & NO & 225 & 0.0293 \\
+                                       & O & 72.4 & 0.0150 \\
+                                       & N & 180 & 0.0262 \\
+        \midrule
+        \multirow{5}{*}{$\text{O}_2$} & $\text{N}_2$ & 134 & 0.0295 \\
+                                       & $\text{O}_2$ & 138 & 0.0300 \\
+                                       & NO & 136 & 0.0298 \\
+                                       & O & 47.7 & 0.0590 \\
+                                       & N & 72.4 & 0.0150 \\
+        \midrule
+        \multirow{5}{*}{NO} & $\text{N}_2$ & 49.5 & 0.0420 \\
+                            & $\text{O}_2$ & 49.5 & 0.0420 \\
+                            & NO & 49.5 & 0.0420 \\
+                            & O & 49.5 & 0.0420 \\
+                            & N & 49.5 & 0.0420 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\section{Thermochemical framework}
+
+% To accurately describe hypersonic boundary layer flows, a thermochemical framework must be incorporated into the governing equations. The extension of the Navier--Stokes system to account for chemical activity in the atmosphere is essential for capturing the coupled effects of chemistry and fluid dynamics at high speeds. In the present work, a five-species air model (\ce{N2}, \ce{O2}, \ce{N}, \ce{O}, and \ce{NO}) is employed, providing a balance between physical fidelity and computational tractability.
+
+% The thermochemical model must be appropriate for the relevant flight conditions. For atmospheric air at moderate temperatures, a non-reacting binary mixture of diatomic oxygen and nitrogen (\ce{O2}, \ce{N2}) provides good accuracy. At elevated temperatures, however, dissociation occurs, requiring the inclusion of atomic oxygen and nitrogen. A four-species model remains incomplete, as it neglects the exchange reactions between species that generate nitric oxide (\ce{NO}), which plays a key role in nonequilibrium chemistry. Consequently, a five-species model is commonly adopted, consisting of \ce{N2}, \ce{O2}, \ce{N}, \ce{O}, and \ce{NO}, with the following reversible reactions:
+% \begin{align}
+%     \ce{N2 + M & <=> 2N + M}, \label{equation:n2_diss} \\ 
+%     \ce{O2 + M & <=> 2O + M}, \label{equation:o2_diss} \\
+%     \ce{NO + M & <=> N + O + M}, \label{equation:no_diss} \\
+%     \ce{NO + O & <=> N + O2}, \label{equation:no_exchange} \\
+%     \ce{N2 + O & <=> NO + N}, \label{equation:n2_exchange}
+% \end{align}
+% where \ce{M} denotes an arbitrary third-body collision partner. Reactions \eqref{equation:n2_diss}--\eqref{equation:no_diss} correspond to dissociation processes, in which a diatomic molecule breaks into atomic species. These reactions are responsible for the strong temperature dependence of mixture composition in high-enthalpy flows, as they consume large amounts of energy and significantly alter the thermodynamic properties of the gas. Reactions \eqref{equation:no_exchange} and \eqref{equation:n2_exchange} are exchange reactions, in which atoms are rearranged between existing molecules. Although they do not directly contribute to dissociation, they play a critical role in determining the relative concentrations of species, thereby controlling the transient appearance of nitric oxide in the boundary layer. At higher enthalpies, ionization phenomena become important, requiring six additional species (the ions of the five neutral species and free electrons). Since the present work focuses on low-altitude hypersonic conditions, ionization is neglected. For more detailed treatments of ionizing air mixtures, the reader is referred to \citet{BoseCandler1998} and \citet{ChaudhryEtAl2018}.
+
+% For illustration, consider a generic dissociation reaction
+% \begin{equation}\label{equation:generic_diss}
+%     \ce{AB + M <=> A + B + M},
+% \end{equation}
+% where the rate of progress is expressed as
+% \begin{equation}
+%     R_d = k_{f,r} \,\frac{\rho_{\ce{AB}}}{\mathcal{M}_{\ce{AB}}}\frac{\rho_{\ce{M}}}{\mathcal{M}_{\ce{M}}}
+%            - k_{b,r}\,\frac{\rho_{\ce{A}}}{\mathcal{M}_{\ce{A}}}\frac{\rho_{\ce{B}}}{\mathcal{M}_{\ce{B}}}\frac{\rho_{\ce{M}}}{\mathcal{M}_{\ce{M}}},
+% \end{equation}
+% with $k_{f,r}$ and $k_{b,r}$ denoting the forward and backward rate coefficients. Similarly, for a generic exchange reaction
+% \begin{equation}
+%     \ce{AB + CD <=> AD + BC},
+% \end{equation}
+% the rate of progress is
+% \begin{equation}
+%     R_e = k_{f,r} \,\frac{\rho_{\ce{AB}}}{\mathcal{M}_{\ce{AB}}}\frac{\rho_{\ce{CD}}}{\mathcal{M}_{\ce{CD}}}
+%            - k_{b,r}\,\frac{\rho_{\ce{AD}}}{\mathcal{M}_{\ce{AD}}}\frac{\rho_{\ce{BC}}}{\mathcal{M}_{\ce{BC}}}.
+% \end{equation}
+
+% From these relations, the general mass production rate of species $s$ per unit volume is obtained as~\citep{Gnoffo1989}
+% \begin{equation}\label{equation:wdot}
+%     \dot{\omega}_s = \mathcal{M}_s \sum_{r=1}^{N} (\beta_{s,r}-\alpha_{s,r}) \,10^3
+%     \left[
+%         k_{f,r}\prod_{s=1}^{n_s}\left(\frac{10^{-3}\rho_s}{\mathcal{M}_s}\right)^{\alpha_{s,r}}
+%         - k_{b,r}\prod_{s=1}^{n_s}\left(\frac{10^{-3}\rho_s}{\mathcal{M}_s}\right)^{\beta_{s,r}}
+%     \right],
+% \end{equation}
+% where $N$ is the number of reactions, $\alpha_{s,r}$ and $\beta_{s,r}$ are stoichiometric coefficients of reactants and products in reaction $r$, and $n_s$ is the number of species. Reaction data are typically tabulated in cgs units, hence the explicit $10^{\pm 3}$ factors~\citep{Gnoffo1989,Park1990,park2001}.  
+
+% Accounting for vibration--dissociation coupling, the rate coefficients follow Arrhenius-type laws:
+% \begin{align}
+%     k_{f,r} &= C_{f,r}\,T_d^{n}\,\exp\!\left(-\frac{\theta_r}{T_d}\right), \\
+%     k_{b,r} &= \frac{k_{f,r}(T)}{K_{c,r}},
+% \end{align}
+% where $C_{f,r}$ is the pre-exponential factor, $\theta_r$ is the activation temperature, and $K_{c,r}$ is the equilibrium constant of reaction $r$.  
+
+% A critical modeling assumption in thermochemical nonequilibrium is the use of a dummy temperature $T_d$, which is a weighted mean of the translational--rotational temperature $T$ and the vibrational temperature $T_v$~\citep{Park1990}:
+% \begin{equation}\label{equation:twotemperature}
+%     T_d = T^{p} \, T_v^{q},
+% \end{equation}
+% with either $p=q=0.5$ or $p=0.7$, $q=0.3$ depending on the reference.  
+
+% The equilibrium constant $K_{c,r}$ may be obtained from empirical curve fits~\citep{Park1985} or from rigid-rotor harmonic oscillator (RRHO) statistical mechanics models~\citep{miromiroThesis}, yielding
+% \begin{equation}
+%     K_{c,r} = \exp\!\left(A_1 z^{-1} + A_2 + A_3 \ln z + A_4 z + A_5 z^2 \right),
+% \end{equation}
+% where $z=10000/T$ and $A_i$ are empirical coefficients available in~\citep{Park1985,Park1990,park2001}, with improved correlations provided by NASA polynomial datasets~\citep{nasa7,nasa9}.
+
+To accurately describe hypersonic boundary layer flows, a thermochemical framework must be incorporated into the governing equations. The extension of the Navier--Stokes system to account for chemical activity in the atmosphere is essential for capturing the coupled effects of chemistry and fluid dynamics at high speeds. 
+
+% In the present work, a five-species air model (\ce{N2}, \ce{O2}, \ce{N}, \ce{O}, and \ce{NO}) is employed, providing a balance between physical fidelity and computational tractability.
+
+The thermochemical model must be appropriate for the relevant flight conditions. For atmospheric air at moderate temperatures, a non-reacting binary mixture of diatomic oxygen and nitrogen (\ce{O2}, \ce{N2}) provides good accuracy. At elevated temperatures, however, dissociation occurs, requiring the inclusion of atomic oxygen and nitrogen. A four-species model remains incomplete, as it neglects the exchange reactions between species that generate nitric oxide (\ce{NO}), which plays a key role in nonequilibrium chemistry. Consequently, a five-species model is commonly adopted, consisting of \ce{N2}, \ce{O2}, \ce{N}, \ce{O}, and \ce{NO}, with the following reversible reactions:
+\begin{align}
+    \ce{N2 + M & <=> 2N + M}, \label{equation:n2_diss} \\ 
+    \ce{O2 + M & <=> 2O + M}, \label{equation:o2_diss} \\
+    \ce{NO + M & <=> N + O + M}, \label{equation:no_diss} \\
+    \ce{NO + O & <=> N + O2}, \label{equation:no_exchange} \\
+    \ce{N2 + O & <=> NO + N}, \label{equation:n2_exchange}
+\end{align}
+where \ce{M} denotes an arbitrary third-body collision partner. Reactions \eqref{equation:n2_diss}--\eqref{equation:no_diss} correspond to dissociation processes, in which a diatomic molecule breaks into atomic species. These reactions are responsible for the strong temperature dependence of mixture composition in high-enthalpy flows, as they consume large amounts of energy and significantly alter the thermodynamic properties of the gas. Reactions \eqref{equation:no_exchange} and \eqref{equation:n2_exchange} are exchange reactions, in which atoms are rearranged between existing molecules. Although they do not directly contribute to dissociation, they play a critical role in determining the relative concentrations of species, thereby controlling the transient appearance of nitric oxide in the boundary layer. At higher enthalpies, ionisation phenomena become important, requiring six additional species (the ions of the five neutral species and free electrons). Since the present work focuses on low-altitude hypersonic conditions, ionisation is neglected. For more detailed treatments of ionising air mixtures, the reader is referred to \citet{BoseCandler1998} and \citet{ChaudhryEtAl2018}.
+
+For illustration, consider a generic dissociation reaction
+\begin{equation}\label{equation:generic_diss}
+    \ce{AB + M <=> A + B + M},
+\end{equation}
+where the rate of progress is expressed as
+\begin{equation}
+    R_d = k_{f,r} \,\frac{\rho_{\ce{AB}}}{\mathcal{M}_{\ce{AB}}}\frac{\rho_{\ce{M}}}{\mathcal{M}_{\ce{M}}}
+           - k_{b,r}\,\frac{\rho_{\ce{A}}}{\mathcal{M}_{\ce{A}}}\frac{\rho_{\ce{B}}}{\mathcal{M}_{\ce{B}}}\frac{\rho_{\ce{M}}}{\mathcal{M}_{\ce{M}}},
+\end{equation}
+with $k_{f,r}$ and $k_{b,r}$ denoting the forward and backward rate coefficients. Similarly, for a generic exchange reaction
+\begin{equation}
+    \ce{AB + CD <=> AD + BC},
+\end{equation}
+the rate of progress is
+\begin{equation}
+    R_e = k_{f,r} \,\frac{\rho_{\ce{AB}}}{\mathcal{M}_{\ce{AB}}}\frac{\rho_{\ce{CD}}}{\mathcal{M}_{\ce{CD}}}
+           - k_{b,r}\,\frac{\rho_{\ce{AD}}}{\mathcal{M}_{\ce{AD}}}\frac{\rho_{\ce{BC}}}{\mathcal{M}_{\ce{BC}}}.
+\end{equation}
+
+From these relations, the general mass production rate of species $s$ per unit volume is obtained as~\citep{Gnoffo1989}
+\begin{equation}\label{equation:wdot}
+    \dot{\omega}_s = \mathcal{M}_s \sum_{r=1}^{N} (\beta_{s,r}-\alpha_{s,r}) \,10^3
+    \left[
+        k_{f,r}\prod_{s=1}^{n_s}\left(\frac{10^{-3}\rho_s}{\mathcal{M}_s}\right)^{\alpha_{s,r}}
+        - k_{b,r}\prod_{s=1}^{n_s}\left(\frac{10^{-3}\rho_s}{\mathcal{M}_s}\right)^{\beta_{s,r}}
+    \right],
+\end{equation}
+where $N$ is the number of reactions, $\alpha_{s,r}$ and $\beta_{s,r}$ are stoichiometric coefficients of reactants and products in reaction $r$, and $n_s$ is the number of species. Reaction data are typically tabulated in cgs units, hence the explicit $10^{\pm 3}$ factors~\citep{Gnoffo1989,Park1990,ParkEtAl2001}. Accounting for vibration--dissociation coupling, the rate coefficients follow Arrhenius-type laws:
+\begin{align}
+    k_{f,r} &= C_{f,r}\,T_d^{n}\,\exp\!\left(-\frac{\theta_r}{T_d}\right), \\
+    k_{b,r} &= \frac{k_{f,r}(T)}{K_{c,r}},
+\end{align}
+where $C_{f,r}$ is the pre-exponential factor, $\theta_r$ is the activation temperature, and $K_{c,r}$ is the equilibrium constant of reaction $r$.  A critical modelling assumption in thermochemical nonequilibrium is the use of a dummy temperature $T_d$, which is a weighted mean of the translational--rotational temperature $T$ and the vibrational temperature $T_v$~\citep{Park1990}:
+\begin{equation}\label{equation:twotemperature}
+    T_d = T^{p} \, T_v^{q},
+\end{equation}
+with either $p=q=0.5$ or $p=0.7$, $q=0.3$ depending on the reference. The equilibrium constant $K_{c,r}$ may be obtained from empirical curve fits~\citep{Park1985} or from rigid-rotor harmonic oscillator (RRHO) statistical mechanics models~\citep{miromiroThesis}, yielding
+\begin{equation}
+    K_{c,r} = \exp\!\left(A_1 z^{-1} + A_2 + A_3 \ln z + A_4 z + A_5 z^2 \right),
+\end{equation}
+where $z=10000/T$ and $A_i$ are empirical coefficients. The rate constant coefficients for the various chemical models employed in this work are presented in \autoref{Appendix:ReactionRateCoefficients}, with data available from~\citep{Park1985,Park1990,ParkEtAl2001}. 
+
+
+% \newpage
+
+
+
+\section{Self-similar solutions}
+Self-similar solutions provide analytical benchmark cases for laminar boundary layer flows in hypersonic regimes, offering insight into thermochemical nonequilibrium phenomena and validation data for numerical methods. The concept of similarity reduces the governing partial differential equations to ordinary differential equations through appropriate coordinate transformations, where velocity and temperature profiles at different streamwise locations differ only by scaling factors in boundary layer thickness and characteristic velocities \citep{White2005}. 
+
+For compressible flows, similarity theory must account for variable density, temperature-dependent transport properties, and coupling between momentum and energy equations. The Howarth--Dorodnitsyn or Lees--Dorodnitsyn transformation \citep{White2005} enables compressible boundary layers to be mapped to an equivalent incompressible form, facilitating similarity solutions even with variable properties. In the hypersonic regime, additional complexity arises from high-temperature effects including dissociation and vibrational excitation. \cite{Lees1956} developed similarity solutions for compressible laminar boundary layers, whilst \cite{FayRiddell1958} extended this framework to the stagnation point of blunt bodies, accounting for finite-rate chemistry and catalytic wall effects. \cite{LinanDaRiva1962} further refined these approaches, which remain the standard for predicting heat transfer in dissociated air. A comprehensive treatment of chemically frozen self-similar boundary layer flows, including detailed derivations and numerical solutions across various geometries, is provided by \cite{MiroMiroetal2020}.
+
+Recent \gls{DNS} have employed locally self-similar formulations to initialise laminar inflow profiles in high-enthalpy flows \citep{DiRenzo2021}. Studies of turbulent hypersonic boundary layers have revealed that whilst laminar flows exhibit strong streamwise dependence of chemical source terms preventing self-similarity, the fully turbulent region displays approximate global self-similarity of chemical species transport \citep{PassiatoreDiRenzo2025}. In the turbulent regime, source terms are balanced by wall-normal transport, which may be laminar, turbulent, or a combination thereof, rather than streamwise fluxes, and the recovery of chemical profiles can be characterised by a chemical relaxation length scale that collapses results across different reaction rates. This finding demonstrates that chemical similarity is achievable in turbulent hypersonic boundary layers, suggesting that turbulent flows with finite-rate chemistry may admit simpler modelling approaches than their laminar counterparts.
+
+% Whilst real hypersonic boundary layers often exhibit non-similar behaviour due to shock-wave interactions, entropy-layer effects, and chemical nonequilibrium, the locally self-similar approximations remain essential for initialising computational solutions. Interpreting complex flow physics, and providing computationally efficient frameworks for investigating detailed thermochemical processes in canonical configurations such as \gls{ZPG} flat-plate boundary layers and potentially stagnation-point flows.
+
+
+\subsection{Similarity variables and transformations}
+For compressible boundary layer studies, similarity transformations enable the reduction of the governing partial differential equations to ordinary differential equations through appropriate coordinate transformations. These transformations exploit the self-similar nature of certain boundary layer flows, where profiles at different streamwise locations collapse onto a single curve when expressed in the transformed coordinates. The classical approach considers the similarity variables proposed by \cite{Lees1956}:
+\begin{equation}
+    \xi(x) = \rho_e \mu_e u_e x \quad \text{and} \quad \eta(x,y) = \frac{u_e}{\sqrt{2\xi}} \int_{0}^{y} \rho \dd y,
+\end{equation}
+where $\mu_e$ is the edge dynamic viscosity and subscript $e$ denotes edge conditions. A streamfunction $\psi = f(\eta)\sqrt{2\xi}$ can be defined to automatically satisfy the continuity equation, such that 
+\begin{equation}
+    u = u_e f' \quad \text{and} \quad \rho v = - \cfrac{\rho_e \mu_e u_e f}{\sqrt{2\xi}} - \eta_x f' \sqrt{2\xi},
+\end{equation}
+where primes indicate differentiation with respect to $\eta$, i.e., $f' = \dd f/\dd\eta$, and $\eta_x = \partial\eta/\partial x$ is a metric coefficient that accounts for the streamwise variation of the similarity variable.
+
+Illingworth \citep{White2005} proposed an alternative transformation that splits the viscosity and density effects in $\xi$ and $\eta$, respectively, resulting in:
+\begin{gather}
+    \xi = \int_{0}^{x} \rho_e u_e \mu_e \dd x, \\
+    \eta = \frac{u_e}{\sqrt{2\xi}} \int_{0}^{y} \rho \dd y.
+\end{gather}
+The fundamental difference between the two transformations is that the Lees transformation employs $\xi = \rho_e \mu_e u_e x$ as an algebraic relation, whilst the Illingworth transformation uses $\xi = \int_{0}^{x} \rho_e u_e \mu_e \dd x$ as an integral form. For flows with constant edge properties, both transformations are equivalent since $\int_{0}^{x} \rho_e u_e \mu_e \dd x = \rho_e \mu_e u_e x$. However, for flows with varying edge conditions along the streamwise direction, the Illingworth transformation provides greater generality by integrating the edge properties, making it suitable for non-similar boundary layers where edge conditions vary with $x$. This more general form is often referred to as the Lees--Dorodnitsyn transformation and has become the standard approach for locally self-similar boundary layer solutions in compressible flow.
+
+The enthalpy is also split into a magnitude times a shape as:
+\begin{equation}
+    h(x,y) = h_e(\xi) g(\eta),
+\end{equation}
+where $g(\eta)$ represents the normalised enthalpy profile across the boundary layer, and $h_e(\xi)$ represents the edge enthalpy distribution. This decomposition allows the energy equation to be transformed into an ordinary differential equation for the shape function $g(\eta)$, analogous to the velocity transformation. An extended study of these transformations and the resulting ordinary differential equation system is extensively covered in \citet[Section~6.5]{Anderson2019}.
+
+
+\subsection{Locally self-similar boundary layer equations}\label{section:locallysimilar}
+
+Similarity solutions for laminar boundary layers provide essential base flows for linear stability theory calculations and inflow conditions for direct numerical simulations. The present study employs three distinct similarity formulations corresponding to different thermochemical models: \gls{CPG}, \gls{TEQ}, and \gls{TNE}. Whilst \gls{CPG} and \gls{TEQ} represent standard similarity solutions for compressible flows, the \gls{TNE} formulation accounts for a distribution of vibrational temperature $T_v$ across the boundary layer arising from conduction, with the wall and freestream taken to be in equilibrium. This latter condition, though less commonly studied, is argued to be more representative of the chosen flight conditions.
+
+For \gls{CPG} and \gls{TEQ} conditions, the similarity equations are derived from the global conservation (\Cref{equation:global_species_continuity}),(\Cref{equation:global_momentum}) and, (\Cref{equation:global_total_energy}) by applying the Illingworth transformation. With a multi-species model under vibrational equilibrium $T_v = T$, the similarity equations for momentum, species, and energy are given respectively by
+\begin{equation}\label{equation:similarity:momentum}
+    (C f'')' + f f'' = 0,
+\end{equation}
+\begin{equation}\label{equation:similarity:species}
+    \left(\frac{\rho^2 D_s}{\rho_e \mu_e} X'_s\right)' + f Y'_s = 0,
+\end{equation}
+and
+\begin{multline}\label{equation:similarity:teq_energy}
+     \left(\frac{\rho}{\rho_e \mu_e} (\kappa + \kappa_v) \theta'\right)' + (c_{p,tr} + c_{v,v}) f \theta' + \frac{\rho \mu}{\rho_e \mu_e} \frac{u_{e}^{2}}{T_e} f''^{2} \\
+     \qquad\qquad\qquad\qquad\qquad + \sum (c_{p,tr,s} + c_{v,v,s}) \left(\frac{\rho D_s}{\rho_e \mu_e} X'_s\right) \theta' = 0,
+\end{multline}
+where $Y_s$ is the mass fraction of species $s$, $\theta = T/T_e$ is the temperature ratio, $C = \rho\mu/\rho_e\mu_e$ is the Chapman--Rubesin parameter, and $D_s$ is the species diffusion coefficient. The specific heat capacities of translational--rotational and vibrational modes are defined as
+\begin{equation}
+    c_{p,tr} = \pdv{h_{tr}}{T}, \quad c_{v,v} = \pdv{e_{v}}{T_{v}},
+\end{equation}
+which depend on a single temperature for \gls{TEQ} conditions.
+
+
+% The diffusion terms have been included for completeness, but remain inactive under the flow conditions computed. 
+
+% For thermally frozen or \gls{TNE} flows, the similarity equations are modified by incorporating an additional equation derived from the vibrational energy conservation equation \Cref{equation:conservation_vibration}, whilst neglecting the vibrational--translational exchange term. The translational--rotational energy equation \Cref{equation:similarity:teq_energy} is replaced with
+Since \gls{TNE} flows are inherently non-similar \citep{Anderson2019}, the \gls{TFG} equations are recovered in the limit $\mathcal{Q}_{tv} \to 0$. For \gls{TFG} and \gls{TNE} flows, the similarity equations are modified by incorporating vibrational energy conservation ( \Cref{equation:conservation_vibration}) whilst neglecting the vibrational–translational exchange term $\mathcal{Q}_{tv}$. The translational–rotational energy equation becomes \begin{multline}\label{equation:similarity:tne_energy}
+    \left(\frac{\rho}{\rho_e \mu_e} \kappa \theta'\right)' + \left(\frac{\rho}{\rho_e \mu_e} \kappa_v \theta'_v\right)' + c_{p,tr} f \theta' + c_{v,v} f \theta'_{v} + \frac{\rho \mu}{\rho_e \mu_e} \frac{u_{e}^{2}}{T_e} f''^{2} \\
+    + \sum c_{p,tr,s} \left(\frac{\rho D_s}{\rho_e \mu_e} X'_s\right) \theta' \\
+    + \sum c_{v,v,s} \left(\frac{\rho D_s}{\rho_e \mu_e} X'_s\right) \theta_v' = 0,
+\end{multline} with the corresponding vibrational temperature equation \begin{equation}\label{equation:similarity:vibration}
+    \left(\frac{\rho}{\rho_e \mu_e} \kappa_v \theta'_v\right)' + c_{v,v} f \theta'_{v} + \sum c_{v,v,s} \left(\frac{\rho D_s}{\rho_e \mu_e} X'_s\right) \theta'_{v} = 0,
+\end{equation} where $\theta_v = T_v/T_e$ denotes the vibrational temperature ratio and $\kappa_v$ is the vibrational thermal conductivity.
+
+The similarity equations are subject to the following boundary conditions:
+\begin{gather}\label{eq:bc1}
+    f'(0) = f(0) = 0, \quad \theta(0) = \theta_w, \quad Y_s'(0) = 0, \\
+    f'(\infty) = 1, \quad \theta(\infty) = 1, \quad Y_s(\infty) = Y_{s,e}.
+\end{gather}
+
+The wall is assumed to be isothermal and surface catalysis is neglected, hence the Neumann condition for mass fractions. For \gls{TNE} cases, the boundary conditions for vibrational temperature are treated analogously to the translational--rotational temperature. The similarity equations are solved using a spectral Chebyshev differentiation matrix, outlined in~\Cref{section:similaritysolution}. Instead of the traditional shooting method, a matrix-based approach was developed that does not require accurate initial estimates of wall variables, providing improved robustness and computational efficiency.
+
+\section*{Chapter summary}
+
+This chapter has presented the complete mathematical and physical framework governing hypersonic flows with thermochemical nonequilibrium effects. The conservation equations for mass, momentum, and energy have been extended to five-species air with active chemistry, incorporating Park's two-temperature model to distinguish between translational--rotational and vibrational energy modes.
+
+The \gls{CPG} and \gls{TEQ} formulations solve the continuity (\Cref{equation:global_continuity}), momentum (\Cref{equation:global_momentum}), and total energy equations (\Cref{equation:global_total_energy}), with the \gls{TEQ} model incorporating the effect of vibrational energy through equilibrium closure at a single temperature ($T = T_v$), whereas the \gls{CPG} model assumes frozen chemistry and no vibrational excitation. In contrast, the \gls{TNE} formulation solves the complete system of equations, including the additional vibrational energy conservation equation (\Cref{equation:conservation_vibration}), allowing the translational and vibrational temperatures to evolve independently and interact via the vibrational--translational coupling term $\mathcal{Q}_{tv}$.
+
+A comprehensive treatment of thermodynamic properties, including equations of state, specific heats, and vibrational energy contributions based on the harmonic oscillator approximation, provides the thermodynamic closure required for high-enthalpy flows. The thermophysical framework encompasses viscosity models ranging from the classical Sutherland law to the advanced Musawi--Sandham polynomial formulation optimised across $100$--$9,000$~\si{\kelvin}, Eucken-type decomposition of thermal conductivity into translational--rotational and vibrational components, and simplified yet accurate species diffusion models based on constant Lewis and Schmidt numbers. The vibrational framework employs the Landau--Teller relaxation model with Park's high-temperature correction to capture vibration--dissociation coupling, whilst the thermochemical framework incorporates five reversible reactions (three dissociation and two exchange reactions) with Arrhenius-type rate coefficients dependent on a dummy temperature weighted between translational and vibrational modes. Finally, self-similar boundary layer solutions are presented for three distinct thermochemical models, \gls{CPG}, \gls{TEQ}, and \gls{TFG} providing analytical benchmarks for validation and initialisation of \gls{DNS} in canonical flat-plate geometries. The equations mentioned in this Chapter form the foundations for the numerical methodology used in this thesis . The equations presented in this chapter form the foundations for the numerical methodology used in this thesis. This methodology is implemented within the OpenSBLI framework, which employs discretisation schemes for \gls{DNS} of hypersonic boundary layer transition.
+
+% This chapter has presented the complete mathematical and physical framework governing hypersonic flows with thermochemical nonequilibrium effects. The conservation equations for mass, momentum, and energy have been extended to five-species air with active chemistry, incorporating Park's two-temperature model to distinguish between translational--rotational and vibrational energy modes. A comprehensive treatment of thermodynamic properties, including equations of state, specific heats, and vibrational energy contributions based on the harmonic oscillator approximation, provides the thermodynamic closure required for high-enthalpy flows. The thermophysical framework encompasses viscosity models ranging from classical Sutherland law to the advanced Musawi--Sandham polynomial formulation optimised across 100--9000~K, Eucken-type decomposition of thermal conductivity into translational--rotational and vibrational components, and simplified yet accurate species diffusion models based on constant Lewis and Schmidt numbers. The vibrational framework employs the Landau-Teller relaxation model with Park's high-temperature correction to capture vibration--dissociation coupling, whilst the thermochemical framework incorporates five reversible reactions (three dissociation and two exchange reactions) with Arrhenius-type rate coefficients dependent on a dummy temperature weighted between translational and vibrational modes. Finally, self-similar boundary layer solutions are derived for three distinct thermochemical models---\gls{CPG}, \gls{TEQ} and \gls{TFG} providing analytical benchmarks for validation and initialisation of direct numerical simulations in canonical flat-plate geometries.
+
+% The \gls{CPG} and \gls{TEQ} formulations solve the continuity, momentum, and total energy equations, with the \gls{TEQ} model incorporating the effect of vibrational energy through equilibrium closure at a single temperature (\(T = T_v\)), whereas the \gls{CPG} model assumes frozen chemistry and no vibrational excitation. In contrast, the \gls{TNE} formulation solves the complete system of equations, including the additional vibrational energy conservation equation, allowing the translational and vibrational temperatures to evolve independently and interact via the vibrational--translational coupling term \(\mathcal{Q}_{tv}\).

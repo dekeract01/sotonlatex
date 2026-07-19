@@ -1,0 +1,872 @@
+\chapter{Disturbance growth in thermally excited hypersonic boundary layers}\label{chapter:disturbance_growth}
+
+In hypersonic boundary layers, even in the absence of chemical effects,  transition is compounded by real-gas effects in the post-shock thermal layer. High-enthalpy conditions drive \emph{thermal} nonequilibrium, where vibrational modes depart from the translational--rotational temperature in the post-shock region and relax on a finite time-scale, altering modal stability characteristics~\citep{Candler2019}. Capturing this behaviour is essential for reliable transition prediction and control. Replicating such conditions whilst maintaining a quiet freestream is uncommon because of high power demands and stringent acoustic control needed~\citep{DiRenzo2021}. In low-disturbance, flight-like environments, transition onset is highly sensitive to small environmental and thermochemical changes, which can move it's position upstream or downstream. Such low-disturbance environments promote the most natural form of transition (\textit{path a} in \fref{figure:transitionmarkovin}). Receptivity first converts external acoustic, entropy, vorticity disturbances and mild surface or thermal non-uniformities into boundary layer fluctuations. These are organised into discrete linear instability modes, as established in Mack's seminal analyses~\citep{Mack1984}, which then undergo exponential amplification. Slow streamwise variations in the mean state can introduce \emph{parametric} modulation, altering growth rates and generating sidebands. This pathway ultimately culminates in breakdown to turbulence, eigenmode growth substantially increases aerothermodynamic loads where heat transfer and skin friction rise sharply, with thermal loads reported up to $30\times$ laminar values~\citep{BitterShepherd2015}. Furthermore, these spectra and growth rates are governed by compressibility, the wall thermal state $T_w/T_e$, and the vibrational relaxation time $\tau_v$. Thermal nonequilibrium modifies bulk-viscous damping and phase speed, shifts synchronisation, and reshapes the overall stability envelope. Accurately representing the thermal state and operating conditions is of utmost importance for predicting the transition location.
+
+As a simplification, we can consider a hypersonic glide vehicle shaped as a wedge flying at hypersonic speed at low altitude. As sketched in \Cref{figure:wedgeflow} (adapted from \citet{williams2021}), the flow field partitions into zones of thermal equilibrium (\gls{TEQ}, green) and thermal nonequilibrium (\gls{TNE}, blue). Immediately behind the leading-edge oblique shock, the post-shock gas remains close to \gls{TEQ}. Inside the boundary layer, however, the vibrational temperature lags the translational–rotational temperature, creating \gls{TNE} that decays over a finite relaxation length. The relative size of these regions depends on altitude and heating. At low altitude, where the ambient density is higher, relaxation proceeds more rapidly and \gls{TEQ} occupies a larger portion of the near field. Further downstream, viscous dissipation increases the local temperature, allowing \gls{TNE} to persist until the vibrational modes re--equilibrate. Local shock curvature and the favourable pressure gradient induced by the nose further shape the distribution of \gls{TEQ} and \gls{TNE} along the surface. Instability modes behave differently across these zones. For clarity, the following discussion adopts a nominally zero streamwise pressure gradient to isolate the thermally driven effects on the spectra and growth of instability modes across the domain.
+
+
+% Immediately behind the oblique shock at the leading edge, the post-shock gas is close to \gls{TEQ}, whilst within the boundary layer the vibrational temperature lags the translational--rotational temperature, producing \gls{TNE} that relaxes downstream over a finite time scale. The extent of each zone depends on ambient density and heating at low altitude (higher density), relaxation is faster and \gls{TEQ} occupies a larger fraction of the near-field; farther downstream, viscous dissipation raises temperatures and \gls{TNE} can persist until vibrational modes re-equilibrate. Local shock curvature and the favourable pressure gradient induced by the nose further modulate these \gls{TEQ}/\gls{TNE} regions along the surface. Instability modes respond differently across these zones: growth rates, phase speeds, and synchronisation are modified in \gls{TNE} owing to vibrational relaxation and altered bulk-viscous damping, whereas \gls{TEQ} exhibits the classical compressible behaviour. For clarity in what follows, we consider a nominally zero streamwise pressure gradient to isolate thermally driven effects on the spectra and growth of instability modes along the domain.
+
+\begin{figure}[t]
+    \centering
+    \fontsize{8}{9}\selectfont\includesvg[width=0.95\textwidth]{resources/figures/disturbance/schematic_wedgeflow.svg}
+    \captionof{figure}{Schematic of hypersonic flow over a two-dimensional wedge, highlighting vibrational nonequilibrium phenomena. Figure adapted from~\cite{williams2021}.}\label{figure:wedgeflow}
+\end{figure}
+
+This Chapter develops a unified assessment of linear-mode growth in thermally excited hypersonic boundary layers over flight-relevant ranges of Mach number $M_\infty$, wall-to-freestream temperature $T_w/T_e$, and vibrational relaxation time $\tau_v$. Emphasis is placed on the mechanisms by which thermal nonequilibrium modifies receptivity to internal disturbances, phase speed and synchronisation, and the acoustic trapping, culminating in changes to streamwise growth rates $\alpha_i(x)$ and cumulative $N$-factors. The resulting stability envelope, mapped consistently across \gls{TEQ} and \gls{TNE} bases, establishes how these parameters regulate amplification and thereby influence the predicted transition location. This foundation will then be used in later Chapter to interpret early nonlinear evolution and to relate numerical predictions to trends expected under representative flight conditions.
+
+
+
+\section{Second mode propagation}
+
+Transition from laminar to turbulent flow on a vehicle surface occurs due to the emergence and subsequent amplification of perturbations in the flow. These perturbations can originate from various sources, including freestream disturbances, acoustic waves, shock interactions, structural vibrations, surface roughness, surface catalysis, or internal fluctuations. Typically there is a receptivity phase, during which the flow field responds to the perturbations. For small amplitude perturbations, this sets the conditions for an initially linear growth followed by nonlinear breakdown to turbulence, as described in~\cite{reshotko2008}. The initial modal growth of the unstable boundary layer waves can be obtained by solving the compressible Orr-Sommerfeld equation. The most unstable eigenmodes computed by solving the eigenvalue problem are Tollmien--Schlichting waves in low-speed flow, whereas for high-speed boundary layer flows multiple unstable modes exist. Early studies of~\cite{Mack1969} provided a wider understanding of these modes, classifying them into two distinct types of linear instabilities known as Mack's \textit{first} and \textit{second modes}, with the latter being the lowest of the acoustic modes. The first mode is primarily vortical in nature. In supersonic boundary layers, the first-mode instability amplifies most readily at oblique orientations with nonzero spanwise wavenumber. Although its local growth rate can be small, the long streamwise development region allows substantial energy accumulation. Several mechanisms damp the first mode in high-speed flows, notably wall cooling which strongly stabilises first-mode waves, favourable pressure gradients, and enhanced thermal-viscous or bulk-viscous dissipation~\citep{Mack1984}.
+
+The second mode is characterised by trapped acoustic waves between the wall and the sonic line relative to the perturbation propagation speed~\citep{Fedorov2001} as depicted in~\fref{figure:schematicmackmode}. The second-mode instability exhibits growth rates typically much larger than those of the first mode, but over a shorter streamwise interval. It is predominantly two-dimensional, spanwise-uniform, high-frequency and acoustic in character, with phase speeds near the local sound speed and energy trapped between the wall and the sonic line~\citep{DeTullio2013}. Wall cooling destabilises this mode, making it the principal instability mechanism in many hypersonic boundary layers. Its amplification is sensitive to the mean thermal state, through sound-speed and viscous or bulk-viscous effects, and to slight changes in synchronisation conditions, which confine its growth to a relatively narrow streamwise band.
+
+
+
+The early stages of transition can be captured accurately by \gls{LST}, provided the disturbance environment has low amplitude and the Reynolds number is high enough that the boundary layer is only weakly non-parallel. Early \gls{LST} results including real-gas effects began with \cite{Malik1989, Malik1990a}, who examined local thermochemical equilibrium relative to a \gls{CPG}, followed by \cite{stuckertreed1994}, who studied \gls{CNE}. \cite{Hudson1997} advanced this line of work by incorporating both chemical and vibrational nonequilibrium using Park's two-temperature model. They found that endothermic reactions, which extract energy from the boundary layer, suppress first-mode instabilities whilst enhancing the second mode analogous to wall cooling. Overall, thermochemical nonequilibrium produced higher growth rates than \gls{CPG} flows but lower than thermal and chemical equilibrium, indicating an overall stabilising influence. These trends were corroborated by \gls{LST} and experiments in the T5 shock tunnel by \cite{JohnsonEtal1998}, who showed that endothermic reactions stabilise the flow, whereas exothermic reactions destabilise it. \cite{JohnsonCandler2005} further demonstrated that the predicted transition location can shift upstream by nearly 50\% when finite-rate reactions are modelled. \cite{MortensenZhong2013} incorporated multi-species chemical effects and compared \gls{LST} with \gls{DNS} for various cone flows, including surface ablation and roughness, noting that changes in transport properties significantly affect growth-rate predictions. Most recently, \cite{BitterShepherd2015} investigated vibrational nonequilibrium and concluded that it can play an important role in stability.
+
+Previous \gls{LST} studies have demonstrated that local thermochemical equilibrium can significantly amplify the $N$-factors, potentially altering the transition breakdown process \citep{MiroMiro2019}. However, it remains unclear whether this shift arises primarily from chemical equilibrium effects or from thermal equilibrium. Chemical nonequilibrium effects on modal growth are examined in the literature \citep{FrankoMacCormackLele2010}, with only partial consideration given to transport properties and their influence on the thermal state \citep{LyttleReed2005}. Whilst these studies acknowledge that discrepancies stem chiefly from the thermal boundary layer, the magnitude of transport-model influences remains inadequately quantified. The goal of the current chapter is to assess the effects of Mach number and wall temperature on thermally excited boundary layers, and to examine the progression of $N$-factors through a combination of \gls{LST} and \gls{DNS} in typical flight scenarios.
+
+\section{Linear stability framework}
+
+The linear propagation and subsequent decay of small, superposed disturbances in a given base state can be accurately captured by stability analysis. A suite of frameworks, ranging from local normal mode to parabolised and fully global analyses, rests on different treatments of parallelism and nonparallel effects and, taken together, yields workable estimates of the transition stage, including neutral boundaries, peak amplification bands, \textit{N}-factor levels, and probable breakdown scenarios; a detailed review of these methods can be found in \citep{Theofilis2011}. Focusing on local disturbances in a nearly parallel boundary layer, the problem is cast as a one-dimensional eigenvalue problem in the wall-normal coordinates. The resulting spectrum provides amplification rates, phase speeds, and wall-normal eigenfunctions, from which neutral curves and bands of peak gain are assembled and \textit{N}-factors accumulated to estimate the onset of transition. Two modelling choices make this tractable. Linearity requires disturbances to remain small enough that quadratic interactions can be ignored. Although breakdown is inherently nonlinear, the linear growth phase is usually the slowest, and therefore determines the effective transition Reynolds number. Moreover, the most amplified frequency in this regime often continues to dominate well into the nonlinear stage \citep{Reshotko2001,Mack1984}. Local parallelism assumes that, over a short streamwise interval, the base flow varies only with the wall-normal coordinate. This has proved adequate for charting initial amplification and is supported by classic experiments that identified instability waves and their quantitative trends.
+
+The first step is to introduce the disturbance field explicitly and linearise about the base state to obtain the eigenproblem for growth rates and phases. The instantaneous state is written as a mean plus a small fluctuation:
+\begin{equation}
+  \boldsymbol{q} \;=\; \bar{\boldsymbol{q}}\;+\; \tilde{\boldsymbol{q}}(x_j,t),
+\end{equation}
+where $\bar{\boldsymbol{q}}=(\bar{\rho},\,\bar{u},\,\bar{v},\,\bar{w},\,\bar{T})^{\mathsf{T}}$ denotes the base flow and $\tilde{\boldsymbol{q}}=(\tilde{\rho},\,\tilde{u},\,\tilde{v},\tilde{w},\,\tilde{T})^{\mathsf{T}}$ the small disturbance. The boundary layer is deemed unstable where the disturbance amplitude increases downstream (or in time), and stable where it decays. The governing equations are linearised about $\bar{\boldsymbol{q}}$; under a locally parallel assumption the coefficients depend only on $y$. Accordingly, a normal--mode ansatz is adopted for the disturbance field:
+\begin{equation}
+  \tilde{\boldsymbol{q}}(x,y,z,t)
+  = \hat{\boldsymbol{q}}(y)\,\exp\!\big(i(\alpha x+\beta z-\omega t)\big),
+\end{equation}
+where $\hat{\boldsymbol{q}}(y)$ is the complex eigenfunction, $\alpha,\beta$ are the stream--/span-- wise wavenumbers, and $\omega$ the frequency. Substitution of this ansatz into the linearised Navier--Stokes equations yields a linear eigenvalue problem:
+\begin{equation*}
+  L\,\hat{\boldsymbol{q}} = \omega\,\hat{\boldsymbol{q}}.
+\end{equation*}
+
+
+\begin{figure}[hbt!]
+    \centering
+    \fontsize{9}{10}\selectfont\includesvg[width=0.9\textwidth]{resources/figures/disturbance/schematic-mackmode.svg}
+    \captionof{figure}{Schematic of acoustic second mode instability in a high-speed boundary layer, where $U(y)$ is the mean streamwise flow profile and $c_r$ is the phase speed. Adapted from \citep{Fedorov2011}}.
+    \label{figure:schematicmackmode}
+\end{figure}
+
+
+The interpretation hinges on the spectral parameters $(\alpha,\beta,\omega)$. In what follows, a spatial analysis is adopted: disturbances grow in space with $\alpha \in \mathbb{C}$ and $\omega \in \mathbb{R}$, and $\alpha$ is iterated until $\omega$ is real. In this setting, the spatial growth rate is $-\alpha_i$, which quantifies the exponential amplification or decay of the disturbance along the streamwise direction. The complex streamwise wavenumber $\alpha = \alpha_r + i\,\alpha_i$ obtained from the spatial eigenvalue problem provides two physically important quantities: the spatial growth rate and the phase speed of the disturbance. The spatial growth rate is defined as $-\alpha_i$, quantifying the exponential amplification ($\alpha_i < 0$) or decay ($\alpha_i > 0$) of the disturbance envelope in the streamwise direction. The real part $\alpha_r$ determines the streamwise wavelength, $\lambda_x = 2\pi / \alpha_r$, and, together with the real frequency $\omega$, defines the phase speed of the disturbance as:
+\begin{equation}
+  c_r = \frac{\omega}{\alpha_r}.
+\end{equation}
+This quantity represents the velocity at which a constant phase propagates along the surface. When normalised by the freestream velocity $u_e$, the nondimensional phase speed $c_r/u_e$ provides insight into the acoustic nature of the disturbance. For high-speed boundary layers, the second-mode instability typically propagates at speeds close to the boundary layer edge velocities~\citep{Fedorov2011}, which can be approximated as: % which gives the phase speed as c_r/uinf = 0.9 
+\begin{equation} 
+  \frac{c_r}{u_e} \approx 1 \pm \frac{1}{M_e},
+\end{equation}
+where the `$+$' branch corresponds to the fast (upper) acoustic mode and the '$-$' branch corresponds to the slow (lower) acoustic mode. The former is associated with trapped acoustic waves reflecting between the wall and the relative sonic line as shown in \Cref{figure:schematicmackmode}, whilst the latter represents waves propagating in the opposite direction. The observed phase-speed values in spatial stability analyses and \gls{DNS} therefore provide a direct indication of whether the dominant disturbance is associated with the upper or lower acoustic branch. Throughout this Chapter, disturbance propagation is analysed using a base flow $\bar{\boldsymbol{q}}$ supplied by the similarity solutions introduced in \Cref{section:locallysimilar}, whilst the perturbations $\tilde{\boldsymbol{q}}$ are modelled as a single species \gls{CPG}, as detailed in this section.
+
+
+% The interpretation hinges on the spectral parameters $(\alpha,\beta,\omega)$. In what follows, a spatial analysis is adopted: disturbances grow in space with $\alpha \in \mathbb{C}$ and $\omega \in \mathbb{R}$, and $\alpha$ is iterated until $\omega$ is real. In this setting, the spatial growth rate is $-\operatorname{Im}(\alpha)$, which quantifies the exponential amplification or decay of the disturbance along the streamwise direction. The complex streamwise wavenumber $\alpha = \alpha_r + i\,\alpha_i$ obtained from the spatial eigenvalue problem provides two physically important quantities: the spatial growth rate and the phase speed of the disturbance. The spatial growth rate is defined as $-\alpha_i$, quantifying the exponential amplification ($\alpha_i < 0$) or decay ($\alpha_i > 0$) of the disturbance envelope in the streamwise direction. The real part $\alpha_r$ determines the streamwise wavelength, $\lambda_x = 2\pi / \alpha_r$, and, together with the real frequency $\omega$, defines the phase speed of the disturbance as:
+% \[
+%   c_r = \frac{\omega}{\alpha_r}.
+% \]
+
+% This quantity represents the velocity at which a constant phase propagates along the surface. When normalised by the freestream velocity $u_e$, the nondimensional phase speed $c_r/u_e$ provides insight into the acoustic nature of the disturbance. For high-speed boundary layers, the second-mode instability typically propagates at speeds close to the local acoustic velocities relative to the wall, which can be approximated as:
+% \[
+%   \frac{c_r}{u_e} \approx 1 \pm \frac{1}{M_e},
+% \]
+% where the $+$ branch corresponds to the fast (upper) acoustic mode and the $-$ branch corresponds to the slow (lower) acoustic mode. The former is associated with trapped acoustic waves reflecting between the wall and the relative sonic line, whilst the latter represents waves propagating in the opposite direction. The observed phase-speed values in spatial stability analyses and \gls{DNS} therefore provide a direct indication of whether the dominant disturbance is associated with the upper or lower acoustic branch. Throughout this chapter, disturbance propagation is analysed using a base flow $\bar{\boldsymbol{q}}$ supplied by the similarity solutions introduced in \Cref{section:locallysimilar}, whilst the perturbations $\tilde{\boldsymbol{q}}$ are modelled as a single species \gls{CPG}, as detailed in this section.
+
+\subsection{Governing equations and viscosity effects}
+
+A number of previous studies have considered thermal effets in \gls{LST}. \cite{Wartemann2019} investigated the use of thermal excitation within the mean flow and stability code. Their results demonstrated that thermal excitation in both base flows and stability solver yielded results practically identical to those obtained when only the base flow included thermal excitation. Similar conclusions were drawn in \cite{MortensenZhong2013} and \cite{miromiroThesis}, and \cite{BitterShepherd2015} for an air-mixture, where base flow thermal excitation had a larger effect on the final growth rates compared to thermal excitation in the perturbed flow. A conclusion was that a compressible stability solver with a constant specific heat $\gamma$ produced comparable outcomes to a solver that solved Linearised Navier--Stokes Equations (LNSE) for thermally excited flows \citep{Wartemann2019}. Taking this into account, the current study employs a stability solver based on the \gls{CPG} assumption, whilst the base flow takes thermal excitation into account. The governing equations mentioned in this section form the basis for the linearised Navier--Stokes equations. Conservation of mass, momentum, and energy in the three spatial directions $x_k$ ($k = 0, 1, 2$) yields the system:
+% \begin{align}
+% \frac{\partial \rho}{\partial t}
+% + \frac{\partial}{\partial x_k}\!\left(\rho u_k\right) = 0, \\[0.5em]
+% \frac{\partial}{\partial t}\!\left(\rho u_i\right)
+% + \frac{\partial}{\partial x_k}\!\left(\rho u_i u_k + p\,\delta_{ik} - \tau_{ik}\right) = 0, \\[0.5em]
+% \frac{\partial}{\partial t}\!\left(\rho E\right)
+% + \frac{\partial}{\partial x_k}\!\left(
+%   \rho u_k\!\left(E + \frac{p}{\rho}\right) + q_k - u_i \tau_{ik}
+% \right) = 0,
+% \end{align}
+\begin{equation}
+    \frac{\partial \rho}{\partial t} + \frac{\partial}{\partial x_k}\!\left(\rho u_k\right) = 0
+\end{equation} \begin{equation}
+    \frac{\partial}{\partial t}\!\left(\rho u_i\right)
++ \frac{\partial}{\partial x_k}\!\left(\rho u_i u_k + p\,\delta_{ik} - \tau_{ik}\right) = 0
+\end{equation} \begin{equation}
+    \frac{\partial}{\partial t}\!\left(\rho E\right)
++ \frac{\partial}{\partial x_k}\!\left(
+  \rho u_k\!\left(E + \frac{p}{\rho}\right) + q_k - u_i \tau_{ik}
+\right) = 0,
+\end{equation}
+where the heat flux $q_k$ is given by Fourier's law:
+\begin{align}
+q_k = -\,\kappa\,\frac{\partial T}{\partial x_k},
+\end{align}
+and $\kappa$ denotes the thermal conductivity.
+
+The equations are non-dimensionalised using the freestream reference quantities for velocity, density, and temperature $(u_\infty,\,\rho_\infty,\,T_\infty)$, together with a characteristic length based on the boundary layer displacement thickness $\delta^{*}$ prescribed at the inlet. The temperature-dependent dynamic viscosity $\mu(T)$ is evaluated using the translational--rotational temperature for \gls{CPG} flows, following either Sutherland's law, the Blottner--Eucken--Wilke rule, or the Musawi--Sandham model. A constant Prandtl number of $0.72$ is employed in all cases unless otherwise stated.
+
+\subsection{e\textsuperscript{N} method}
+
+For a given frequency and Reynolds number, the locally parallel stability analysis delivers only the \emph{local} spatial growth rate, $- \alpha_i$, whereas transition prediction requires the \emph{net} amplification accumulated as a disturbance convects downstream. The $e^N$ method \citep{SmithGamberoni1956,VanIngen1956} provides this link by integrating the spatial growth rate to obtain the amplitude ratio relative to a reference location $x_0$: % \operatorname{Im}(\alpha)
+\begin{equation}
+    N \;=\; \ln{ \left( \cfrac{A(x)}{A(x_0)} \right )} \;=\; - \int_{x_0}^{x} \alpha_i \; \mathrm{d} x
+\end{equation}
+so that $A(x)=A(x_0)\,e^{N(x)}$. In practice $N(x)$ is maximised over a range of frequencies to form an envelope used for correlation with experiments. A ``critical'' value of $N$ is then calibrated: in conventional wind tunnels, transition is commonly observed for $N \approx 5$--$10$ \citep{Schneider2015}, corresponding to an amplification of $e^{5}$--$e^{10}\!\approx\!150{,}000$--$22{,}000$.
+
+It is important to emphasise that transition occurs when disturbance amplitudes become large enough for nonlinear interactions to take hold; the absolute amplitude $A$, rather than the ratio $A/A_0$ or its logarithmic measure $N$, is therefore the physically relevant quantity. An ideal predictive framework would couple the linear amplification computed here with receptivity-based initial amplitudes tied to the actual disturbance sources. Because such initial levels are not included explicitly, the calibrated ``critical $N$'' inevitably depends on the facility, geometry, and disturbance environment. Even so, once tuned for a given configuration, the $e^N$ method has shown substantial practical predictive capability~\citep{Fedorov2011}.
+
+
+\subsection{Validation}
+
+The \gls{LST} eigenvalue problem was solved using a Chebyshev spectral differentiation method, with geometric wall-normal clustering introduced via the Malik mapping \citep{Malik1990a}, which maps $[-1,1]\to[0,\eta_{\max}]$. In the spatial formulation adopted here, the problem is posed for complex $\alpha$ at prescribed $(\omega,\beta)$, yielding a generalised eigenvalue problem whose spectrum provides $\alpha_r$ and $\alpha_i$ (with spatial growth rate $-\alpha_i$). The framework is compared against \citet{Groot2018}, and the case-specific conditions in \Cref{table:lstcomp} are chosen to isolate Mack's second mode.
+
+\begin{table}[ht]
+  \centering
+  \caption{Case-specific parameters (subset of \citet{Groot2018}) and numerical settings used here.}
+  \label{table:lstcomp}
+  \vspace{0.25em}
+  \begin{tabular}{@{}lcccccccc@{}}
+    \toprule
+    Case & $M$  & $\mathrm{Re}_\ell$ &
+    $\overline{T}_e$ (K) & $\overline{T}_w$ (K) & $\mathrm{Re}$ &
+    $\omega$ & $\beta$ & $n_{\mathrm{cheb}}$ \\
+    \midrule
+    IV & 2.5   & $5.0\cdot10^{6}$ & $600/4.05$ & adiab. & 3000 & 0.04  & 0.1 & 200 \\
+    V  & 10.0  & $9.8425\cdot10^{6}$ & 278       & adiab. & 2000 & 0.075 & 0   & 500 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Throughout the current validation study, viscosity follows Sutherland's law with $T_{\mathrm{ref}}=273.15\ \mathrm{K}$, $S=110.6\ \mathrm{K}$, and $\mu_{\mathrm{ref}}=1.716\times10^{-5}\ \mathrm{kg/(m\,s)}$, and we use $\mathrm{Pr}=0.70$ and $\gamma=1.4$, consistent with the benchmark setup of \citet{Groot2018}. \gls{LST} is extremely sensitive to the viscosity model, and slight changes in the viscosity and thermal conductivity can yield contrasting results. \cite{Groot2018} introduces the DEKAF code, a spectral basic-state solver for boundary layer stability that computes high-accuracy self-similar base flows across regimes using Chebyshev pseudo-spectral discretisation and Newton--Raphson iteration. It provides benchmark base states and integral metrics for validating \gls{LST} and assessing how basic-state accuracy propagates into stability predictions~\citep{MiroMiro2019}.
+
+As a first assessment of accuracy, boundary layer integral parameters are evaluated: the displacement thickness $\delta^*$, momentum thickness $\theta^*$, shape factor $H^*$, energy thickness $\delta_e^*$, and enthalpy thickness $\delta_h^*$; the characteristic similarity length $\ell$ was used to normalisation. The resulting values are reported in \Cref{tab:integral_params_compare_iv_v}. The similarity solution presented in \Cref{section:similaritysolution} matches the reference to five decimal places, increasing confidence in the method. It is computed using a Chebyshev differentiation approach and required $N=200$ collocation points to converge $H^*$. The comparison uses the five-species frozen \gls{CPG} formulation.
+
+\begin{table}[t]
+  \centering
+  \caption{Integral parameters for cases IV and V: DEKAF vs Present.}
+  \label{tab:integral_params_compare_iv_v}
+  \setlength{\tabcolsep}{6pt}
+  \small
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    & \multicolumn{2}{c}{Case IV} & \multicolumn{2}{c}{Case V} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    Metric & DEKAF & Present & DEKAF & Present \\
+    \midrule
+    $\delta^*/\ell$        & 4.2571  & 4.2571  & 27.0430 & 27.0430 \\
+    $\theta^*/\ell$        & 0.6391  & 0.6391  & 0.4188  & 0.4188  \\
+    $H^*=\delta^*/\theta^*$& 6.6615  & 6.6615  & 64.5748 & 64.5748 \\
+    $\delta_e^*/\ell$      & 1.0086  & 1.0086  & 0.6745  & 0.6745  \\
+    $\delta_h^*/\ell$      & 1.2099  & 1.2099  & 0.8245  & 0.8245  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+  \centering
+  \caption{Eigenvalues obtained using Chebyshev spectral collocation.}
+  \label{tab:eigs_iv_v}
+  \setlength{\tabcolsep}{7pt}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \multicolumn{5}{c}{\textbf{IV}}\\
+    \midrule
+    solver & $\alpha_r\;(\mathrm{rad/m})$ & $\epsilon(\alpha_r)$
+           & $\alpha_i\;(\mathrm{rad/m})$ & $\epsilon(\alpha_i)$ \\
+    \midrule
+    VESTA   & $1.07402614379007\cdot 10^{2}$ & $9.4\cdot 10^{-13}$ &
+               $-1.03977656691188\cdot 10^{0}$ & $5.1\cdot 10^{-12}$ \\
+    TUD     & $1.07402614379108\cdot 10^{2}$ & --- &
+               $-1.03977656636347\cdot 10^{0}$ & --- \\
+    Current & $1.07402619911674\cdot 10^{2}$  & $5.2\cdot 10^{-8}$ &
+               $-1.03975787207327\cdot 10^{0}$ & $1.8\cdot 10^{-5}$ \\
+    \midrule
+    \multicolumn{5}{c}{\textbf{V}}\\
+    \midrule
+    solver & $\alpha_r\;(\mathrm{rad/m})$ & $\epsilon(\alpha_r)$
+           & $\alpha_i\;(\mathrm{rad/m})$ & $\epsilon(\alpha_i)$ \\
+    \midrule
+    VESTA   & $3.86915377502036\cdot 10^{2}$ & $4.7\cdot 10^{-12}$ &
+               $-7.98862348202598\cdot 10^{0}$ & $3.5\cdot 10^{-12}$ \\
+    TUD     & $3.86915377503853\cdot 10^{2}$ & --- &
+               $-7.98862348069057\cdot 10^{0}$ & --- \\
+    Current & $3.86914179040329\cdot 10^{2}$  & $3.1\cdot 10^{-6}$ &
+               $-7.98994070166233\cdot 10^{0}$ & $1.6\cdot 10^{-4}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Finally, \Cref{tab:eigs_iv_v} compares the complex wavenumber $\alpha=\alpha_r+i\alpha_i$ from the present spatial \gls{LST} solver with the DEKAF benchmarks, themselves verified against the VESTA code~\citep{Pinna2012} and the TU~Delft solver~\citep{Groot2013}. For both case~IV ($M=2.5$) and case~V ($M=10$), the present $\alpha_r$ and $\alpha_i$ agree with DEKAF to at least five decimal places, confirming consistency in growth rate (via $-\alpha_i$) and phase speed (via $\alpha_r$). \Cref{figure:lst_groot_comp_eigenfunc} further compares the mode shapes for $M=2.5$ and $M=10$, normalised by $\max|\tilde{u}|$. The wall-normal amplitude distributions from the present solver closely overlay the DEKAF profiles, capturing the perturbations of characteristic second-mode structure in both cases. Case~IV converged with $N=200$ collocation points, whereas case~V requires $N=500$, consistent with the higher frequency and stronger acoustic trapping of the Mack second mode at $M=10$.
+
+
+\begin{figure}[t]
+    \centering
+    \fontsize{9}{10}\selectfont
+    \includegraphics[width=0.80\textwidth]{resources/figures/disturbance/result_lst_groot_comparison_DEKAF.pdf}
+    \caption[Eigenfunction profiles for cases IV--V (DEKAF \citep{Groot2018} vs Current).]%
+    {Amplitude profiles of the spatial LST eigenfunctions plotted versus the wall-normal coordinate $y/\delta^{*}$. Curves are normalised by $\max|\tilde{u}|$. Solid lines denote the \emph{Current} solver and circular markers denote \emph{DEKAF}~\citep{Groot2018}. \textbf{(a)} Case~IV and \textbf{(b)} Case~V.}
+    \label{figure:lst_groot_comp_eigenfunc}
+\end{figure}
+
+\newpage
+
+\section{Computational domain and configurations}\label{section:disturbances:computationdomain}
+
+The configuration considered here is shown in \Cref{figure:schematicflow}. A wedge is placed in a Mach~10 freestream at an altitude of 36~km, selected to represent the heat-rate limit along a hypersonic glide-vehicle trajectory~\citep{Rizvi2015}. Atmospheric properties at 36~km are obtained from the International Civil Aviation Organisation (ICAO) standard atmosphere and are used without modification, i.e.\ $\mathrm{p}_{\mathrm{atm}} = 498.521~\mathrm{Pa}$ and $\mathrm{T}_{\mathrm{atm}} = 239.282~\mathrm{K}$. The composition is taken as a binary mixture with molar concentrations $X_{\ce{N2}}=0.79$ and $X_{\ce{O2}}=0.21$, which, together with the stated thermodynamic state, define the reference conditions for the flow. The corresponding atmospheric stagnation enthalpy is evaluated as $H_{0}=h_{\mathrm{atm}}+u_{\mathrm{atm}}^{2}/2=5.07~\mathrm{MJ/kg}$, where $h_{\mathrm{atm}}$ and $u_{\mathrm{atm}}$ are the static enthalpy and flow speed consistent with the ICAO values.
+
+The rectangular two-dimensional computational domain is placed immediately downstream of the attached oblique shock generated by the wedge, i.e.\ in the post-shock region where the flow has already been turned and compressed by the leading edge shock. The corresponding post-shock freestream conditions are calculated using the standard shock jump relations, and the mixture composition of air at equilibrium conditions is checked for consistency using the ~\cite{Park1990} model, ensuring that thermodynamic state and species partitioning are aligned. A full breakdown of the flow conditions is provided in \Cref{table:flight_conditions}, where $\vartheta$ denotes the wedge angle and is altered to realise two nominal operating points (Mach~6 and Mach~8, respectively), with all other quantities reported in a consistent format. Throughout, a subscript $e$ designates freestream conditions evaluated at the inflow to the computational domain. The two sub-rows of the table, one corresponding to each wedge angle, show only small, practically negligible differences in the post-shock streamwise velocity when adopting either \gls{CPG} or \gls{TEQ} conditions, indicating that the inflow kinematics are only weakly sensitive to the chosen thermodynamic closure for these cases.
+
+\begin{figure}[t]
+    \centering
+    \fontsize{8}{10}\selectfont\includesvg[width=0.95\textwidth]{figures/disturbance/schematic-flightconditions_aiaa2.svg}
+    \caption{Schematic of the geometry considered in the current study, showcasing a domain behind the shock of a wedge. The post-shock freestream conditions of the flow over the wedge are provided in \Cref{table:flight_conditions}}
+    \label{figure:schematicflow}
+\end{figure}
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.4}
+\centering
+\caption{2D wedge post-shock conditions for $h=36~\mathrm{km}$, $M_{\infty}=10$.}
+\label{table:flight_conditions}
+\setlength{\tabcolsep}{6pt}
+\small
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+$\vartheta$ & $M_e$  & $T_e$ (K) & $p_e$ (kPa) & $\rho_e$ (kg/m\textsuperscript{3}) & $u_e$ (m/s) & type \\
+\midrule
+\multirow{2}{*}{12.41} & \multirow{2}{*}{6} & \multirow{2}{*}{620.0} & \multirow{2}{*}{4.91} & \multirow{2}{*}{2.748$\times$10\textsuperscript{-3}} & 3001.09 & \gls{CPG} \\
+                       &                         &                         &                         &                                             & 2972.59 & \gls{TEQ} \\
+\addlinespace[0.5ex]
+\midrule
+\multirow{2}{*}{5.88}  & \multirow{2}{*}{8} & \multirow{2}{*}{365.0} & \multirow{2}{*}{1.78} & \multirow{2}{*}{1.6920$\times$10\textsuperscript{-3}} & 3070.21 & \gls{CPG} \\
+                       &                     &                        &                        &                                                & 3066.27 & \gls{TEQ} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the two-dimensional calculations, the post-shock computational domain is prescribed as $L_x\times L_y=800\,\delta^{*}_{0}\times 100\,\delta^{*}_{0}$ in the streamwise and wall-normal directions, respectively, which corresponds to a physical streamwise length of $\approx 2.9~\mathrm{m}$ for the Mach~6 cases and $\approx 3.2~\mathrm{m}$ for the Mach~8 cases. The mesh comprises $N_x\times N_y=2800\times 600$ points, i.e.\ $\sim 1.68\times 10^{6}$ points in total, which are uniformly spaced in $x$ while stretched in $y$ obtained by hyperbolic stretching:
+\begin{equation}
+y=L_y\,\frac{\sinh\!\left(s_1\,\xi\right)}{\sinh s_1},\qquad s_1=5.0,\quad \xi\in(0,1),
+\end{equation}
+which clusters nodes towards the wall and yields approximately 180 points inside the boundary layer by the downstream end of the domain. Time advancement uses a non-dimensional time step $\Delta t=0.01$, giving an acoustic \gls{CFL}$=(u+a_f)\,\Delta t/\Delta x=0.083$, consistent with values commonly reported in the literature for comparable resolutions and Mach numbers. The inflow Reynolds number based on the displacement thickness is fixed at $\mathrm{Re}_{\delta^{*}_0}=10{,}000$, which places the inflow section at around $ 0.8~\mathrm{m}$ downstream of the leading edge for the Mach~6 cases and $\approx 0.2~\mathrm{m}$ for the Mach~8 configuration, thereby standardising the viscous scaling at entry. The initial distance from the leading edge is dependent on the thermal excitation, Mach number and wall temperature; therefore, the values reported are slightly different for individual cases.
+
+Discretisation and time marching follow a high-order strategy: unless otherwise stated, the spatial derivatives are evaluated with a fourth-order central-difference scheme augmented by Feiereisen splitting to stabilise convective transport in the presence of strong aliasing errors, whilst temporal evolution is advanced with a low-storage, three-stage Runge--Kutta (RK3) method. Boundary conditions are imposed as simple extrapolation in the outflow and farfield, an inlet pressure transfer condition is applied at $x=x_d$. The wall is modelled as non-catalytic and isothermal in thermal equilibrium, with temperatures set as $T=T_v\in\{1200~\mathrm{K},\,1800~\mathrm{K}\}$ depending on the case, selected to lie within the melting-range envelope of typical materials used in thermal-protection systems (see \cite{CedillosBarraza2016} for a detailed survey).
+
+% The thermal-equilibrium assumption at the wall is supported by experiments showing that molecules leaving a heated surface equilibrate vibrationally at the wall \cite{Park1990,CandlerNompelis2021}. Consistent with this, prior stability analyses \cite{Hudson1997,MiroMiro2019,BitterShepherd2015} impose a thermally equilibrated wall, and \gls{DNS} studies of hypersonic boundary layers \cite{Passiatoreetal2021,DiRenzo2021} have adopted comparable wall treatments under both equilibrium and nonequilibrium bulk-flow conditions.
+
+\subsection{Wall treatment}
+
+To introduce controlled, small-amplitude perturbations, we employ a wall suction--blowing strip following \cite{AlamSandham2000}, adapted to the two-dimensional (spanwise-uniform) domain. A Gaussian-localised disturbance centred at $x_f$ (see \Cref{figure:schematicflow}) is imposed as a wall mass-flux perturbation:
+\begin{equation}
+  \rho v \;=\; a_0\, g(x)\, \sum_{i=1}^{8} \sin\!\big(2\pi \hat{f}_i t\big),
+\end{equation}
+with $a_0 = 1\times10^{-5}\,u_e$ the prescribed forcing amplitude, chosen to keep the response in the linear regime. The streamwise shape function is:
+\begin{equation}
+  g(x) \;=\; \exp\!\left[-\,\frac{(x-x_f)^2}{2\sigma^2}\right],
+\end{equation}
+where $2\sigma^2 = 20(\delta_0^{*})^2$, we take $\sigma=\sqrt{10}\,\delta_0^{*}$, and centre the forcing at $x_f = 25\,\delta_0^{*}$. The Gaussian's effective width is $2\sqrt{2\ln 2}\,\sigma \approx 2.35\,\sigma$, so the core spans several grid points. Outside the Gaussian support the wall is impermeable ($\rho v=0$), and the imposed signal has zero temporal mean, so the net mass flux is zero.
+
+% The wall-normal disturbance frequencies are imposed via the non-dimensional frequency parameter $\hat{f} = f \delta_0^* / u_e$, where $\hat{f}$ denotes the dimensional frequency, $f$ is the non-dimensional Strouhal number, $\delta_0^*$ is the initial displacement thickness, and $u_e$ is the edge velocity. The corresponding dimensional time period is $\tilde{T} = u_e / (f \delta_0^*)$. For Mach~6 cases, $f = 0.15$ and $0.16$; Mach~8 cases employ $f = 0.10$ and $0.11$.
+
+The dimensional frequency is defined as $\hat{f} = f\,\delta^{*}_0/u_e$, with $\hat{f}$ being the non-dimensional frequency, with corresponding time periods $\hat{T} = u_e / (f \delta_0^*)$. Discrete frequencies are selected so that the resulting wave packets amplify within $x/\delta_0^{*}\in[0,\,800]$. For Mach~6 we use eight frequencies with $0.10 \le \hat{f} \le 0.18$; for Mach~8, $0.08 \le \hat{f} \le 0.16$, yielding $f \approx 80$--$152~\mathrm{kHz}$ in both cases. These bands target Mack-mode receptivity under elevated post-shock pressure and temperature and are consistent with accompanying \gls{LST} predictions. Numerically, suction--blowing is imposed as a Dirichlet condition on the wall-normal mass flux $(\rho v)$ over the Gaussian support; elsewhere a no-penetration condition $(\rho v=0)$ is enforced. This construction provides a compact, well-resolved, reproducible, inflow-independent disturbance source that excites the intended instability content whilst maintaining small perturbation levels.
+
+\subsection{Pressure response handling}
+
+The perturbation response is monitored via 500 wall probes, equally spaced over $x_d \in [110\,\delta^{*}_{0},\,800\,\delta^{*}_{0}]$, recording wall-pressure time series at a sampling frequency $\hat{f}_s$ chosen to resolve the highest forced tone (Nyquist criterion: $\hat{f}_s> 2\max_i \hat{f}_i$). The simulation time step provides 2,000 samples per period of the fundamental frequency. A sample of the wall-pressure evolution over a representative interval is shown in \fref{figure:fftplot}(a), where pressure traces from ten monitor points are plotted against time.
+
+
+After discarding the initial transient portion, the wall-pressure fluctuations are analysed using a Fast Fourier Transform (FFT) to recover the imposed frequencies and their streamwise amplification in wall pressure. To reduce spectral leakage, a Hann (Hanning) window is applied to each record prior to the transform. For each probe location and forced frequency $\hat{f}_i$, the complex FFT coefficient $\widehat{p}$ is extracted and its amplitude $\hat{a}_{\mathrm{r}}$ computed. With $N_s$ samples retained per probe, the record length is $T = N_s/\hat{f}_s$ and the frequency resolution is $\Delta f = \hat{f}_s/N_s$, ensuring that each forced frequency falls on (or within one bin of) the discrete spectrum.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=14cm]{resources/figures/disturbance/result_fft_plot_mach6_tw12.pdf}
+    \caption{Wall pressure fluctuations $p_\mathrm{w}$ (Pa) over a period of time (top) and Fourier transform of the fluctuations with a Hanning filter to give the amplitude spectrum $|\hat{p}(f)|$ (bottom).}
+    \label{figure:fftplot}
+\end{figure}
+
+The \gls{DNS}-based $N$-factors are evaluated from the amplitude ratios as:
+\begin{equation}\label{eq:dnsnfactor_dense}
+    N_{\mathrm{DNS}} = \ln\!\left(\frac{\hat{a}_{r}}{\hat{a}_{r,0}}\right) + c,
+\end{equation}
+where $\hat{a}_{r,0}$ is the neutral-point amplitude taken from the early-growth baseline and $c$ is a constant offset used to align the \gls{DNS}-based $N$-factors with those from \gls{LST}. In continuous form, this represents the integrated amplification factor:
+\begin{equation}
+    N_{\mathrm{DNS}} = \int_{x_0}^{x_d} \frac{1}{\hat{a}_{\mathrm{r}}}\,\frac{\mathrm{d} \hat{a}_{\mathrm{r}}}{\mathrm{d}x}\,\mathrm{d}x + c,
+\end{equation}
+with $x_0$ the neutral location. Using wall pressure as the observable provides a robust, directly accessible measure of the acoustic-type Mack-mode content and enables consistent comparison with the growth predicted by \gls{LST}.
+
+\subsection{Convergence studies}
+
+To verify the linearity of the disturbance amplitudes, a systematic amplitude-scaling test was performed for two representative configurations: a Mach~6 cold-wall case in \gls{TNE} and a Mach~8 hot-wall case with \gls{TEQ}. These cases bracket the range of wall thermal conditions and vibrational models used in the study and therefore provide a stringent test of linearity. Figures~\ref{figure:linearmach6} and~\ref{figure:linearmach8} compare responses to four initial amplitudes, $\hat{a}_0 \in \{10^{-6}, 10^{-5}, 10^{-4}, 10^{-3}\}$, with each trace rescaled to the $\hat{a}_0 = 10^{-3}$ reference for visual comparison.
+
+% For both configurations, the curves for $\hat{a}_0 = 10^{-6}, 10^{-5}, 10^{-4}$ collapse to within visual tolerance, confirming linear behaviour where the wavepacket amplitude $\hat{a}_r(x)$ scales proportionally with the input whilst the peak location and local growth and decay rates remain invariant across the $\hat{f}$ range. In contrast, the $\hat{a}_0 = 10^{-3}$ responses deviate markedly in both cases: at Mach~6, the peak fundamental amplitude is reduced and the envelope broadens, whilst at Mach~8, higher harmonics become more pronounced. These deviations indicate the onset of weak nonlinearity, consistent with quadratic self-interaction of the fundamental in strictly two-dimensional \gls{DNS}, which generates both a steady mean-flow correction ($k_x = 0$) and higher streamwise harmonics. Both channels drain energy from the fundamental, yielding a lower $\hat{a}_r$ despite the larger forcing. On the basis of these tests, $\hat{a}_0 = 10^{-5}$ was adopted for all subsequent cases: it lay comfortably above the numerical noise floor whilst remaining strictly within the linear-response range for both test configurations. The remaining cases exhibited the same qualitative trend, so $\hat{a}_0 = 10^{-5}$ was applied uniformly throughout, ensuring consistency across the entire parametric study.
+
+For both configurations, the curves for $\hat{a}_0 = 10^{-6}, 10^{-5}, 10^{-4}$ collapse to within visual tolerance, confirming linear behaviour in which the wavepacket amplitude $\hat{a}_r(x)$ scales directly with the input and the peak location, local growth, and decay rates remain unchanged across the $\hat{f}$ range. By contrast, the $\hat{a}_0 = 10^{-3}$ responses depart noticeably from this trend. At Mach~6 the peak fundamental amplitude is reduced and the envelope broadens, while at Mach~8 the higher harmonics become more prominent. These changes signal the onset of weak nonlinearity, consistent with quadratic self-interaction of the fundamental in strictly two-dimensional \gls{DNS}, which produces a steady mean-flow correction ($k_x = 0$) together with higher streamwise harmonics. Both channels draw energy from the fundamental and lower $\hat{a}_r$ despite the stronger forcing. Based on these tests, $\hat{a}_0 = 10^{-5}$ was selected for all remaining cases; it sits well above the numerical noise floor yet stays firmly within the linear-response regime for both configurations. The other cases showed the same qualitative pattern, so $\hat{a}_0 = 10^{-5}$ was applied consistently throughout the full parametric study.
+
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{resources/figures/disturbance/result_mach6_linear_comp.pdf}
+\caption{Amplitude-scaling at $M_e = 6$, $T_w = 1200~\mathrm{K}$ (TNE): streamwise evolution of the fundamental amplitude $\hat{a}_r(x)$ for multiple $\hat{a}_0$ across selected $\hat{f}$.}
+\label{figure:linearmach6}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\textwidth]{resources/figures/disturbance/result_mach8_linear_comp.pdf}
+\caption{Amplitude-scaling at $M_e = 8$, $T_w = 1800~\mathrm{K}$ (TEQ): streamwise evolution of the fundamental amplitude $\hat{a}_r(x)$ for multiple $\hat{a}_0$ across selected $\hat{f}$.}
+\label{figure:linearmach8}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\textwidth]{resources/figures/disturbance/result_mach6_convergence_grid.pdf}
+\caption{Grid convergence at $M_e = 6$, $T_w = 1800~\mathrm{K}$ (TNE): streamwise evolution of wall pressure $\bar{p}_w$ and skin friction coefficient $c_f$.}
+\label{figure:convergencemach6}
+\end{figure}
+
+A grid study was conducted on two representative configurations, a Mach~6 hot-wall \gls{TNE} case and a Mach~8 cold-wall \gls{TEQ} case. Two grids were examined, $n_x \times n_y = 2800 \times 600$ and $4000 \times 1000$ points in $(x,y)$. Solutions on both meshes converged for all diagnostics, with the streamwise evolution of $\hat{a}_r(x)$ used as the primary metric. Boundary-layer integral quantities confirmed that the $2800 \times 600$ grid was already grid-independent. \Cref{figure:convergencemach6} illustrates this for the Mach~6 hot-wall \gls{TNE} case by showing the streamwise evolution of wall pressure $\bar{p}_w$ and skin-friction coefficient $c_f$, both of which display excellent agreement between the two meshes. These results validate the spatial discretisation strategy. The $2800 \times 600$ grid was therefore adopted for all remaining simulations.
+
+
+The time step was adjusted to maintain a fixed CFL target, with $\Delta t$ scaled proportionally to $\min\{\Delta x, \Delta y\}$. This CFL-based policy was applied uniformly across all cases, ensuring temporal resolution consistency.
+
+% Furthermore, a grid study was performed on two additional representative configurations: a Mach~6 hot-wall \gls{TNE} case and a Mach~8 cold-wall \gls{TEQ} case. Two grids were compared: $n_x,n_y$, $2800 \times 600$ and $4000 \times 1000$ points in $(x,y)$. The solutions on both grids collapsed for all reported diagnostics, with the streamwise evolution of $\hat{a}_r(x)$ serving as the primary metric of interest. boundary layer integral quantities exhibited the same trend, confirming grid independence at $2800 \times 600$. Figure~\ref{figure:convergencemach6} illustrates the grid convergence for the Mach~6 hot-wall \gls{TNE} case, showing the streamwise evolution of wall pressure $\bar{p}_w$ and skin friction coefficient $c_f$. The observed convergence validates the spatial discretisation strategy employed throughout this investigation. Accordingly, $2800 \times 600$ was adopted for all subsequent simulations. The time step was adjusted with grid refinement to maintain a fixed CFL target, with $\Delta t$ reduced in proportion to the local spacing based on $\min\{\Delta x, \Delta y\}$. The same CFL-based policy was applied uniformly to all cases, ensuring temporal resolution consistency across varying mesh densities and physical regimes examined in the study.
+
+
+\section{Stability characteristics}
+
+Twelve two-dimensional cases were simulated, covering all combinations of \gls{CPG}, \gls{TEQ}, and \gls{TNE} at Mach~6 and Mach~8 with wall temperatures $T_w=1200\,\mathrm{K}$ and $T_w=1800\,\mathrm{K}$ (\emph{cold wall} and \emph{hot wall}, respectively). Classical stability surveys have established trends across varying Mach numbers and wall conditions \citep{Mack1969,Mack1984,Malik1989,MasadEtAl1992}, though typically at low enthalpy. Recent high-enthalpy studies identify novel thermal effects on modal instability \citep{Bitter2015}, but thermal nonequilibrium effects on instability dynamics remain unexplored in high-fidelity setting. This work addresses this gap by examining base flows representative of hypersonic vehicle trajectories (see \Cref{figure:trajectory}). The following comparisons proceed sequentially: \gls{LST} against \gls{DNS}, base flows across thermal assumptions, and fluctuation growth under varying Mach numbers and thermal excitation.
+
+
+\subsection{Base flows}
+Two-dimensional \gls{DNS} boundary layer profiles are compared with their locally self-similar counterparts in \Cref{figure:bcprofiles}, showing velocity (top row), temperature (middle row), and vibrational temperature (bottom row). The left, middle, and right columns correspond to \gls{CPG}, \gls{TEQ}, and \gls{TNE} respectively, with \gls{TFG} similarity solutions as reference for \gls{TNE} (discussed in \Cref{section:locallysimilar} and \Cref{section:similaritysolution}). Profiles are extracted at 75\% of the streamwise domain length for the Mach~6 cold-wall condition, ensuring fully developed upstream flow. Both \gls{CPG} and \gls{TEQ} show excellent agreement with their respective similarity profiles, confirming that the numerical solution reproduces the self-similar structure across the wall-normal extent. In \gls{TEQ}, the temperature peak is reduced by approximately 8\% relative to \gls{CPG} because thermal energy partitions into vibrational modes, reducing peak enthalpy; by assumption $T_v=T$, whereas vibrational excitation is absent in \gls{CPG}. For \gls{TNE}, initialisation from the \gls{TFG} similarity state reveals incomplete relaxation $T_v\!\to\!T$ at the plotted station, $T_v$ remains elevated, indicating residual vibrational energy and correspondingly depressed translational-rotational temperature. Overall, \gls{CPG} and \gls{TEQ} validate the local self-similarity framework, whilst \gls{TNE} captures the expected nonequilibrium adjustment from \gls{TFG} initialisation towards equilibrium, with residual offset quantifying remaining relaxation distance.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{resources/figures/disturbance/result_profiles_m6tw12.pdf}
+\caption{Mach 6, cold wall $T_w=1200~\mathrm{K}$: normalised streamwise velocity $f' = u/u_e$, translational-rotational temperature $\theta = T/T_e$, and vibrational temperature $\theta_v = T_v/T_e$ profiles as a function of the similarity variable $\eta = y/\delta^{*}$ compared against respective locally self-similar solutions. Profiles extracted at 75\% of domain length.}\label{figure:bcprofiles}
+\end{figure}
+
+The integral boundary layer thicknesses exhibit consistent trends across models. \Cref{figure:blgrowth} shows the streamwise evolution of displacement thickness $\delta^*$ and momentum thickness $\theta^*$ for Mach~6 and Mach~8 cold-wall cases, defined by the compressible, density-weighted relations:
+\begin{equation}
+\delta^{*}=\int_{0}^{\infty}\left(1-\frac{\rho u}{\rho_{e} u_{e}}\right)\,dy,\qquad
+\theta^{*}=\int_{0}^{\infty}\frac{\rho u}{\rho_{e} u_{e}}\left(1-\frac{u}{u_{e}}\right)\,dy,
+\end{equation}
+where subscript $e$ denotes edge values. Both thicknesses increase monotonically during development, with model separation reflecting physically consistent differences. The stronger near-wall cooling in \gls{TEQ} relative to \gls{CPG} concentrates mass flux into the low-speed region, reducing the mass-flux deficit and yielding smaller $\delta^{*}$. Simultaneously, temperature--dependent transport steepens the wall gradient, increasing $c_f$ and producing larger $\theta^{*}$. \gls{TNE} occupies an intermediate position because vibrational relaxation moderates temperature excursions and near-wall cooling effects. At Mach~6, the three models exhibit distinct separation in both quantities, with greater spread in $\delta^*$ than $\theta^{*}$. At Mach~8, the models converge, particularly for $\theta^{*}$ indicating that stronger compression heating and thinner boundary layers suppress the relative influence of thermal nonequilibrium on momentum transport.
+
+ % via the von Kármán relation $d\theta^{*}/dx\approx c_f/2$
+ 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{resources/figures/disturbance/result_boundarylayergrowth.pdf}
+\caption{Streamwise evolution of displacement thickness $\delta^*$ and momentum thickness $\theta^*$ for CPG, TEQ, and TNE simulations: (a) Mach~6 cold-wall and (b) Mach~8 cold-wall cases.}
+\label{figure:blgrowth}
+\end{figure}
+
+To assess thermal nonequilibrium effects more broadly, \Cref{figure:bcgrowth_mach} presents the streamwise evolution of all four integral thicknesses across Mach numbers and wall temperatures for \gls{TNE} cases. The additional quantities are:
+\begin{equation}
+\delta_{e}=\int_{0}^{\infty}\frac{\rho u}{\rho_{e} u_{e}}
+\left(1-\frac{u^{2}}{u_{e}^{2}}\right)\,dy,\qquad
+\delta_{h}=\int_{0}^{\infty}\frac{\rho u}{\rho_{e} u_{e}}
+\frac{T-T_{e}}{T_{w}-T_{e}}\,dy.
+\end{equation}
+
+The displacement thickness $\delta^*$ grows more rapidly at higher wall temperatures and Mach numbers, with the hot-wall cases consistently producing thicker layers. The momentum thickness $\theta^*$ shows a different sensitivity. At Mach~6 the cold- and hot-wall cases remain close, whereas at Mach~8 they separate markedly, with the hot-wall case increasing more quickly. The energy thickness $\delta_e$, weighted by $1-(u/u_e)^2$, follows a pattern similar to $\theta^*$; the Mach~6 cases cluster together, while the Mach~8 cases diverge noticeably with wall temperature. The enthalpy thickness $\delta_h$ highlights the underlying thermal behaviour. The Mach~8 cold-wall case begins with a much lower $\delta_h$ than the Mach~6 hot-wall case, consistent with stronger compression heating and a thinner thermal layer. Its growth rate $d\delta_h/dx$ is, however, significantly larger, indicating faster thermal boundary-layer development driven by steeper enthalpy gradients at higher edge enthalpies.
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{resources/figures/disturbance/result_boundarylayergrowth_mach.pdf}
+\caption{Streamwise evolution of boundary layer integral parameters for TNE simulations at different Mach numbers and wall temperatures: (a) displacement thickness $\delta^*$, (b) momentum thickness $\theta^*$, (c) energy thickness $\delta_e$, and (d) enthalpy thickness $\delta_h$.}
+\label{figure:bcgrowth_mach}
+\end{figure}
+
+% Two-dimensional \gls{DNS} boundary layer profiles are compared with their locally self-similar counterparts in \Cref{figure:bcprofiles}, showing velocity (top row), temperature (middle row), and vibrational temperature (bottom row). The left, middle, and right columns correspond to \gls{CPG}, \gls{TEQ}, and \gls{TNE} respectively, with \gls{TFG} similarity solutions as reference for \gls{TNE}, mentioned in~\Cref{section:locallysimilar}, solved in~\Cref{section:similaritysolution}. Profiles are extracted at approximately 75\% of the streamwise domain length for the Mach~6 cold-wall condition, ensuring fully developed upstream flow. Both \gls{CPG} and \gls{TEQ} show excellent agreement with their respective similarity profiles across the wall-normal extent, including near-wall gradients and freestream approach, confirming that the numerical solution reproduces self-similar structure. In \gls{TEQ}, the temperature peak is reduced by approximately 8\% relative to \gls{CPG} because thermal energy is partitioned into vibrational modes, draining peak enthalpy; by assumption $T_v=T$, whereas vibrational excitation is absent in \gls{CPG}. The \gls{TNE} simulations are initialised from the \gls{TFG} similarity state, and the relaxation $T_v\!\to\!T$ is clearly evident but incomplete at the plotted station: $T_v$ remains elevated, indicating residual vibrational energy relative to \gls{TFG} and correspondingly depressed translational-rotational temperature. The \gls{CPG} and \gls{TEQ} cases validate the local self-similarity framework, whilst \gls{TNE} profiles capture the expected nonequilibrium adjustment from \gls{TFG} initialisation towards $T_v=T$, with residual offset quantifying remaining relaxation distance.
+
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=0.9\textwidth]{resources/figures/disturbance/result_profiles_m6tw12.pdf}
+% \caption{Mach 6, cold wall $T_w=1200~\mathrm{K}$   normalised streamwise velocity $u/u_e$, translational-rotational temperature $T/T_e$ and vibrational temperature $T_v/T_e$ profiles as a function of the similarity variable $\eta = y/\delta^{*}$ compared against respective locally self-similar solutions. Profiles were taken at 75\% of the domain length.}\label{figure:bcprofiles}
+% \end{figure}
+
+% Figure~\ref{figure:blgrowth} shows the streamwise evolution of displacement thickness $\delta^*$ and momentum thickness $\theta^*$ for the Mach~6 and Mach~8 cold-wall cases. The compressible, density-weighted definitions are:
+% \begin{equation}
+% \delta^{*}=\int_{0}^{\infty}\left(1-\frac{\rho u}{\rho_{e} u_{e}}\right)\,dy,\qquad
+% \theta^{*}=\int_{0}^{\infty}\frac{\rho u}{\rho_{e} u_{e}}\left(1-\frac{u}{u_{e}}\right)\,dy,
+% \end{equation}
+% where subscript $e$ denotes the edge value. Both thicknesses increase monotonically during boundary layer development, but the models separate in a physically consistent manner. For cold walls, \gls{TEQ} produces stronger near-wall cooling than \gls{CPG}, concentrating mass flux into the low-speed region. This reduces the mass-flux deficit, yielding smaller $\delta^{*}$ in \gls{TEQ}. Simultaneously, temperature-dependent transport steepens the wall gradient, increasing $c_f$ and producing larger $\theta^{*}$ via the von Kármán relation $d\theta^{*}/dx\approx c_f/2$. \gls{TNE} occupies an intermediate position because vibrational relaxation moderates temperature excursions and weakens near-wall cooling, yielding $\delta^{*}$ closer to \gls{CPG} and $\theta^{*}$ closer to \gls{TEQ}. At Mach~6, the three models exhibit distinct separation in both quantities, with greater spread in $\delta^*$ than $\theta^{*}$. At Mach~8, the models converge substantially, particularly for $\theta^{*}$, indicating that stronger compression heating and thinner boundary layers reduce the relative influence of thermal nonequilibrium on momentum transport.
+
+
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=0.96\textwidth]{resources/figures/disturbance/result_boundarylayergrowth.pdf}
+% \caption{Streamwise evolution of displacement thickness $\delta^*$ and momentum thickness $\theta^*$ for CPG, TEQ, and TNE simulations: (a) Mach~6 cold-wall and (b) Mach~8 cold-wall cases.}
+% \label{figure:blgrowth}
+% \end{figure}
+
+% Isolating \gls{TNE} cases, Figure~\ref{figure:bcgrowth_mach} presents the streamwise evolution of all four integral thicknesses across different Mach numbers and wall temperatures. The additional quantities are defined as:
+% \begin{equation}
+% \delta_{e}=\int_{0}^{\infty}\frac{\rho u}{\rho_{e} u_{e}}
+% \left(1-\frac{u^{2}}{u_{e}^{2}}\right)\,dy,\qquad
+% \delta_{h}=\int_{0}^{\infty}\frac{\rho u}{\rho_{e} u_{e}}
+% \frac{T-T_{e}}{T_{w}-T_{e}}\,dy.
+% \end{equation}
+
+% The displacement thickness $\delta^*$ exhibits higher growth rates at both higher wall temperatures and higher Mach numbers, with the hot-wall cases consistently producing thicker displacement layers. The momentum thickness $\theta^*$ shows markedly different sensitivity: at Mach~6, the cold- and hot-wall cases remain close throughout the domain, whilst at Mach~8, a substantial separation emerges, with the hot-wall case growing more rapidly. The energy thickness $\delta_e$ follows a similar trend to $\theta^*$, with its kernel $1-(u/u_e)^2$ weighting the momentum deficit more strongly; Mach~6 cases cluster together, whilst Mach~8 cases diverge significantly with wall temperature. The enthalpy thickness $\delta_h$ reveals distinct thermal behaviour: the Mach~8 cold-wall case starts with a markedly lower initial $\delta_h$ than the Mach~6 hot-wall case, reflecting stronger compression heating and a thinner thermal layer. Despite this lower initial value, the growth rate $d\delta_h/dx$ is substantially higher for the Mach~8 cold-wall condition, indicating more rapid thermal boundary layer development driven by the steeper enthalpy gradient at higher edge enthalpies.
+
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=0.96\textwidth]{resources/figures/disturbance/result_boundarylayergrowth_mach.pdf}
+% \caption{Streamwise evolution of boundary layer integral parameters for TNE simulations at different Mach numbers and wall temperatures: (a) displacement thickness $\delta^*$, (b) momentum thickness $\theta^*$, (c) energy thickness $\delta_e$, and (d) enthalpy thickness $\delta_h$.}
+% \label{figure:bcgrowth_mach}
+% \end{figure}
+
+% \subsubsection{Thermal relaxation}\label{section:disturbance:thermal_relaxation}
+
+% Figure~\ref{figure:tvprofiles} compares the $\theta_v$ and $\theta$ profiles for all four flow conditions, in each case showing the \gls{TNE} result from \gls{DNS} against the \gls{TFG} similarity solution, which also provides the inflow condition for the simulations. The cold-wall cases in panels (a) and (c) show larger departures from the inflow similarity solution in both profiles than the hot-wall cases (b) and (d), indicating that lower wall temperatures promote equilibration. Similarly, the lower Mach number cases (a) and (b) depart more than the higher-Mach-number cases (c) and (d). As the flow progresses downstream, both $\theta_v$ and $\theta$ relax toward the \gls{TEQ} solution. The \gls{DNS} \gls{TNE} curves sit between the two similarity predictions: $\theta_{\text{DNS}}$ lies between the self-similar \gls{TFG} and \gls{TEQ} $\theta$ curves, and likewise for $\theta_v$, indicating partial but incomplete relaxation. In each case, the \gls{DNS} solution remains closer to \gls{TFG} than to the \gls{TEQ} similarity solution. Hence, for the flight and wedge-angle conditions considered, the \gls{TFG} solution is preferred as the \gls{DNS} inflow: it supplies a self-similar, boundary layer-consistent state at a fractional computational cost, whilst preserving slow vibrational relaxation so that receptivity and linear growth develop inside the domain rather than being set by the inflow; it also reduces sensitivity to inflow length and cleanly isolates the downstream instability physics.
+
+\subsubsection{Thermal relaxation}\label{section:disturbance:thermal_relaxation}
+The $\theta_v$ and $\theta$ profiles for all four flow conditions are compared in \Cref{figure:tvprofiles}, showing \gls{TNE} results from \gls{DNS} against \gls{TFG} similarity solutions (which provide the inflow condition). Cold-wall cases (panels a and c) show larger departures from the inflow solution than hot-wall cases (b and d), indicating that lower wall temperatures promote equilibration. Similarly, lower Mach numbers (a and b) depart more than higher Mach numbers (c and d). As the flow develops downstream, both $\theta_v$ and $\theta$ relax toward \gls{TEQ}. The \gls{DNS} \gls{TNE} curves lie between the two similarity predictions, indicating partial relaxation. In all cases, the \gls{DNS} solution remains closer to \gls{TFG} than \gls{TEQ}, confirming it as the appropriate inflow condition. It provides a self-similar, boundary layer-consistent state at minimal cost whilst preserving slow vibrational relaxation, allowing receptivity and linear growth to develop within the domain rather than being imposed at the inflow. This reduces sensitivity to inflow length and isolates downstream instability physics.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{resources/figures/disturbance/result_Tvcomp_ssprofiles_dns_update.pdf}
+\caption{Comparison of $\theta$ and $\theta_v$ profiles at 75\% of the domain length: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$.}\label{figure:tvprofiles}
+\end{figure}
+
+A complementary characterisation employs the vibrational Damköhler number, which compares advective residence time with vibrational relaxation:
+\begin{equation}
+    \mathrm{Da}_v = \tau_{\mathrm{flow}}/\tau_v,
+\end{equation}
+where the flow time scale is $\tau_{\mathrm{flow}} \sim \delta^{*}/u_e$, and $\tau_v$ the vibrational relaxation time. Species-resolved measures $\mathrm{Da}_{v,s}$ at different streamwise stations are presented in \Cref{figure:Davprofiles}.
+
+The magnitude of $\mathrm{Da}_{v,s}$ varies with each species' vibrational properties: $\mathrm{Da}_{v,\mathrm{N_2}}$ exceeds $\mathrm{Da}_{v,\mathrm{O_2}}$ because $\mathrm{N_2}$ has a higher characteristic vibrational temperature $\Theta_v$ and therefore relaxes more slowly. Over $x/\delta_0^{*}\in[200,\,800]$, the $\mathrm{Da}_{v,s}$ profiles increase monotonically: the peak magnitude grows at successive stations whilst its wall-normal location remains approximately fixed, and outer-layer decay becomes more gradual as the boundary layer thickens. The larger rise of the peak in panel~(d) (approximately 70\%) relative to panel~(a) (approximately 40\%) reflects different baseline magnitudes and growth rates across configurations. As the boundary layer develops, $\tau_{\mathrm{flow}}$ increases due to layer thickening whilst temperatures rise and reduce $\tau_v$, causing $\mathrm{Da}_{v,s}$ to increase as relaxation progressively outpaces advection.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.60\textwidth]{resources/figures/disturbance/result_disturbance_DNS_Dav.pdf}
+\caption{Species-resolved vibrational Damköhler profiles $\mathrm{Da}_{v,s}$ for $s\in\{\mathrm{N_2},\mathrm{O_2}\}$, sampled at multiple streamwise stations. Panels: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$.}
+\label{figure:Davprofiles}
+\end{figure}
+
+Wall heating promotes equilibration through competing effects: reduced temperatures lengthen $\tau_v$ (slower relaxation) but compress the thermal layer, shortening $\tau_{\mathrm{flow}}$ (faster transit). The residence-time effect dominates, yielding higher $\mathrm{Da}_{v,s}$ for cold-wall cases. Across all configurations, the approach to equilibrium follows a hierarchy based on $\mathrm{Da}_{v,s}$: case~(b) ($M_e = 6$, $T_w = 1800$~K) achieves the highest vibrational equilibration, followed by case~(a) ($M_e = 6$, $T_w = 1200$~K), then case~(d) ($M_e = 8$, $T_w = 1800$~K), with case~(c) ($M_e = 8$, $T_w = 1200$~K) furthest from equilibrium. Higher Mach numbers suppress equilibration despite wall cooling.
+
+
+
+% A complementary characterisation employs the vibrational Damköhler number, which compares advective residence time with vibrational relaxation:
+% \begin{equation}
+%     \mathrm{Da}_v = \tau_{\mathrm{flow}}/\tau_v
+% \end{equation}
+% where the flow time scale is taken as $\tau_{\mathrm{flow}} \sim L/u_e$, with $L$ chosen as the displacement thickness, and $\tau_v$ the vibrational relaxation time. The spanwise evolution of the species-resolved measures $\mathrm{Da}_{v,s}$ at different streamwise stations is presented in \Cref{figure:Davprofiles}.
+
+% In configurations with a cooled wall, $\mathrm{Da}_{v,s}$ is systematically larger: reduced temperatures lengthen $\tau_v$ (slower relaxation) but also compress the thermal layer, thereby shortening $\tau_{\mathrm{flow}}$ (faster transit). The competing effects of slower relaxation and faster transit yield a net increase in $\mathrm{Da}_{v,s}$, indicating that the flow resides in the boundary layer for a sufficiently extended period relative to the vibrational time scale to achieve greater equilibration. The magnitude of $\mathrm{Da}_{v,s}$ varies with each species' vibrational properties: $\mathrm{Da}_{v,\mathrm{N_2}}$ exceeds $\mathrm{Da}_{v,\mathrm{O_2}}$ and $\mathrm{Da}_{v,\mathrm{NO}}$ because $\mathrm{N_2}$ has a higher characteristic vibrational temperature $\Theta_v$ and therefore relaxes more slowly.
+
+% Over $x/\delta_0^{*}\in[200,\,800]$, the $\mathrm{Da}_{v,s}$ profiles increase monotonically whilst retaining a similar shape: the peak magnitude grows at successive stations, its wall-normal location remains approximately fixed within the boundary layer, and the outer-layer decay becomes more gradual as the boundary layer thickens. The larger fractional rise of the peak in panel~(d) (approximately 70\%) relative to panel~(a) (approximately 40\%) reflects the different baseline magnitudes and growth rates across configurations. As the boundary layer develops downstream, $\tau_{\mathrm{flow}}$ increases due to layer thickening whilst temperatures rise and thereby reduce $\tau_v$, causing $\mathrm{Da}_{v,s}$ to increase as relaxation progressively outpaces advection in the time-scale competition.
+
+% Comparing across all configurations, the approach to equilibrium follows a clear hierarchy based on the magnitude of $\mathrm{Da}_{v,s}$: case~(a) ($M_e = 6$, $T_w = 1200$~K) achieves the highest degree of vibrational equilibration with the largest Damköhler numbers, followed by case~(c) ($M_e = 8$, $T_w = 1200$~K), then case~(b) ($M_e = 6$, $T_w = 1800$~K), with case~(d) ($M_e = 8$, $T_w = 1800$~K) remaining furthest from equilibrium. Wall cooling promotes equilibration: cooler walls lengthen $\tau_v$ through reduced temperatures but also shorten $\tau_{\mathrm{flow}}$ through thinner boundary layers, with the residence-time effect dominating to yield higher $\mathrm{Da}_{v,s}$. Lower Mach numbers provide an additional effect in the same direction.
+
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=0.96\textwidth]{resources/figures/disturbance/result_disturabnce_DNS_Dav.pdf}
+% \caption{Species-resolved vibrational Damköhler profiles $\mathrm{Da}_{v,s}$ for $s\in\{\mathrm{N_2},\mathrm{O_2},\mathrm{NO}\}$, sampled at multiple streamwise stations to illustrate vibrational relaxation. Panels: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$.}
+% \label{figure:Davprofiles}
+% \end{figure}
+
+% \subsection{Growth rates of disturbances}
+% The base flow was perturbed via wall suction-blowing to excite the most unstable second-mode instability. These disturbances arise from partial trapping of waves between the wall and the relative sonic line, where they form standing waves via repeated reflections; outside the sonic line they become evanescent. This trapped, waveguide-like behaviour is illustrated in \Cref{figure:mackmodes_mach8}, showing the spatial structure of pressure disturbance $\tilde{p}$ (Pa) within successive streamwise windows for the Mach~8 cold-wall \gls{TNE} case, each at $1{:}1$ aspect ratio to preserve wave geometry.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_m812.pdf}
+%     \caption{Contours of pressure disturbance $\tilde{p}$ in successive streamwise windows for the Mach~8 TNE cold-wall case. The solid horizontal line marks the boundary layer thickness $\delta_{99}$.}
+%     \label{figure:mackmodes_mach8}
+% \end{figure}
+
+% The disturbance field displays a clear acoustic signature: phase lines incline downstream and oscillations are confined between the wall and the relative sonic line (solid horizontal line at $\delta_{99}$). Alternating compression and rarefaction reveal repeated reflections within the trapped layer, consistent with the second-mode acoustic wave. Near-wall amplification towards the downstream end demonstrates exponential instability growth.
+
+% The pressure amplitude and phase modulation are characteristic of Mack modes: wall-peaked amplitudes, phase rotation across the sonic line, and partial attenuation due to interference. Over $x/\delta^{*}_{0} \in [400, 600]$, the local amplitude reduction reflects broadband interference rather than instability loss. The dominant energetic components correspond to frequencies $\hat{f} = 0.09, 0.10$, and $0.11$, which produce the observed spatial beating pattern. Their slightly differing growth rates lead to constructive and destructive superposition, modulating the pressure field. Similar patterns appear in broadband \gls{DNS} of Mach~6 cones \citep{SivasubramanianFasel2014,UnnikrishnanGaitonde2021}; the latter attributed such modulation to nonlinear second-mode interactions. However, the linearity of the present study shows this behaviour arises from linear interactions amongst multiple frequency disturbances.
+
+% The mode shapes of the Mack-mode instability are compared in \Cref{figure:mach8eigenfuncs}, where pressure disturbance profiles are normalised by their respective maxima. The three streamwise locations show excellent qualitative agreement between \gls{LST} predictions and \gls{DNS} data. In all cases, pressure amplitude peaks at the wall and decays monotonically across the boundary layer, confirming the acoustic nature of the second-mode instability. Wall confinement strengthens with increasing frequency, as expected for higher-order acoustic modes with shorter wavelengths relative to local boundary layer thickness.
+
+% As the flow develops downstream, the boundary layer thickens and the instability pocket shifts towards lower frequencies, leading to gradual broadening of the wall-normal envelope. This trend matches the reduction in local growth rate predicted by \gls{LST} and the spatial evolution observed in \gls{DNS}. At $x/\delta^{*}_{0} = 500$ in \Cref{figure:mackmodes_mach8}, only the lowest frequency component ($f = 0.09$) remains dynamically significant; higher-frequency modes ($f = 0.10$ and $0.11$) have decayed below the local instability threshold. Higher-frequency waves amplify earlier and penetrate further downstream before saturating, whilst the lower-frequency component persists over longer streamwise extent. This selective persistence reflects natural frequency filtering in spatially developing hypersonic boundary layers under \gls{TNE} conditions, whereby broadband excitation evolves towards a single dominant tone governed by the local growth-rate distribution. The mode shapes exhibit the characteristic wall-peaked, waveguide-like structure predicted by linear theory, confirming that dominant \gls{DNS} disturbances correspond to the classical second-mode family and the simulation captures the correct instability progression.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=11cm]{resources/figures/disturbance/result_mach8_tne_eigenfuncs_turbo.pdf}
+%     \caption{Normalised pressure mode shapes at selected streamwise locations for the Mach~8 TNE cold-wall case, showing the wall-normal distribution of second-mode disturbances at different frequencies.}
+%     \label{figure:mach8eigenfuncs}
+% \end{figure}
+
+
+
+\subsection{Growth rates of disturbances}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_m812.pdf}
+    \caption{Contours of pressure disturbance $\tilde{p}$ in successive streamwise windows for the Mach~8 TNE cold-wall case. The solid horizontal line marks the boundary layer thickness $\delta_{99}$.}
+    \label{figure:mackmodes_mach8}
+\end{figure}
+
+% These disturbances arise from partial trapping of waves between the wall and the relative sonic line, where they form standing waves via repeated reflections; outside the sonic line they become evanescent.
+
+The base flow was perturbed via wall suction-blowing to excite the most unstable second-mode instability. The trapped, waveguide-like behaviour is illustrated in \Cref{figure:mackmodes_mach8}, showing the spatial structure of pressure disturbance $\tilde{p}$ (Pa) within successive streamwise windows for the Mach~8 cold-wall \gls{TNE} case, each at $1{:}1$ aspect ratio to preserve wave geometry. The disturbance pressure was obtained through $\tilde{p} = p - \bar{p}$, where $p$ is the perturned simulation and $\bar{p}$ is the base flow simulation. The disturbance field displays a clear acoustic signature, phase lines incline downstream and oscillations are confined between the wall and the relative sonic line (marked at $\delta_{99}$). Alternating compression and rarefaction regions reveal repeated reflections within the trapped layer, consistent with the second-mode acoustic wave, and near-wall amplification demonstrates instability growth. The pressure amplitude and phase modulation are characteristic of Mack modes, including wall-peaked amplitudes, phase rotation across the sonic line, and partial attenuation due to interference. Over $x/\delta^{*}_{0} \in [400, 600]$, the local amplitude reduction reflects broadband interference rather than instability. The dominant energetic components correspond to frequencies $\hat{f} = 0.09, 0.10$, and $0.11$, which produce the observed spatial beating pattern; their slightly differing growth rates lead to constructive and destructive superposition, modulating the pressure field. Similar patterns appear in broadband \gls{DNS} of Mach~6 cones \citep{SivasubramanianFasel2014,UnnikrishnanGaitonde2021}, though the linearity of the present study shows this behaviour arises from linear interactions amongst multiple frequency disturbances.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=11cm]{resources/figures/disturbance/result_mach8_tne_eigenfuncs_turbo.pdf}
+    \caption{Normalised pressure mode shapes at selected streamwise locations for the Mach~8 TNE cold-wall case, showing the wall-normal distribution of second-mode disturbances at different frequencies.}
+    \label{figure:mach8eigenfuncs}
+\end{figure}
+
+
+
+The mode shapes of the Mack-mode instability are compared in \Cref{figure:mach8eigenfuncs}, where pressure disturbance profiles are normalised by their respective maxima. The three streamwise locations show excellent qualitative agreement between \gls{LST} predictions and \gls{DNS} data. Higher-frequency waves amplify earlier and penetrate further downstream before saturating, whilst the lower-frequency component persists over longer streamwise extent. In all cases, pressure amplitude peaks at the wall and decays monotonically across the boundary layer, confirming the acoustic nature of the second-mode instability. Wall confinement strengthens with increasing frequency, as expected for higher-order acoustic modes with shorter wavelengths relative to local boundary layer thickness.
+
+
+
+As the flow develops downstream, the boundary layer thickens and the instability pocket shifts towards lower frequencies, leading to gradual broadening of the wall-normal envelope. This trend matches the reduction in local growth rate predicted by \gls{LST} and the spatial evolution observed in \gls{DNS}. At $x/\delta^{*}_{0} = 500$ in \Cref{figure:mackmodes_mach8}, only the lowest frequency component ($\hat{f} = 0.09$) remains dynamically significant; higher-frequency modes ($\hat{f} = 0.10$ and $0.11$) have decayed below the local instability threshold. This selective persistence reflects natural frequency filtering in spatially developing hypersonic boundary layers under \gls{TNE} conditions, whereby broadband excitation evolves towards a narrow band distribution governed by the local growth-rate distribution. The mode shapes exhibit the characteristic wall-peaked, waveguide-like structure predicted by linear theory, confirming that dominant \gls{DNS} disturbances correspond to the classical second-mode family and the simulation captures the correct instability progression.
+
+
+
+% \subsection{Comparative analysis of instability behaviour}
+% This section examines how scaled instability parameters vary with thermal model and Mach number, assessing whether universal scaling can be achieved across \gls{CPG}, \gls{TEQ}, and \gls{TNE} configurations and quantifying mode behaviour shifts induced by thermal nonequilibrium.
+
+\subsection{Validation of LST predictions against DNS}
+While \gls{LST} provides rapid growth-rate predictions, it relies on locally parallel flow assumptions, requiring validation against high-fidelity \gls{DNS} data. Direct comparison of \gls{LST}-derived $N$ factors with those from \gls{DNS} is complicated by receptivity effects, which depend on the excitation mechanism, frequency, and local flow conditions. To account for these variations, $N$ factors from \gls{DNS} are vertically shifted to align with corresponding \gls{LST} curves for each frequency and thermal model. These shifts quantify the receptivity coefficient; smaller shifts indicate more efficient coupling between imposed disturbance and instability mode. Once aligned, an $N$-factor envelope constructed from combined \gls{LST} and shifted \gls{DNS} data provides a unified framework for assessing instability amplification across the streamwise domain.
+
+The $N$-factor evolution for the Mach~6 configuration across multiple frequencies and thermal models is shown in \Cref{figure:mackmodes_mach6_nfactor_comparison}. After applying the receptivity shift, \gls{DNS}-derived $N$ factors align well with \gls{LST} predictions (panel a), validating the theoretical framework for the examined frequency range. The $N$-factor envelopes from both \gls{LST} (panel b) and \gls{DNS} (panel c) exhibit consistent maximum amplification trends. The close agreement confirms that, despite parallel-flow limitations, \gls{LST} captures the essential physics of second-mode instability growth in hypersonic boundary layers when corrected for receptivity effects.
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=12cm]{resources/figures/disturbance/result_mach6_tne_dns_lst_nfactor.pdf}
+%     \caption{Streamwise evolution of $N$ factors for Mach~6 flow over the wedge configuration. Panel (a) presents the direct comparison between LST predictions and receptivity-shifted DNS data for multiple non-dimensional frequencies. (b) shows LST-predicted $N$ factors with the corresponding $N$-factor envelope. (c) displays DNS-derived $N$ factors after receptivity correction, with the envelope.}
+%     \label{figure:mackmodes_mach6_nfactor_comparison}
+% \end{figure}
+
+% The receptivity coefficients required to align \gls{DNS} and \gls{LST} $N$ factors are quantified in Figure~\ref{figure:mackmodes_receptivity_coefficients}. Following \citet{DeTullio2013}, wall suction and blowing is employed as the disturbance source, deemed the most appropriate excitation mechanism for investigating second-mode instabilities. For the Mach~6 cases, both \gls{TNE} and \gls{CPG} models exhibit relatively low receptivity shifts across the frequency range, suggesting efficient disturbance coupling in these configurations. In contrast, the \gls{TEQ} model requires notably larger shifts, indicating reduced receptivity potentially linked to differences in mean temperature profiles and thermochemical damping mechanisms that alter the modal structure. At higher frequencies, where disturbance peaks occur closer to the wall suction/blowing region, transient effects become more pronounced, necessitating larger receptivity corrections across all thermal models. This trend reflects the increased sensitivity of near-wall modes to local flow perturbations and the departure from the parallel-flow assumption inherent in \gls{LST}. The Mach~8 cases exhibit qualitatively similar behaviour, with \gls{TNE} and \gls{CPG} models again demonstrating comparable and relatively modest receptivity shifts, whilst the \gls{TEQ} model shows more variable coupling efficiency. One notable exception appears at $\hat{f} = 0.09$, where an anomalous receptivity shift deviates from the otherwise consistent pattern; this may warrant further investigation into local flow features or numerical artefacts at this specific frequency. Overall, the systematic differences in receptivity between thermal models underscore the importance of thermochemical effects not only in modifying instability growth rates, but also in governing the initial amplitude of disturbances entering the boundary layer. The systematic variation in receptivity with thermal model therefore validates the \gls{LST} framework whilst underscoring the central role of thermal processes in governing disturbance coupling to boundary layer instabilities.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=10cm]{resources/figures/disturbance/result_mach6_tne_dns_lst_nfactor.pdf}
+    \caption{Streamwise evolution of $N$ factors for Mach~6 hot wall flow over the wedge configuration. Panel (a) presents the direct comparison between LST predictions and receptivity-shifted DNS data for multiple non-dimensional frequencies. (b) shows LST-predicted $N$ factors with the corresponding $N$-factor envelope. (c) displays DNS-derived $N$ factors after receptivity correction, with the envelope.}
+    \label{figure:mackmodes_mach6_nfactor_comparison}
+\end{figure}
+
+Receptivity coefficients required to align \gls{DNS} and \gls{LST} $N$ factors are presented in \Cref{figure:mackmodes_receptivity_coefficients}. Following \citet{DeTullio2013}, wall suction and blowing serves as the disturbance source, deemed most appropriate for investigating second-mode instabilities. For Mach~6, both \gls{TNE} and \gls{CPG} models exhibit relatively low receptivity shifts across the frequency range, indicating efficient disturbance coupling. The \gls{TEQ} model, however, requires notably larger shifts, suggesting reduced receptivity potentially linked to differences in mean temperature profiles and thermochemical damping that alter modal structure. At higher frequencies, where disturbance peaks occur closer to the suction/blowing region, transient effects become more pronounced, necessitating larger receptivity corrections across all thermal models. This reflects increased sensitivity of near-wall modes to local perturbations and departure from the parallel-flow assumption in \gls{LST}. The Mach~8 cases exhibit qualitatively similar behaviour: \gls{TNE} and \gls{CPG} models show comparable, modest receptivity shifts, whilst \gls{TEQ} demonstrates more variable coupling efficiency. A notable exception occurs at $\hat{f} = 0.09$, where an anomalous receptivity shift deviates from the otherwise consistent pattern and warrants further investigation. The systematic differences in receptivity between thermal models underscore that thermochemical effects govern not only instability growth rates but also the initial amplitude of disturbances entering the boundary layer, validating the \gls{LST} framework whilst highlighting the central role of thermal processes in disturbance coupling.
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm]{resources/figures/disturbance/result_receptivity_coefficients.pdf}
+    \caption{Receptivity coefficients quantifying the vertical shift required to align DNS-derived $N$ factors with LST predictions. (a) shows coefficients for Mach~6 cases across CPG, TEQ, and TNE thermal models at two wall temperatures ($T_w = 1200$ and $1800$~K). (b) presents the corresponding Mach~8 data.}
+    \label{figure:mackmodes_receptivity_coefficients}
+\end{figure}
+
+% \subsubsection{Influence of thermal excitations}
+
+% To illustrate how thermal nonequilibrium alters the instability structure, a representative window of the Mach~6 cold-wall simulation is examined. \Cref{figure:mackmodes_mach6_temp} shows the translational-rotational temperature disturbance over $x/\delta^{*}_{0}\in[351,\,369]$ for \gls{CPG}, \gls{TEQ}, and \gls{TNE} spanning frozen, fully equilibrated, and partially relaxed states capturing the characteristic second-mode behaviour observed across all configurations. The disturbance field exhibits near-wall maxima and downstream-tilted phase lines, consistent with a trapped acoustic wave between the wall and the relative sonic line (dash-dotted). The solid curve denotes $\delta_{99}$, and thin overlays (where shown) indicate the phase-speed loci $c_r=u_e$ and $c_r=u_e+a_f$, which align the disturbance with the local base-flow acoustics. Within this region, the dominant nondimensional frequencies are $\hat{f}\in[0.13,\,0.15]$, with clear phase rotation across the sonic line and evanescent behaviour outside it, consistent with partial trapping and reflection. This frequency range agrees with linear-stability predictions for the most-amplified second-mode band under the present conditions~\citep{BitterShepherd2015}.
+
+ 
+% Across the three models, the qualitative wave structure within the boundary layer remains similar: near-wall acoustic trapping and downstream-tilted phase lines are observed in all cases. However, quantitative differences emerge that reflect the competing timescales of vibrational relaxation and acoustic oscillation. \gls{TEQ} yields the largest spatial disturbance amplitudes, whilst \gls{TNE} displays a slight downstream phase delay and reduced spatial confinement. In \gls{CPG} and \gls{TEQ}, acoustic energy remains confined within the boundary layer with rapid decay inside the layer. Conversely, in \gls{TNE}, a small fraction of energy leaks into the freestream via partial transmission at the relative sonic line, producing weak dispersive signatures above the layer behaviour compatible with weakly radiating acoustic components, though the leakage remains too modest to imply sustained radiation into the freestream~\citep{KniselyZhong2019}.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_m612_temperature.pdf}
+%     \caption{Contours of temperature disturbance $\hat{T}$ in a narrow streamwise window for the Mach~6 cold-wall case.}
+%     \label{figure:mackmodes_mach6_temp}
+% \end{figure}
+
+% The phase delay and reduced confinement in \gls{TNE} provide immediate signatures of weakened thermoacoustic feedback. This behaviour corresponds to a downstream shift in the local growth-rate envelope, consistent with the delayed oscillation onset visible in \Cref{figure:mackmodes_mach6_temp}. The faint signatures above the boundary layer edge in \gls{TNE} imply a modest reduction in acoustic impedance, allowing limited energy leakage into the outer flow behaviour compatible with radiative damping previously reported for high-enthalpy conditions~\citep{BitterShepherd2015}. The fact that \gls{TEQ} maintains stronger confinement whilst \gls{TNE} shows leakage suggests that the degree of equilibration directly modulates the acoustic cavity efficiency.
+
+% In contrast to the similar phase organisation observed in spatial fields, the temperature mode shapes in \Cref{figure:mach6_tempeigenfuncs} reveal quantitative differences in modal sensitivity between the models. The \gls{TNE} case exhibits noticeably larger temperature mode-shape amplitudes compared to \gls{CPG} and \gls{TEQ}, with peak values distributed throughout the boundary layer depth. This amplification arises from the delayed energy exchange between translational and vibrational reservoirs: in \gls{TNE}, the vibrational temperature $T_v$ does not equilibrate rapidly enough to absorb disturbance energy, leaving a larger fraction concentrated in the translational-rotational mode and enhancing local compressibility. The \gls{CPG} and \gls{TEQ} cases show comparable and substantially smaller mode-shape amplitudes; \gls{TEQ} benefits from equilibrium energy buffering across vibrational modes, which distributes disturbance energy and reduces the instantaneous translational temperature response. Whilst qualitatively similar modal structures have been observed in high-Mach low-Reynolds number flows~\citep{MiroMiro2019}, the pronounced amplitude hierarchy observed here is distinctive, likely reflecting the specific equilibration regimes of the present configurations.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=13cm]{resources/figures/disturbance/result_mach612_eigenfuncs.pdf}
+%     \caption{Contours of pressure disturbance $\hat{p}$ in a narrow streamwise window for the Mach~8 TNE cold-wall case. The solid horizontal line marks the boundary layer thickness $\delta_{99}$.}
+%     \label{figure:mach6_tempeigenfuncs}
+% \end{figure}
+
+% The spatial field $\tilde{T}$ reflects the cumulative effect of acoustic resonance efficiency, growth-rate integration, and multi-frequency interactions within the boundary layer. The larger spatial amplitudes in \gls{TEQ} arise from enhanced wave trapping and more efficient acoustic feedback, leading to greater cumulative amplification despite the individual modal response being buffered by energy distribution across modes. Conversely, \gls{TNE} exhibits reduced spatial amplitudes due to partial energy leakage and weakened acoustic confinement, even though single-frequency modal sensitivity is enhanced. This demonstrates that thermal equilibrium improves second-mode resonance efficiency through better wave trapping, whilst thermal nonequilibrium amplifies individual modal responses but reduces overall wave packet growth through energy leakage and dissipation.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_m812_temperature.pdf}
+%     \caption{Contours of temperature disturbance $\hat{T}$ in a narrow streamwise window for the Mach~8 hot-wall case.}
+%     \label{figure:mackmodes_mach8_temp}
+% \end{figure}
+
+% At Mach~8, the second-mode disturbance field exhibits lower dominant frequencies and stronger penetration towards the boundary layer edge compared to Mach~6, consistent with the increased boundary layer thickness and modified acoustic cavity dimensions. The characteristic second-mode wave packets display alternating thermal structures and elongated wavelengths. Across the three models, \gls{TEQ} exhibits substantially larger spatial disturbance amplitudes than \gls{CPG} and \gls{TNE}, reinforcing the Mach~6 hierarchy. At higher Mach, the elevated freestream enthalpy increases boundary layer temperatures and vibrational excitation across all models. In \gls{TEQ}, the equilibrium assumption ensures vibrational modes are fully populated, effectively reducing the frozen sound speed and modifying acoustic impedance distribution to strengthen wave trapping. The \gls{CPG} case displays well-defined wave structures with moderate amplitudes and sharp thermal gradients, whilst \gls{TNE} shows diffused thermal signatures reflecting the delayed vibrational relaxation that prevents full energy absorption. Although wavelength and spatial organisation remain qualitatively similar across all models, the persistent amplitude hierarchy with \gls{TEQ} consistently dominant at both Mach numbers demonstrates that thermal equilibration significantly enhances spatial disturbance build-up through improved acoustic feedback, an effect amplified with increasing Mach number.
+
+% To quantify the amplitude variations, \Cref{figure:mach_amplitudecomp} presents the streamwise evolution of pressure disturbance amplitudes extracted from FFT analysis for a range of nondimensional frequencies at both Mach~6 (cold wall) and Mach~8 (hot wall) conditions. All models exhibit a distinct amplification region associated with second-mode instability, followed by downstream decay. At Mach~6, \gls{CPG} shows sharp growth peaking near $x/\delta^{*}_{0}\approx 400$ at $\hat{f}=0.14$. \gls{TEQ} exhibits stronger amplification with a peak near $x/\delta^{*}_{0}\approx 600$ and broader frequency response, consistent with enhanced acoustic resonance. \gls{TNE} shows delayed onset and a downstream-shifted amplitude peak near $x/\delta^{*}_{0}\approx 650$, with reduced amplitudes reflecting weakened acoustic confinement. These trends confirm prior observations of amplitude suppression in thermochemically nonequilibrium flows~\citep{KniselyZhong2019}; however, the present results demonstrate that thermal equilibrium represents the amplification limit, with \gls{TEQ} substantially exceeding both \gls{CPG} and \gls{TNE}. At Mach~8, all three models display multi-peaked behaviour with broader frequency distributions, indicative of increased nonlinear interactions, yet the same hierarchy persists: \gls{TEQ} shows the strongest amplification, whilst \gls{TNE} exhibits reduced amplitudes and more distributed energy. This amplitude hierarchy across both Mach numbers is consistent with findings that thermochemical nonequilibrium produces a stabilising effect relative to chemical equilibrium~\citep{KlineEtAl2019}; the present thermal nonequilibrium results follow a similar pattern, with thermal equilibrium emerging as the dominant amplification regime. In both cases, the progressive shift of the amplitude envelope towards lower frequencies downstream illustrates spatial filtering: higher frequencies saturate and decay earlier, whilst lower-frequency disturbances persist over longer streamwise extents~\citep{Fedorov2011}.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=11cm]{resources/figures/disturbance/result_mach_amplitude_comp.pdf}
+%     \caption{Streamwise evolution of pressure disturbance amplitude spectra for (a) Mach~6 cold wall and (b) Mach~8 hot wall cases at selected frequencies, obtained via Fourier transformation. Legend: CPG (solid line), TEQ (dot-dashed line), TNE (dashed line).}
+%     \label{figure:mach_amplitudecomp}
+% \end{figure}
+
+\subsection{Influence of thermal excitations}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_m612_temperature.pdf}
+    \caption{Contours of temperature disturbance $\tilde \theta$,  in a narrow streamwise window for the Mach~6 cold-wall case. Panels (a) CPG, (b) TEQ, and (c) TNE, the lines are $\delta_{99}$, crical line and the sonic line, with $c_r = 0.9$ for all three cases.}
+    \label{figure:mackmodes_mach6_temp}
+\end{figure}
+
+
+To illustrate how thermal nonequilibrium alters instability structure, a representative window of the Mach~6 cold-wall simulation is examined. \Cref{figure:mackmodes_mach6_temp} shows the translational-rotational temperature disturbance $\tilde{T}$ over $x/\delta^{*}_{0}\in[351,\,369]$ for (a) CPG, (b) TEQ, and (c) TNE, spanning frozen, fully equilibrated, and partially relaxed states. The disturbance field exhibits near-wall maxima and downstream-tilted phase lines, consistent with a trapped acoustic wave between the wall and the sonic line $c_r = u + a_f$ (dash-dotted). The solid curve denotes $\delta_{99}$, and thin overlays (where shown) indicate the critical layer $c_r=u$, which aligns the disturbance with local base-flow acoustics. The dominant nondimensional frequencies are $\hat{f}\in[0.13,\,0.15]$, with clear phase rotation across the sonic line and evanescent behaviour outside it, consistent with partial trapping and reflection. This frequency range agrees with linear-stability predictions for the most-amplified second-mode band~\citep{BitterShepherd2015}.
+
+Across the three models, the qualitative wave structure within the boundary layer remains similar: near-wall acoustic trapping and downstream-tilted phase lines appear in all cases. However, quantitative differences emerge reflecting competing timescales of vibrational relaxation and acoustic oscillation. TEQ yields the largest spatial disturbance amplitudes, whilst TNE displays a slight downstream phase delay and reduced spatial confinement. In CPG and TEQ, acoustic energy remains confined within the boundary layer with rapid decay. Conversely, in TNE, a small fraction of energy leaks into the freestream via partial transmission at the sonic line, producing weak dispersive signatures above the layer. The leakage remains modest, precluding sustained radiation into the freestream~\citep{KniselyZhong2019}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_mach612_eigenfuncs.pdf}
+    \caption{Temperature mode-shape amplitudes for CPG, TEQ, and TNE at selected streamwise locations for Mach~6 cold-wall conditions.}
+    \label{figure:mach6_tempeigenfuncs}
+\end{figure}
+
+
+The phase delay and reduced confinement in TNE provide immediate signatures of weakened thermoacoustic feedback, corresponding to a downstream shift in the local growth-rate envelope. The faint signatures above the boundary layer edge in TNE imply a modest reduction in acoustic impedance, allowing limited energy leakage into the outer flow. The fact that TEQ maintains stronger confinement whilst TNE shows leakage suggests that the degree of equilibration directly modulates acoustic efficiency. In contrast to the similar phase organisation in spatial fields, the temperature mode shapes in \Cref{figure:mach6_tempeigenfuncs} reveal quantitative differences in modal sensitivity between the models. \gls{TNE} exhibits noticeably larger temperature mode-shape amplitudes compared to \gls{CPG} and \gls{TEQ}, with peak values distributed throughout the boundary layer depth. This amplification arises from delayed energy exchange between translational and vibrational reservoirs: in \gls{TNE}, the vibrational temperature $T_v$ does not equilibrate rapidly enough to absorb disturbance energy, leaving a larger fraction concentrated in the translational-rotational mode and enhancing local compressibility. \gls{CPG} and \gls{TEQ} show comparable and substantially smaller mode-shape amplitudes; \gls{TEQ} benefits from equilibrium energy buffering across vibrational modes, which distributes disturbance energy and reduces instantaneous translational temperature response. Whilst qualitatively similar modal structures appear in high-Mach low-Reynolds number flows~\citep{MiroMiro2019}, the pronounced amplitude hierarchy observed here reflects the specific equilibration regimes of the present configurations.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=12cm]{resources/figures/disturbance/result_mackmodes_m812_temperature.pdf}
+    \caption{Contours of temperature disturbance $\tilde{T}$ in a narrow streamwise window for the Mach~8 hot-wall case. Panels (a) CPG, (b) TEQ, (c) TNE.}
+    \label{figure:mackmodes_mach8_temp}
+\end{figure}
+
+
+The spatial field of normalised disturabance Temperature $\tilde{\theta}$ reflects cumulative effects of acoustic resonance efficiency, growth-rate integration, and multi-frequency interactions. Larger spatial amplitudes in \gls{TEQ} arise from enhanced wave trapping and more efficient acoustic feedback, leading to greater cumulative amplification despite individual vibrational enregy mode draining the system. Conversely, \gls{TNE} exhibits reduced spatial amplitudes due to partial energy leakage and weakened acoustic confinement, even though single-frequency modal sensitivity is enhanced. This demonstrates that thermal equilibrium improves second-mode resonance efficiency through better wave trapping, whilst thermal nonequilibrium amplifies individual modal responses but reduces overall wave packet growth through energy leakage.
+
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=11cm]{resources/figures/disturbance/result_mach_amplitude_comp.pdf}
+    \caption{Streamwise evolution of pressure disturbance amplitude spectra for (a) Mach~6 cold wall and (b) Mach~8 hot wall cases at selected frequencies, obtained via Fourier transformation. Legend: CPG (\protect\cpgline), TEQ (\protect\teqline), TNE (\protect\tneline).}
+    \label{figure:mach_amplitudecomp}
+\end{figure}
+
+
+At Mach~8, the second-mode disturbance field exhibits lower dominant frequencies and stronger penetration towards the boundary layer edge, consistent with increased boundary layer thickness and modified acoustic dimensions (see \Cref{figure:mackmodes_mach8_temp}). Characteristic wave packets display alternating thermal structures and elongated wavelengths. \gls{TEQ} exhibits substantially larger spatial disturbance amplitudes than \gls{CPG} and \gls{TNE}, reinforcing the Mach~6 hierarchy. Elevated freestream enthalpy increases boundary layer temperatures and vibrational excitation across all models. In \gls{TEQ}, the equilibrium assumption ensures vibrational modes are fully populated, reducing the frozen sound speed and strengthening wave trapping. \gls{CPG} displays well-defined wave structures with moderate amplitudes, whilst \gls{TNE} shows diffused thermal signatures reflecting delayed vibrational relaxation. Although wavelength and spatial organisation remain qualitatively similar across all models, the persistent amplitude hierarchy with \gls{TEQ} consistently dominant demonstrates that thermal equilibration enhances spatial disturbance build-up through improved acoustic feedback, an effect amplified with increasing Mach number.
+
+
+
+Pressure disturbance amplitudes extracted from FFT analysis are presented in \Cref{figure:mach_amplitudecomp} for Mach~6 (cold wall) and Mach~8 (hot wall) conditions. All models exhibit amplification followed by downstream decay. At Mach~6, CPG peaks near $x/\delta^{*}_{0}\approx 400$ at $\hat{f}=0.14$, TEQ shows stronger amplification peaking at $x/\delta^{*}_{0}\approx 600$ with broader frequency response, and TNE exhibits delayed onset with a downstream-shifted peak near $x/\delta^{*}_{0}\approx 650$ and reduced amplitudes. At Mach~8, all three models display multi-peaked behaviour with broader frequency distributions, yet the hierarchy persists: TEQ dominates, TNE shows reduced amplitudes. This amplitude hierarchy is consistent with thermal equilibrium representing the amplification limit, whilst thermal nonequilibrium produces a stabilising effect~\citep{KlineEtAl2019}. The progressive shift of the amplitude envelope towards lower frequencies downstream illustrates spatial filtering: higher frequencies decay earlier, whilst lower frequencies persist over longer streamwise extents~\citep{Fedorov2011}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_phase_speed_growth_612_618_five.pdf}
+    \caption{Spatial growth rate and phase speed for Mach~6 at $\hat{f}=0.16$, extracted from DNS. Left: cold-wall conditions. Right: hot-wall conditions. Dashed lines denote acoustic reference speeds $c_{\phi}=1\pm 1/M_e$.}
+    \label{figure:mach6_cph}
+\end{figure}
+
+\subsubsection{Phase speed and growth-rate structure}
+The phase speed $c_{r}$ and spatial growth rate $\alpha_i$ for the $\hat{f}=0.16$ disturbance component across Mach~6 cold-wall and hot-wall configurations are shown in \Cref{figure:mach6_cph}. A striking feature emerges in the growth-rate profiles: \gls{TNE} and \gls{CPG} exhibit virtually identical downstream phase delays relative to \gls{TEQ}, despite operating under distinctly different thermal conditions. This phase delay manifests as delayed amplification onset and a downstream-shifted growth-rate peak, independent of wall temperature. Both \gls{TNE} and \gls{CPG} sustain higher phase speeds than \gls{TEQ} throughout the domain, reflecting altered acoustic impedance from reduced vibrational excitation. This trend is less pronounced than comparable low-Reynolds number high-enthalpy linear stability studies~\citep{MortensenZhong2013}, suggesting that the nonequilibrium effect on phase speed may saturate at higher Reynolds numbers.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=12cm]{resources/figures/disturbance/result_lst_dns_amplitude_comp.pdf}
+    \caption{Amplitude of disturbances versus distance from wedge leading edge. Rows represent configurations: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$. Columns show frequencies $[i,j,k]$, $0.14,0.15,0.16$ for Mach~6 cases and $0.11,0.12,0.13$ for Mach~8.}
+    \label{figure:lstdns_amplitude}
+\end{figure}
+
+A notable feature in the phase-speed profiles is excursion below the $1-1/M_e$ line, indicating local entry into the acoustic supersonic mode band. Such crossings are associated with second-mode excitation mechanisms~\citep{KniselyZhong2018}. In the cold-wall case, these signatures are most pronounced in \gls{TEQ}, whilst remaining subdued in \gls{CPG} and \gls{TNE}. This suggests that thermal equilibration enhances excitation of higher-order acoustic components, implying that thermal equilibrium influences not only primary second-mode growth but also competing instability branches.
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_mach_pressure_rms.pdf}
+    \caption{Streamwise evolution of pressure root-mean-square ($p_{\text{rms}}$) across the cases. Panels show: (a) Mach~6 cold-wall ($T_w=1200~\mathrm{K}$), (b) Mach~6 hot-wall ($T_w=1800~\mathrm{K}$), (c) Mach~8 cold-wall ($T_w=1200~\mathrm{K}$), (d) Mach~8 hot-wall ($T_w=1800~\mathrm{K}$).}
+    \label{figure:prms_allcases}
+\end{figure}
+
+
+\subsection{Comparison across Mach numbers and temperature}\label{section:comparisonacrossmach}
+To assess how thermal nonequilibrium effects scale with flow conditions, disturbance amplitude response and RMS pressure evolution are compared across Mach~6 and Mach~8 at cold-wall ($T_w=1200$~K) and hot-wall ($T_w=1800$~K) configurations. \Cref{figure:lstdns_amplitude} shows disturbance amplitude profiles for the most-amplified frequency at each condition, with rows representing (a) Mach~6 cold-wall, (b) Mach~6 hot-wall, (c) Mach~8 cold-wall, and (d) Mach~8 hot-wall, and columns showing \gls{CPG}, \gls{TEQ}, and \gls{TNE}. \gls{TEQ} consistently exhibits the largest disturbance amplitudes across all conditions, whilst \gls{CPG} and \gls{TNE} show marginal differences. Wall temperature elevation progressively shifts the amplitude peak closer to the leading edge in \gls{TEQ}, whereas \gls{CPG} and \gls{TNE} remain relatively insensitive to wall temperature variation. At higher Mach numbers, \gls{CPG} becomes increasingly similar to \gls{TNE}, a trend particularly evident in the Mach~8 hot-wall configuration.
+
+
+
+
+
+
+
+The pressure root-mean-square evolution shown in \Cref{figure:prms_allcases} provides complementary insight into cumulative disturbance development. Peak $p_{\text{rms}}$ values decrease systematically from cold-wall Mach~6 towards hot-wall Mach~8, consistent with reduced instability growth at higher Mach numbers and elevated wall temperatures. \gls{TEQ} shows the largest $p_{\text{rms}}$ magnitudes across all conditions, whilst \gls{CPG} and \gls{TNE} remain reduced with increasingly similar values at higher Mach numbers. These observations are broadly consistent with prior findings that thermal nonequilibrium has limited effect relative to perfect-gas assumptions~\citep{BitterShepherd2015}; however, the present results reveal that thermal equilibrium produces substantial amplification, an effect not previously emphasised. The hierarchy reflects the underlying Damköhler number dependence: Mach~6 configurations achieve rapid vibrational equilibration and approach \gls{TEQ} behaviour, whilst Mach~8 hot-wall remains closer to frozen-gas conditions due to insufficient relaxation time~\citep{KlineEtAl2018}. Cooled walls further promote equilibration by shortening boundary layer residence time relative to vibrational relaxation timescale, enhancing transition towards \gls{TEQ} dynamics and explaining higher peak $p_{\text{rms}}$ values in cold-wall configurations. These observations confirm that thermal equilibration enhances disturbance growth, although this advantage diminishes with increasing Mach number and wall temperature.
+
+
+
+
+
+
+% \subsection{N factor envelope}
+% Finally, \gls{DNS} $N$-factors are extracted via spatial integration of the growth rate and compared against \gls{LST} predictions. A vertical shift is applied to account for absolute amplitude differences, with no frequency adjustment. \Cref{figure:m6tw12_Nfactor} presents results for four frequencies ($\hat{f}=0.13$, $0.14$, $0.15$, $0.16$) across \gls{CPG}, \gls{TEQ}, and \gls{TNE} models for the $M_e=6$, $T_w=1200$ configuration. \gls{DNS} upstream noise reflects receptivity behaviour; in the growth phase, \gls{DNS} and \gls{LST} agreement is excellent regarding peak location and magnitude. Notably, \gls{CPG} and \gls{TEQ} agreement quality is comparable despite \gls{LST} using a frozen \gls{CPG} base flow in both cases, confirming that base-flow changes dominate over thermochemical modelling in \gls{LST}. In \gls{TNE}, the frozen base-flow assumption in \gls{LST} introduces an additional approximation (vibrational relaxation not modelled), yet agreement remains reasonable, indicating that nonequilibrium effects on $N$-factor prediction are modest. \gls{TEQ} tends to overestimate $N$-factors slightly, whilst \gls{CPG} remains closest to \gls{TNE} results.
+
+% The $N$-factor comparison for all cases is shown in~\Cref{figure:Nfactors_allcases}. One frequency has been selected for each case. The top row shows the $M_e=6$, $T_w=1200~\mathrm{K}$ case, the second row $M_e=6$, $T_w=1800~\mathrm{K}$, the third row $M_e=8$, $T_w=1200~\mathrm{K}$ and the bottom row $M_e=8$, $T_w=1800~\mathrm{K}$. The three columns show the CPG, TEQ and TNE cases respectively. Peak $N$-factors are higher for the cooled-wall cases and lower for the higher Mach number cases, ranging from 6.5 in the $M_e=6$, $T_w=1200~\mathrm{K}$ TEQ case down to 2.7 in the $M_e=8$, $T_w=1800~\mathrm{K}$ case. The $y$-shift correction applied for $M_e=8$ cases was considerably higher. Agreement between LST and DNS remains good for the $M_e=8$ cases, despite the lower growth rates and greater non-parallelism of the base flows for these cases.
+
+% Spatial integration of the growth rate yields $N$-factors that are compared against \gls{LST} predictions using a vertical amplitude shift to account for receptivity effects. The rate of $N$-factor increase in \gls{CPG} cases aligns well with \gls{LST} predictions, particularly when compared to lower Mach number cases, suggesting good agreement in the growth trend between \gls{DNS} and \gls{LST} for the frozen-gas model. However, peak $N$-factors in \gls{CPG} cases deviate from \gls{LST} predictions, highlighting inconsistencies in their final amplitudes. Furthermore, the \gls{TEQ} model yields \gls{DNS} $N$-factors that are consistently lower than \gls{LST} predictions, with this discrepancy most pronounced at lower frequencies in the hot-wall case, reaching differences of $\Delta N \approx 0.5$. This underprediction at larger streamwise distances is attributed to growing boundary layer non-parallelism, which violates the parallel-flow assumption inherent to \gls{LST}.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=13cm]{resources/figures/disturbance/result_all_lst_dns_envelope_comparison.pdf}
+%     \caption{$N$-factor envelopes for all Mach and wall temperature configurations. Rows: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$. Columns show frequencies increasing from left to right.}
+%     \label{figure:lstdns_nfactor}
+% \end{figure}
+
+% The equilibrium model remains the most unstable of the simulations, and despite the underprediction at lower frequencies, still yields higher amplitude responses across most cases. Nonetheless, \gls{CPG} cases exhibit lower $N$-factors compared to \gls{TEQ} cases at both wall temperatures, consistent with prior studies. Notably, the amplitude differences between \gls{CPG}, \gls{TEQ}, and \gls{TNE} reveal that \gls{TNE} and \gls{CPG} responses are remarkably similar, particularly in hot-wall conditions where they yield virtually identical results. This convergence between frozen-gas and nonequilibrium models is significant: for the conditions considered in this study, the thermally frozen-gas model provides a robust \gls{LST} approximation for predicting nonequilibrium \gls{DNS} growth behaviour, suggesting that detailed thermochemical modelling within \gls{LST} may be unnecessary when \gls{CPG} assumptions sufficiently capture the base-flow effects on instability dynamics. The comparison across all configurations demonstrates that whilst \gls{TEQ} sustains an amplification advantage over both \gls{CPG} and \gls{TNE}, the distinction between frozen and nonequilibrium responses diminishes significantly at higher Mach numbers and hot-wall conditions, reinforcing the Damköhler-based hierarchy established in the preceding analysis.
+
+\subsection{N factor envelope}
+The $N$-factors are extracted via spatial integration of the growth rate and compared against \gls{LST} predictions, with a vertical shift applied to account for absolute amplitude differences. \Cref{figure:m6tw12_Nfactor} presents results for four frequencies ($\hat{f}=0.13$, $0.14$, $0.15$, $0.16$) across \gls{CPG}, \gls{TEQ}, and \gls{TNE} for the $M_e=6$, $T_w=1200$ configuration. In the growth phase, \gls{DNS} and \gls{LST} agreement is excellent regarding peak location and magnitude. \gls{CPG} and \gls{TEQ} show comparable agreement quality despite \gls{LST} using a frozen \gls{CPG} base flow for both, confirming that base-flow changes dominate over thermochemical modelling. For \gls{TNE}, the frozen base-flow assumption introduces an additional approximation (vibrational relaxation not modelled), yet agreement remains reasonable, indicating that nonequilibrium effects on $N$-factor prediction are modest. \gls{TEQ} tends to overestimate $N$-factors slightly, whilst \gls{CPG} remains closest to \gls{TNE} results.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_Nfactor_612.pdf}
+    \caption{$N$ factors acquired from DNS and LST for Mach~6 $T_w=1200~\mathrm{K}$ case. Legend: CPG DNS (\protect\cpgline), CPG LST (\protect\cpgdottedline), TEQ DNS   (\protect\teqline), TEQ LST(\protect\teqdottedline), \\ TNE DNS (\protect\tneline), TFG LST (\protect\tnedottedline).}
+    \label{figure:m6tw12_Nfactor}
+\end{figure}
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_all_lst_dns_envelope_comparison.pdf}
+    \caption{$N$-factor envelopes for all Mach and wall temperature configurations. Rows: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$. Columns show CPG, TEQ and TNE cases.}
+    \label{figure:lstdns_nfactor}
+\end{figure}
+
+Systematic trends emerge across all cases. Peak $N$-factors are higher for cooled-wall cases and lower for higher Mach numbers, ranging from 6.5 in the $M_e=6$, $T_w=1200$ \gls{TEQ} case to 2.7 in the $M_e=8$, $T_w=1800$ case. Agreement between \gls{LST} and \gls{DNS} remains good for Mach~8 cases despite lower growth rates and greater base-flow non-parallelism. The rate of $N$-factor increase in \gls{CPG} cases aligns well with \gls{LST} predictions, particularly at lower Mach numbers. Peak $N$-factors in \gls{CPG} cases deviate from \gls{LST} predictions at larger streamwise distances, whilst the \gls{TEQ} model yields \gls{DNS} $N$-factors consistently lower than \gls{LST} predictions. Discrepancies in \gls{TEQ} are most pronounced at lower frequencies in hot-wall cases, reaching $\Delta N \approx 0.5$, and are attributed to growing boundary layer non-parallelism that affects the validity of the parallel-flow assumption.
+
+\gls{TEQ} remains the most unstable across most cases, whilst \gls{CPG} exhibits lower $N$-factors at both wall temperatures. Notably, \gls{TNE} and \gls{CPG} responses are remarkably similar, particularly in hot-wall conditions where they yield virtually identical results. This convergence suggests that the thermally frozen-gas model provides a robust approximation for predicting nonequilibrium \gls{DNS} growth behaviour, indicating that detailed thermochemical modelling within \gls{LST} may be unnecessary when \gls{CPG} assumptions sufficiently capture base-flow effects. Although \gls{TEQ} sustains an amplification advantage over both \gls{CPG} and \gls{TNE}, the distinction between frozen and nonequilibrium responses diminishes significantly at higher Mach numbers and hot-wall conditions, reinforcing the Damköhler-based hierarchy established in the preceding analysis.
+
+
+
+
+% \subsection{Effect of vibrational nonequilibrium}
+
+% For flows in thermal nonequilibrium (\gls{TNE}), it is important to establish the vibrational nonequilibrium signature across the flow conditions investigated to understand its influence on second-mode growth. For acoustic disturbance analysis in thermochemically nonequilibrium flows, the vibrational and translational energy conservation equations are linearised about a base flow state. Following the framework of \citet{WagnildEtAl2012}:
+% \begin{equation}\label{equation:vibrational_disturbance}
+% \frac{d\tilde{e}_v'}{dt} = -\bar{u}_i \frac{\partial \tilde{e}_{v}}{\partial x_i} + (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}} + (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}^2} \left( \frac{\partial \bar{\tau}_s}{\partial T} \tilde{T} + \frac{\partial \bar{\tau}_s}{\partial p} \tilde{p} \right),
+% \end{equation}
+% and the linearised total energy disturbance equation:
+% \begin{equation}\label{equation:translational_disturbance}
+% \begin{split}
+% \frac{d\tilde{e}_t'}{dt} = -\left(e_{v,0}^* - \bar{e}_v\right) \cfrac{1}{\bar{\tau}_{s}} - (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}^2} \left( \frac{\tilde{\rho}}{\bar{\rho}} + \frac{\partial \bar{\tau}_s}{\partial T} \tilde{T} + \frac{\partial \bar{\tau}_s}{\partial p} \tilde{p} \right) \\
+% - \left( \frac{\tilde{\rho}}{\bar{\rho}} \bar{u}_{i} + \tilde{u}_i \right) \frac{\partial \bar{e}_0}{\partial x_i} - \cfrac{\bar{p}}{\bar{\rho}} \frac{\partial \tilde{u}_i}{\partial x_i} - \cfrac{\tilde{p}}{\bar{\rho}} \frac{\partial \bar{u}_{i}}{\partial x_i}.
+% \end{split}
+% \end{equation}
+
+% The three dominant production mechanisms in these equations are: (i) the mean-flow gradient production term $-\bar{u}_i (\partial \tilde{e}_{v}/\partial x_i)$, which represents disturbance advection by the base-flow velocity; (ii) the relaxation production term $(e_{v,0}^* - \bar{e}_v)/\bar{\tau}_s$, which models energy exchange between vibrational and translational modes via the Landau-Teller mechanism and introduces phase lag between the two disturbance fields; and (iii) the thermodynamic production term proportional to $(\partial \bar{\tau}_s/\partial T) \tilde{T}$ and $(\partial \bar{\tau}_s/\partial p) \tilde{p}$, which governs how the relaxation timescale responds to temperature and pressure perturbations, thereby modulating energy exchange efficiency during acoustic oscillations.
+
+% The linearised energy equations reveal a critical distinction between thermal equilibrium and nonequilibrium responses: the phase relationship between vibrational temperature disturbance $\tilde{T}_v$ and translational temperature disturbance $\tilde{T}$. In thermal equilibrium (\gls{TEQ}), where the relaxation timescale is very short, the vibrational mode remains phase-locked with the translational oscillations. The coupling term $(e_{v,0}^* - \bar{e}_v)/\bar{\tau}_s$ in Equation~\eqref{equation:vibrational_disturbance} responds synchronously to pressure fluctuations, amplifying the acoustic response and strengthening acoustic impedance contrast within the boundary layer acoustic cavity.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_mach_Tv_perturbation.pdf}
+%     \caption{Contours of vibrational temperature disturbance $\hat{T}_v$ in a narrow streamwise window for: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$.}
+%     \label{figure:mackmodes_tv}
+% \end{figure}
+
+% In thermal nonequilibrium (\gls{TNE}), the finite relaxation timescale creates a phase lag: the vibrational energy cannot fully respond to rapid acoustic oscillations. For slow acoustic waves (low-frequency disturbances), the mean-flow gradient production term generates positive energy production in the vibrational equation. However, the relaxation lag term $(e_{v,0}^* - \bar{e}_v)/\bar{\tau}_s^2 (\partial \bar{\tau}_s / \partial T) \tilde{T}$ introduces an out-of-phase component: when translational temperature rises, the vibrational response lags, creating a temporal offset between $\tilde{T}_v$ and $\tilde{T}$. This phase offset acts as an effective dissipative mechanism, decoupling the two energy reservoirs and reducing the cumulative acoustic amplification. The consequence, observed in the \gls{DNS} results, is reduced spatial disturbance growth and downstream-shifted amplitude peaks in \gls{TNE} compared to \gls{TEQ}.
+
+% \Cref{figure:disturbance_tv} presents an instantaneous snapshot of the vibrational temperature disturbance $\tilde{T}_v = T_v^{\text{forced}} - T_v^{\text{base}}$ extracted at the boundary layer edge ($y/\delta_{99} \approx 1$) across all four configurations. The contours reveal a striking out-of-phase behaviour: whilst disturbance quantities such as velocity $\tilde{u}_i$, $\tilde{v}_i$ and pressure $\tilde{p}$ oscillate in phase with the translational temperature (exhibiting the characteristic phase-tilted wave structures expected from acoustic cavity resonance), the vibrational temperature disturbance manifests a substantially delayed oscillation. The lag is most pronounced in the Mach~8 hot-wall case (panel d), where $\tilde{T}_v$ appears nearly 90 degrees out of phase with $\tilde{T}$. In the colder Mach~6 conditions (panels a and c), the lag is less extreme but clearly visible as a downstream shift in the phase progression. This spatial manifestation of the temporal lag confirms the theoretical prediction: the vibrational mode cannot maintain synchrony with the fast translational oscillations driven by acoustic pressure perturbations. The energy available in the acoustic wave is continuously being redirected into vibrational degrees of freedom at a rate determined by the relaxation timescale, and this partitioning occurs with systematic time delay, effectively removing energy from the acoustic growth cycle and suppressing second-mode amplification in thermal nonequilibrium flows.
+
+
+
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=12cm]{resources/figures/disturbance/result_T_Tv_perturbation_overlap.pdf}
+%     \caption{Translational and vibrational temperature disturbances versus streamwise distance. Each row represents the configuration (first row $M_e=6$, $T_w=1200$, second row $M_e=6$, $T_w=1200$, third row $M_e=6$, $T_w=1200$, bottom row $M_e=8$, $T_w=1800$).}
+%     \label{figure:disturbance_tv}
+% \end{figure}
+
+% The similarity between \gls{TNE} and \gls{CPG} $N$-factors reflects a fundamental decoupling mechanism: phase-lagged vibrational response renders the vibrational mode acoustically inert. In \gls{CPG}, vibrational excitation is frozen entirely. In \gls{TNE}, vibrational modes respond with substantial phase lag, extracting acoustic energy out-of-sync with the disturbance cycle. Both configurations therefore experience identical effective acoustic impedance controlled by translational-rotational modes alone. The vibrational mode in \gls{TNE}, despite theoretical excitation, contributes negligibly to acoustic dynamics due to desynchronisation, explaining why growth rates remain close to the frozen-gas limit across all flow conditions.
+
+
+\subsection{Effect of vibrational nonequilibrium}
+For flows in thermal nonequilibrium (\gls{TNE}), understanding the vibrational nonequilibrium signature is essential to assess its influence on second-mode growth. The linearised vibrational and translational energy conservation equations, following \citet{WagnildEtAl2012}, are:
+\begin{equation}\label{equation:vibrational_disturbance}
+\frac{d\tilde{e}_v'}{dt} = -\bar{u}_i \frac{\partial \tilde{e}_{v}}{\partial x_i} + (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}} + (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}^2} \left( \frac{\partial \bar{\tau}_s}{\partial T} \tilde{T} + \frac{\partial \bar{\tau}_s}{\partial p} \tilde{p} \right),
+\end{equation}
+and:
+\begin{equation}\label{equation:translational_disturbance}
+\begin{split}
+\frac{d\tilde{e}_t'}{dt} = -\left(e_{v,0}^* - \bar{e}_v\right) \cfrac{1}{\bar{\tau}_{s}} - (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}^2} \left( \frac{\tilde{\rho}}{\bar{\rho}} + \frac{\partial \bar{\tau}_s}{\partial T} \tilde{T} + \frac{\partial \bar{\tau}_s}{\partial p} \tilde{p} \right) \\
+- \left( \frac{\tilde{\rho}}{\bar{\rho}} \bar{u}_{i} + \tilde{u}_i \right) \frac{\partial \bar{e}_0}{\partial x_i} - \cfrac{\bar{p}}{\bar{\rho}} \frac{\partial \tilde{u}_i}{\partial x_i} - \cfrac{\tilde{p}}{\bar{\rho}} \frac{\partial \bar{u}_{i}}{\partial x_i}.
+\end{split}
+\end{equation}
+Three dominant production mechanisms govern disturbance evolution: (i) mean-flow advection via $-\bar{u}_i (\partial \tilde{e}_{v}/\partial x_i)$; (ii) the relaxation term $(e_{v,0}^* - \bar{e}_v)/\bar{\tau}_s$, which introduces phase lag through the Landau-Teller mechanism; and (iii) thermodynamic feedback via $(\partial \bar{\tau}_s/\partial T) \tilde{T}$ and $(\partial \bar{\tau}_s/\partial p) \tilde{p}$.
+
+Vibrational nonequilibrium influences stability through base-flow modification and potential acoustic attenuation. However, vibrational absorption occurs at frequencies several orders of magnitude lower than second-mode disturbances (MHz range)~\citep{BitterShepherd2015}, rendering direct vibrational damping ineffective at the relevant timescales.
+
+% For flows in thermal nonequilibrium (\gls{TNE}), establishing the vibrational nonequilibrium signature across flow conditions is essential to understand its influence on second-mode growth. The linearised vibrational and translational energy conservation equations, following \citet{WagnildEtAl2012}, are:
+% \begin{equation}\label{equation:vibrational_disturbance}
+% \frac{d\tilde{e}_v'}{dt} = -\bar{u}_i \frac{\partial \tilde{e}_{v}}{\partial x_i} + (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}} + (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}^2} \left( \frac{\partial \bar{\tau}_s}{\partial T} \tilde{T} + \frac{\partial \bar{\tau}_s}{\partial p} \tilde{p} \right),
+% \end{equation}
+% and:
+% \begin{equation}\label{equation:translational_disturbance}
+% \begin{split}
+% \frac{d\tilde{e}_t'}{dt} = -\left(e_{v,0}^* - \bar{e}_v\right) \cfrac{1}{\bar{\tau}_{s}} - (e_{v,0}^* - \bar{e}_v) \cfrac{1}{\bar{\tau}_{s}^2} \left( \frac{\tilde{\rho}}{\bar{\rho}} + \frac{\partial \bar{\tau}_s}{\partial T} \tilde{T} + \frac{\partial \bar{\tau}_s}{\partial p} \tilde{p} \right) \\
+% - \left( \frac{\tilde{\rho}}{\bar{\rho}} \bar{u}_{i} + \tilde{u}_i \right) \frac{\partial \bar{e}_0}{\partial x_i} - \cfrac{\bar{p}}{\bar{\rho}} \frac{\partial \tilde{u}_i}{\partial x_i} - \cfrac{\tilde{p}}{\bar{\rho}} \frac{\partial \bar{u}_{i}}{\partial x_i}.
+% \end{split}
+% \end{equation}
+
+% Three dominant production mechanisms govern disturbance evolution: (i) the mean-flow gradient term $-\bar{u}_i (\partial \tilde{e}_{v}/\partial x_i)$, representing disturbance advection; (ii) the relaxation term $(e_{v,0}^* - \bar{e}_v)/\bar{\tau}_s$, which models energy exchange via the Landau-Teller mechanism and introduces phase lag; and (iii) the thermodynamic term proportional to $(\partial \bar{\tau}_s/\partial T) \tilde{T}$ and $(\partial \bar{\tau}_s/\partial p) \tilde{p}$, governing how the relaxation timescale responds to temperature and pressure perturbations.
+
+% Vibrational nonequilibrium influences stability analysis through two primary pathways. First, mean profiles of temperature, density, and velocity are altered by energy exchange between translational and vibrational modes, indirectly affecting disturbances through changes to the mean flow. Second, the phase lag between translational and vibrational energy can attenuate acoustic waves. However, the characteristic frequency at which vibrational absorption occurs is several orders of magnitude lower than second-mode disturbance frequencies (MHz range) in hypersonic boundary layers~\citep{BitterShepherd2015}, rendering direct vibrational damping of disturbances ineffective at the relevant timescales.
+
+The critical distinction between thermal equilibrium and nonequilibrium emerges in the phase relationship between vibrational temperature disturbance $\tilde{T}_v$ and translational temperature disturbance $\tilde{T}$. In thermal equilibrium (\gls{TEQ}), the very short relaxation timescale keeps the vibrational mode phase-locked with translational oscillations. The coupling term $(e_{v,0}^* - \bar{e}_v)/\bar{\tau}_s$ responds synchronously to pressure fluctuations, amplifying the acoustic response and strengthening acoustic impedance contrast. \Cref{figure:mackmodes_tv} show the contours of the disturbance vibrational temperature $\tilde{T}_v$ in a selected narrow range, showing a clear modulation closer to the boundary layer. In thermal nonequilibrium (\gls{TNE}), the finite relaxation timescale introduces phase lag: vibrational energy cannot fully respond to rapid acoustic oscillations. When translational temperature rises, the vibrational response lags, creating a temporal offset between $\tilde{T}_v$ and $\tilde{T}$. This phase offset acts as a dissipative mechanism, decoupling the two energy reservoirs and reducing cumulative acoustic amplification.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=13cm]{resources/figures/disturbance/result_mackmodes_mach_Tv_perturbation.pdf}
+    \caption{Contours of vibrational temperature disturbance $\tilde{T}_v$ in a narrow streamwise window for: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$.}
+    \label{figure:mackmodes_tv}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=10cm]{resources/figures/disturbance/result_T_Tv_perturbation_overlap.pdf}
+    \caption{Translational and vibrational temperature disturbances versus streamwise distance for: (a) $M_e=6$, $T_w=1200~\mathrm{K}$; (b) $M_e=6$, $T_w=1800~\mathrm{K}$; (c) $M_e=8$, $T_w=1200~\mathrm{K}$; (d) $M_e=8$, $T_w=1800~\mathrm{K}$.}
+    \label{figure:disturbance_tv}
+\end{figure}
+
+An instantaneous snapshot of the vibrational temperature disturbance $\tilde{T}_v = T_v^{\text{forced}} - T_v^{\text{base}}$ at the boundary layer edge ($y/\delta_{99} \approx 1$) is presented in \Cref{figure:disturbance_tv}. Whilst velocity and pressure disturbances oscillate in phase with translational temperature, the vibrational temperature disturbance manifests a substantially delayed oscillation. This lag is most pronounced in the Mach~8 hot-wall case, where $\tilde{T}_v$ appears nearly $\pi$ rad out of phase with $\tilde{T}$. In cooler Mach~6 conditions, the lag is less extreme but clearly visible as a downstream phase shift. This temporal lag confirms the theoretical prediction: the vibrational mode cannot maintain synchrony with fast translational oscillations, and energy partitioning into vibrational degrees of freedom occurs with systematic delay, effectively removing energy from the acoustic growth cycle.
+
+The similarity between \gls{TNE} and \gls{CPG} $N$-factors reveals that despite the phase-lagged vibrational response, disturbance growth rates remain nearly identical to the frozen-gas case. The relaxation times are 10 times smaller in Mach 8 cases and 20 times smaller in Mach 6 cases, rendering vibrational effects negligible. This convergence demonstrates that base-flow thermal structure, specifically the mean temperature profile impedances distribution and governs disturbance amplification. In both \gls{CPG} and \gls{TNE}, the effective acoustic impedance is controlled by translational-rotational modes alone: \gls{CPG} freezes vibrational modes entirely, while \gls{TNE} allows them to respond with substantial phase lag. Consequently, disturbance dynamics are dominated by base-flow thermal effects. Although vibrational modes are typically dissipative for second-mode-type disturbances \citep{Wagnild2012,BitterShepherd2015}, vibrational perturbations contribute negligibly to acoustic amplification across all flow conditions.
+
+\section*{Chapter summary}
+This Chapter examined linear disturbance growth in hypersonic boundary layers across Mach~6 and Mach~8 at cold and hot wall conditions, comparing three thermochemical models: \gls{CPG}, \gls{TEQ}, and \gls{TNE}. The key finding is a clear hierarchy in disturbance amplification: \gls{TEQ} produces substantially larger growth rates and $N$-factors than both \gls{CPG} and \gls{TNE}, which behave nearly identically across most conditions. This suggests that thermal effects in the base flow, which alter acoustic impedance and wave trapping efficiency, are the dominant mechanism controlling second-mode growth. Vibrational temperature disturbances exhibit pronounced phase lag relative to translational oscillations, demonstrating that disturbance-level vibrational dynamics remain decoupled from the acoustic growth mechanism. This phase difference helps to explain why \gls{LST} could exclude vibrational perturbations from the disturbance equations.
+
+Wall heating promotes faster approach to equilibrium: elevated temperatures accelerate relaxation whilst simultaneously thickening the boundary layer, resulting in hot-wall cases achieving higher equilibration degrees than cold-wall cases despite longer absolute relaxation timescales. \gls{LST} predictions match \gls{DNS} data closely when corrected for receptivity, with agreement quality consistent across all three models. Notably, using the thermally frozen \gls{TFG} similarity solution as the base flow for \gls{TNE} calculations yields good agreement with \gls{DNS}, reducing computational cost whilst preserving the slow vibrational relaxation dynamics essential for capturing transition physics. This validates the theoretical framework and demonstrates that base-flow thermal structure, rather than disturbance-level thermal excitation, is sufficient to predict transition behaviour in these configurations. Understanding these linear mechanisms provides a foundation for investigating how vibrational modes interact with finite-amplitude disturbances in the nonlinear regime.
+
+% \section{Chapter summary}
+% This Chapter examined linear disturbance growth in hypersonic boundary layers across Mach~6 and Mach~8 at cold and hot wall conditions, comparing three thermochemical models: \gls{CPG}, \gls{TEQ}, and \gls{TNE}. The key finding is a clear hierarchy in disturbance amplification: \gls{TEQ} produces substantially larger growth rates and $N$-factors than both \gls{CPG} and \gls{TNE}, which behave nearly identically across most conditions. This suggests that thermal effects in the base flow, which alter acoustic impedance and wave trapping efficiency, are the dominant mechanism controlling second-mode growth. Vibrational temperature disturbances exhibit pronounced phase lag relative to translational oscillations, demonstrating that disturbance-level vibrational dynamics remain decoupled from the acoustic growth mechanism. This phase lag reveals why \gls{LST} could incorporate thermal excitations in base-flow profiles but exclude vibrational perturbations from the disturbance equations.
+
+% Wall heating promotes faster approach to equilibrium: elevated temperatures accelerate relaxation whilst simultaneously thickening the boundary layer, resulting in hot-wall cases achieving higher equilibration degrees than cold-wall cases despite longer absolute relaxation timescales. \gls{LST} predictions match \gls{DNS} data closely when corrected for receptivity, with agreement quality consistent across all three models. Notably, using the thermally frozen \gls{TFG} similarity solution as the base flow for \gls{TNE} calculations yields good agreement with \gls{DNS}, reducing computational cost whilst preserving the slow vibrational relaxation dynamics essential for capturing transition physics. This validates the theoretical framework and demonstrates that base-flow thermal structure, rather than disturbance-level thermal excitation, is sufficient to predict transition behaviour in these configurations.
+
+% \section{Chapter summary}
+% This Chapter examined linear disturbance growth in hypersonic boundary layers across Mach~6 and Mach~8 at cold and hot wall conditions, comparing three thermochemical models: \gls{CPG}, \gls{TEQ}, and \gls{TNE}. The key finding is a clear hierarchy in disturbance amplification: \gls{TEQ} produces substantially larger growth rates and $N$-factors than both \gls{CPG} and \gls{TNE}, which behave nearly identically across most conditions. This suggests that thermal effects in the base flow, which alter acoustic impedance and wave trapping efficiency, are the dominant mechanism controlling second-mode growth. Vibrational temperature disturbances show pronounced phase lag relative to translational oscillations and therefore have negligible impact on overall acoustic amplification. The characteristic frequency of vibrational absorption is far too low to directly damp second-mode disturbances, so disturbance-level vibrational dynamics remain effectively decoupled from the acoustic growth mechanism. Wall heating promotes faster approach to equilibrium: elevated temperatures accelerate relaxation whilst simultaneously thickening the boundary layer, resulting in hot-wall cases achieving higher equilibration degrees than cold-wall cases despite longer absolute relaxation timescales. \gls{LST} predictions match \gls{DNS} data closely when corrected for receptivity, with agreement quality consistent across all three models. Notably, using the thermally frozen \gls{TFG} similarity solution as the base flow for \gls{TNE} calculations yields good agreement with \gls{DNS}, reducing computational cost whilst preserving the slow vibrational relaxation dynamics essential for capturing transition physics. This validates the theoretical framework and demonstrates that base-flow thermal structure, rather than disturbance-level thermal excitation, is sufficient to predict transition behaviour in these configurations.
+
+
+% \section{Chapter summary}
+
+% Direct numerical simulations and linear stability theory have been carried out for a combination of Mach numbers (Mach 6 and Mach 8), wall temperatures (cold-wall $T_w = 1200~\mathrm{K}$ and hot-wall $T_w = 1800~\mathrm{K}$), and thermal models (calorically perfect gas, thermal equilibrium, and thermal nonequilibrium) relevant to hypersonic flow over wedge-shaped geometries. Boundary layer similarity solutions provide inflow conditions for the simulations and base-flow profiles for linear stability analysis. A key finding is that thermally frozen base flow provides more physically consistent inflow conditions, since the relaxation toward thermal equilibrium coincides temporally with the excitation of second-mode instabilities, rendering the choice of thermal model critical to disturbance dynamics.
+
+
+% The simulations successfully capture Mack's second-mode acoustic instability across all configurations, with growth rates and spatial amplification profiles showing excellent agreement with linear stability theory predictions across the most-amplified frequency bands. When normalised for receptivity effects, $N$-factor comparisons between \gls{DNS} and \gls{LST} remain robust across all thermochemical regimes, validating the parallel-flow assumption up to saturation. Critically, the results demonstrate a consistent hierarchy: thermal equilibrium cases are substantially more unstable than thermal nonequilibrium configurations, which in turn exhibit growth rates comparable to calorically perfect gas predictions. This hierarchy reflects underlying changes in acoustic impedance structure and wave trapping efficiency within the boundary layer acoustic cavity.
+
+% Analysis across Mach numbers and wall temperatures reveals competing timescale effects governed by the vibrational Damköhler number. At Mach 6 with cooled walls, vibrational equilibration occurs rapidly, and thermal equilibrium conditions dominate instability characteristics. At Mach 8 with heated walls, the boundary layer becomes thicker and translational temperatures rise, extending the vibrational relaxation timescale significantly. The Mach 8 cold-wall case exhibits faster equilibration than the Mach 6 hot-wall case, demonstrating that wall cooling promotes equilibration by shortening boundary layer residence time relative to relaxation timescale. These findings establish the physical basis for the observed amplitude hierarchy: configurations approaching equilibrium exhibit larger spatial disturbances and higher $N$-factors, whilst configurations remaining farther from equilibrium show suppressed growth.
+
+% The phase-speed and growth-rate analysis reveals that thermal nonequilibrium introduces a systematic downstream phase delay relative to thermal equilibrium, with this delay independent of wall temperature. Both frozen-gas (\gls{CPG}) and nonequilibrium (\gls{TNE}) models sustain higher phase speeds than thermal equilibrium, reflecting altered acoustic impedance arising from reduced or phase-lagged vibrational excitation. Critically, supersonic mode signatures (where phase speed dips below the $1 - 1/M_e$ line) are most pronounced in thermal equilibrium cases, indicating that thermal equilibration enhances the excitation of higher-order acoustic components and extends the effective instability mechanism beyond the primary second-mode band.
+
+% The thermal conductivity partition between translational-rotational ($\kappa_{tr}$) and vibrational ($\kappa_v$) modes emerges as a previously unidentified mechanism governing acoustic impedance structure. In thermal equilibrium, the vibrational thermal conductivity $\kappa_v$ actively extracts energy from boundary layer disturbances, suppressing peak temperature oscillations and reducing local temperature sensitivity. This energy redistribution weakens acoustic impedance contrast compared to frozen-gas assumptions. In thermal nonequilibrium, insufficient vibrational equilibration prevents $\kappa_v$ from fully withdrawing this energy on acoustic timescales, leaving translational-rotational temperature responses amplified. However, this enhancement is offset by a dissipative mechanism arising from the phase lag between vibrational and translational energy responses.
+
+% The convergence of thermal nonequilibrium and frozen-gas $N$-factors across all conditions is now explained through this decoupling mechanism. Phase-lagged vibrational response renders the vibrational mode acoustically inert despite formal inclusion in the model, functionally equivalent to complete vibrational freezing. In \gls{CPG}, no vibrational energy is excited. In \gls{TNE}, vibrational energy is excited but transferred asynchronously with acoustic oscillations, producing identical acoustic impedance structure. Only in thermal equilibrium does phase-locked vibrational coupling enhance acoustic impedance contrast and amplify second-mode growth. This distinction underscores that thermal nonequilibrium effects are fundamentally determined not merely by the degree of vibrational excitation, but by the synchronisation of energy exchange with acoustic timescales a finding with significant implications for predicting transition in hypersonic nonequilibrium flows.
